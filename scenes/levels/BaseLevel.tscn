@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/levels/BaseLevel.cs" type="Script" id=1]
+[ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/elemental_objects/Squirter.tscn" type="PackedScene" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+rough = true
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 40.25, 7 )
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource( 1 )
+playerStartPosition = NodePath("PlayerStartPos")
+
+[node name="PlayerStartPos" type="Position2D" parent="."]
+position = Vector2( 44, 113 )
+
+[node name="FloorCollision" type="StaticBody2D" parent="."]
+physics_material_override = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FloorCollision"]
+polygon = PoolVector2Array( -1, 160, 140, 159, 234, 189, 317, 190, 368, 164, 479, 161, 481, 268, -9, 271 )
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="debug" type="Label" parent="UILayer"]
+margin_left = 13.0
+margin_top = 13.0
+margin_right = 53.0
+margin_bottom = 27.0
+text = "debug"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Platform" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2( 197, 108 )
+rotation = -0.109956
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Platform"]
+position = Vector2( 306, 79 )
+shape = SubResource( 2 )
+
+[node name="InversionOrb" parent="." instance=ExtResource( 2 )]
+
+[node name="Squirter" parent="." instance=ExtResource( 3 )]
+position = Vector2( 237, 189 )
