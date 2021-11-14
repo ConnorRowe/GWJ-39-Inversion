@@ -1,0 +1,82 @@
+using Godot;
+using System.Collections.Generic;
+
+namespace Inversion
+{
+    public class ReactionHandler : Node2D
+    {
+        [Signal]
+        public delegate void ElementStarted(Element element);
+        [Signal]
+        public delegate void ElementEnded(Element element);
+
+        private static readonly Dictionary<Element, bool> emptyElementOverlaps = new Dictionary<Element, bool>()
+        {
+            {Element.Fire, false},
+            {Element.Water, false},
+            {Element.Earth, false},
+            {Element.Lightning, false},
+        };
+
+        [Export]
+        private NodePath collisionShapePath;
+
+        public bool IsActive { get; set; } = true;
+
+        private CollisionShape2D collisionShape;
+        private Shape2D shape;
+        private Physics2DShapeQueryParameters shapeQueryParams;
+        private Dictionary<Element, bool> elementOverlaps = new Dictionary<Element, bool>(emptyElementOverlaps);
+
+        public override void _Ready()
+        {
+            collisionShape = GetNode<CollisionShape2D>(collisionShapePath);
+            shape = collisionShape.Shape;
+            shapeQueryParams = new Physics2DShapeQueryParameters();
+            shapeQueryParams.SetShape(shape);
+            shapeQueryParams.Transform = new Transform2D(0, GlobalPosition + collisionShape.Position);
+            shapeQueryParams.CollideWithAreas = true;
+            shapeQueryParams.CollisionLayer = 4;
+        }
+
+        public override void _PhysicsProcess(float delta)
+        {
+            var spaceState = GetWorld2d().DirectSpaceState;
+            shapeQueryParams.Transform = new Transform2D(0, GlobalPosition + collisionShape.Position);
+            var results = spaceState.IntersectShape(shapeQueryParams);
+
+            var newElemOverlaps = new Dictionary<Element, bool>(emptyElementOverlaps);
+
+            foreach (Godot.Collections.Dictionary hit in results)
+            {
+                Node hitNode = ((Node)hit["collider"]);
+
+                if (hitNode.Owner is IHasElementalArea hasElementalArea && !hasElementalArea.IsDisabled())
+                {
+                    newElemOverlaps[hasElementalArea.GetAreaElement()] = true;
+                }
+            }
+
+            foreach (var elem in newElemOverlaps.Keys)
+            {
+                if (newElemOverlaps[elem] != elementOverlaps[elem])
+                {
+                    if (newElemOverlaps[elem])
+                        EmitSignal(nameof(ElementStarted), elem);
+                    else
+                        EmitSignal(nameof(ElementEnded), elem);
+
+                    elementOverlaps[elem] = newElemOverlaps[elem];
+                }
+            }
+        }
+
+        private void ResetElementOverlaps()
+        {
+            foreach (var elem in elementOverlaps.Keys)
+            {
+                elementOverlaps[elem] = false;
+            }
+        }
+    }
+}

@@ -16,8 +16,19 @@ namespace Inversion
             Player = GD.Load<PackedScene>("res://scenes/Player.tscn").Instance<Player>();
             AddChild(Player);
             Player.Position = startPos.Position;
+            Player.InversionOrb = GetNode<InversionOrb>("InversionOrb");
+
+            Player.Connect(nameof(Player.PlayerDied), this, nameof(PlayerDied));
         }
 
+        private void PlayerDied()
+        {
+            RestartLevel();
+        }
 
+        private void RestartLevel()
+        {
+            Player.Position = GetNode<Node2D>(playerStartPosition).Position;
+        }
     }
 }

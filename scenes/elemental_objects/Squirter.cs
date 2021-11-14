@@ -2,7 +2,7 @@ using Godot;
 
 namespace Inversion
 {
-    public class Squirter : Node2D, IInvertable
+    public class Squirter : Node2D, IInvertable, IHasElementalArea
     {
         private Element currentElement = Element.Fire;
         private bool isDisabled = false;
@@ -10,10 +10,14 @@ namespace Inversion
         private Particles2D fire;
         private Particles2D water;
 
+        private Area2D sprayArea;
+
         public override void _Ready()
         {
             fire = GetNode<Particles2D>("FireStuff/Particles2D");
             water = GetNode<Particles2D>("WaterStuff/Particles2D");
+
+            sprayArea = GetNode<Area2D>("SprayArea");
         }
 
         public void Invert()
@@ -32,6 +36,11 @@ namespace Inversion
         public bool IsDisabled()
         {
             return isDisabled;
+        }
+
+        public Element GetAreaElement()
+        {
+            return currentElement;
         }
     }
 }

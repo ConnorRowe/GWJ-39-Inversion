@@ -1,27 +1,27 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/levels/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/elemental_objects/Squirter.tscn" type="PackedScene" id=3]
-
-[sub_resource type="PhysicsMaterial" id=1]
-rough = true
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 40.25, 7 )
+[ext_resource path="res://tileset/terrain_tiles/tileset_terrain_tiles.tres" type="TileSet" id=4]
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource( 1 )
 playerStartPosition = NodePath("PlayerStartPos")
 
+[node name="BGLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="BGLayer"]
+margin_right = 640.0
+margin_bottom = 360.0
+color = Color( 0.0784314, 0.0941176, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PlayerStartPos" type="Position2D" parent="."]
 position = Vector2( 44, 113 )
-
-[node name="FloorCollision" type="StaticBody2D" parent="."]
-physics_material_override = SubResource( 1 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FloorCollision"]
-polygon = PoolVector2Array( -1, 160, 140, 159, 234, 189, 317, 190, 368, 164, 479, 161, 481, 268, -9, 271 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -35,18 +35,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Platform" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-position = Vector2( 197, 108 )
-rotation = -0.109956
-shape = SubResource( 2 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Platform"]
-position = Vector2( 306, 79 )
-shape = SubResource( 2 )
-
 [node name="InversionOrb" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Squirter" parent="." instance=ExtResource( 3 )]
-position = Vector2( 237, 189 )
+position = Vector2( 222, 280 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 40, 40 )
+cell_custom_transform = Transform2D( 40, 0, 0, 40, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131079, 2, 196608, 131080, 2, 196609, 131081, 2, 196610, 131082, 4, 0, 262148, 536870916, 0, 262149, 2, 196608, 262150, 2, 196610, 262151, 4, 0, 327683, 536870916, 0, 393216, 2, 0, 393217, 2, 1, 393218, 2, 1, 393219, 2, 1, 393220, 2, 2, 393225, 2, 0, 393226, 2, 1, 393227, 2, 2, 458752, 2, 65536, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65537, 458756, 2, 131077, 458757, 2, 1, 458758, 2, 1, 458759, 2, 1, 458760, 2, 1, 458761, 2, 131078, 458762, 2, 65537, 458763, 2, 65538, 524288, 2, 131072, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 131073, 524292, 2, 131073, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 131073, 524296, 2, 131073, 524297, 2, 131073, 524298, 2, 131073, 524299, 2, 131074 )
