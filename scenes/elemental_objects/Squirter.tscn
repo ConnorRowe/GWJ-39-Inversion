@@ -37,6 +37,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 30.4
 damping_random = 1.0
+scale = 2.0
 color_ramp = SubResource( 11 )
 
 [sub_resource type="Gradient" id=15]
@@ -63,6 +64,7 @@ gravity = Vector3( 0, 98, 0 )
 initial_velocity = 88.23
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+scale = 2.0
 color_ramp = SubResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=16]
@@ -81,7 +83,7 @@ texture = ExtResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="FireStuff"]
 position = Vector2( 0, -6 )
-amount = 96
+amount = 144
 randomness = 0.24
 process_material = SubResource( 14 )
 
@@ -90,7 +92,7 @@ process_material = SubResource( 14 )
 [node name="Particles2D" type="Particles2D" parent="WaterStuff"]
 position = Vector2( 0, -6 )
 emitting = false
-amount = 64
+amount = 96
 lifetime = 1.25
 draw_order = 1
 process_material = SubResource( 9 )

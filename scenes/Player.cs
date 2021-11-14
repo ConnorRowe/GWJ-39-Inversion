@@ -10,9 +10,9 @@ namespace Inversion
         private const float JumpForce = 300f;
         private const float GravityAccel = 98f * 8;
         private const float TerminalVel = 980f;
-        private const float MaxSpeed = 650f;
-        private const float Acceleration = 450f;
-        private const float MovementDampening = 7f;
+        private const float MaxSpeed = 900f;
+        private const float Acceleration = 600f;
+        private const float MovementDampening = 6f;
 
         public InversionOrb InversionOrb { get; set; } = null;
 
@@ -22,12 +22,19 @@ namespace Inversion
         private float gravity = 0;
         private bool canJump = false;
         private ReactionHandler reactionHandler;
+        private AnimatedSprite charSprite;
+        private float targetCharAngle = 0f;
+
+        private Label debugLabel;
 
         public override void _Ready()
         {
             reactionHandler = GetNode<ReactionHandler>("ReactionHandler");
             reactionHandler.Connect(nameof(ReactionHandler.ElementStarted), this, nameof(ElementAreaEntered));
             reactionHandler.Connect(nameof(ReactionHandler.ElementEnded), this, nameof(ElementAreaExited));
+            charSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+
+            debugLabel = GetNode<Label>("debuglabel");
         }
 
         public override void _Input(InputEvent evt)
@@ -50,6 +57,28 @@ namespace Inversion
             }
         }
 
+        public override void _Process(float delta)
+        {
+            if ((velocity + externalVelocity).LengthSquared() > 50f)
+            {
+                if (inputDir == 0f)
+                    charSprite.Animation = "slide";
+                else
+                    charSprite.Animation = "run";
+            }
+            else
+            {
+                charSprite.Animation = "idle";
+            }
+
+            if (inputDir > 0f)
+                charSprite.FlipH = false;
+            else if (inputDir < 0f)
+                charSprite.FlipH = true;
+
+            charSprite.Rotation = Mathf.Lerp(charSprite.Rotation, targetCharAngle, delta * 16f);
+        }
+
         public override void _PhysicsProcess(float delta)
         {
             if (!canJump && IsOnFloor())
@@ -67,6 +96,11 @@ namespace Inversion
 
                 if (Input.IsActionPressed("g_move_right"))
                     inputDir++;
+
+                // Sprite rotation stuff
+                var floorNormal = GetFloorNormal();
+                targetCharAngle = Mathf.Atan2(floorNormal.y, floorNormal.x) + (Mathf.Pi / 2f);
+                debugLabel.Text = $"normal={GetFloorNormal()}, angle={GetFloorAngle()}";
             }
             else if (Input.IsActionPressed("g_move_left") || Input.IsActionPressed("g_move_right"))
             {
@@ -80,6 +114,9 @@ namespace Inversion
 
 
                 inputDir = Mathf.Lerp(inputDir, newDir, delta * 4f);
+
+                charSprite.Rotation = 0f;
+                debugLabel.Text = "";
             }
 
             if (Input.IsActionJustPressed("g_jump") && canJump)
@@ -87,6 +124,9 @@ namespace Inversion
                 // Jump
                 gravity = -JumpForce;
                 canJump = false;
+
+                charSprite.Rotation = 0f;
+                targetCharAngle = 0f;
             }
 
             velocity -= (velocity * MovementDampening * delta);

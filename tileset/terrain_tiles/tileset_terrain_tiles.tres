@@ -151,7 +151,7 @@ segments = PoolVector2Array( 0, 38, 0, 38, 0, 38, 38, 0, 38, 0, 40, 0, 40, 0, 40
 segments = PoolVector2Array( 40, 40, 34, 40, 34, 40, 0, 6, 0, 6, 0, 0, 0, 0, 2, 0, 2, 0, 40, 38, 40, 38, 40, 38, 40, 38, 40, 40 )
 
 [sub_resource type="ConvexPolygonShape2D" id=50]
-points = PoolVector2Array( 34, 40, 0, 6, 0, 0, 2, 0, 40, 38, 40, 40 )
+points = PoolVector2Array( 0, 0, 40, 40, 35, 40, 0, 6 )
 
 [resource]
 2/name = "tileset_terrain_tiles.png 2"
@@ -483,12 +483,12 @@ points = PoolVector2Array( 34, 40, 0, 6, 0, 0, 2, 0, 40, 38, 40, 40 )
 4/shape_offset = Vector2( 0, 0 )
 4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 4/shape = SubResource( 50 )
-4/shape_one_way = true
-4/shape_one_way_margin = 2.0
+4/shape_one_way = false
+4/shape_one_way_margin = 1.0
 4/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": true,
-"one_way_margin": 2.0,
+"one_way": false,
+"one_way_margin": 1.0,
 "shape": SubResource( 50 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
