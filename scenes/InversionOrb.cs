@@ -5,37 +5,43 @@ namespace Inversion
 {
     public class InversionOrb : KinematicBody2D
     {
-        private const float maxSpeed = 180f;
-        private const float acceleration = 180f;
+        private const float MaxSpeed = 180f;
+        private const float Acceleration = 180f;
+        private static readonly Color baseColour = new Color("e64539");
+        private static readonly Color overlapColour = new Color("ff8933");
 
         public bool Active { get; set; } = true;
         private float speed = 0f;
         private List<IInvertable> overlappedInvertables = new List<IInvertable>();
+        private Sprite baseSprite;
+        private Sprite glow;
+        private Color glowColour = new Color(1, 1, 1, .3f);
+        private Color targetColour = baseColour;
+        private float count = 0f;
 
         public override void _Ready()
         {
-            base._Ready();
-
             Area2D inversionArea = GetNode<Area2D>("InversionArea");
             inversionArea.Connect("area_entered", this, nameof(InversionAreaEntered));
             inversionArea.Connect("area_exited", this, nameof(InversionAreaExited));
+            baseSprite = GetNode<Sprite>("Sprite");
+            glow = GetNode<Sprite>("Sprite/Glow");
         }
 
-        public override void _Input(InputEvent evt)
+        public override void _Process(float delta)
         {
-            if (evt is InputEventMouseButton emb && !emb.Pressed && emb.ButtonIndex == 1)
-            {
-                foreach (var invertable in overlappedInvertables)
-                {
-                    if (!invertable.IsDisabled())
-                    {
-                        invertable.Invert();
-                        GD.Print($"inverting -> {invertable}");
-                    }
-                }
+            count += delta * .3f;
+            if (count > 1f)
+                count--;
 
-                overlappedInvertables.Clear();
-            }
+            if (overlappedInvertables.Count > 0)
+                targetColour = overlapColour;
+            else
+                targetColour = baseColour;
+
+            baseSprite.Modulate = baseSprite.Modulate.LinearInterpolate(targetColour, delta * 4f);
+            glowColour.a = .25f + (Mathf.Sin(count * Mathf.Pi) * .2f);
+            glow.Modulate = glowColour;
         }
 
         public override void _PhysicsProcess(float delta)
@@ -47,10 +53,10 @@ namespace Inversion
 
             if (Mathf.Abs(mousePos.x) > 1f || Mathf.Abs(mousePos.y) > 1f)
             {
-                if (speed < maxSpeed)
-                    speed += acceleration * delta;
-                else if (speed > maxSpeed)
-                    speed = maxSpeed;
+                if (speed < MaxSpeed)
+                    speed += Acceleration * delta;
+                else if (speed > MaxSpeed)
+                    speed = MaxSpeed;
 
                 float mouseDist = mousePos.Length();
                 if (mouseDist < 8f)
@@ -78,12 +84,26 @@ namespace Inversion
 
         private void InversionAreaExited(Area2D area)
         {
-            if (area is IInvertable invertable)
+            if (area.Owner is IInvertable invertable)
             {
                 overlappedInvertables.Remove(invertable);
 
                 GD.Print($"invert exit -> {invertable}");
             }
+        }
+
+        public void TryInvert()
+        {
+            foreach (var invertable in overlappedInvertables)
+            {
+                if (!invertable.IsDisabled())
+                {
+                    invertable.Invert();
+                    GD.Print($"inverting -> {invertable}");
+                }
+            }
+
+            overlappedInvertables.Clear();
         }
     }
 }

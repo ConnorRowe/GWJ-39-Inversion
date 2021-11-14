@@ -24,14 +24,14 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.581818 ), 0.0, 0.0, 0, 
 curve = SubResource( 4 )
 
 [sub_resource type="ParticlesMaterial" id=14]
-trail_divisor = 6
+trail_divisor = 4
 trail_size_modifier = SubResource( 5 )
 trail_color_modifier = SubResource( 13 )
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
-spread = 15.0
+spread = 12.0
 gravity = Vector3( 0, 98, 0 )
-initial_velocity = 98.03
+initial_velocity = 130.0
 initial_velocity_random = 0.25
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
@@ -61,7 +61,7 @@ flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 15.0
 gravity = Vector3( 0, 98, 0 )
-initial_velocity = 88.23
+initial_velocity = 120.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
@@ -84,7 +84,9 @@ texture = ExtResource( 1 )
 [node name="Particles2D" type="Particles2D" parent="FireStuff"]
 position = Vector2( 0, -6 )
 amount = 144
+lifetime = 1.25
 randomness = 0.24
+local_coords = false
 process_material = SubResource( 14 )
 
 [node name="WaterStuff" type="Node2D" parent="."]
@@ -93,7 +95,8 @@ process_material = SubResource( 14 )
 position = Vector2( 0, -6 )
 emitting = false
 amount = 96
-lifetime = 1.25
+lifetime = 1.75
+local_coords = false
 draw_order = 1
 process_material = SubResource( 9 )
 
@@ -112,4 +115,4 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SprayArea"]
-polygon = PoolVector2Array( -2, -6, -14, -40, -3.87082, -49, 4, -49, 14, -40, 2, -6 )
+polygon = PoolVector2Array( -2, -6, -22, -79, 20, -79, 2, -6 )

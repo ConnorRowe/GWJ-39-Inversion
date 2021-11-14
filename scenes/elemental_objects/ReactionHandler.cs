@@ -22,19 +22,38 @@ namespace Inversion
         private NodePath collisionShapePath;
 
         public bool IsActive { get; set; } = true;
+        public bool FlipH { get; set; } = false;
 
-        private CollisionShape2D collisionShape;
+        private Node2D collisionShape;
         private Shape2D shape;
         private Physics2DShapeQueryParameters shapeQueryParams;
         private Dictionary<Element, bool> elementOverlaps = new Dictionary<Element, bool>(emptyElementOverlaps);
 
         public override void _Ready()
         {
-            collisionShape = GetNode<CollisionShape2D>(collisionShapePath);
-            shape = collisionShape.Shape;
+            // CollisionPolygon2D test = new CollisionPolygon2D();
+            // ConcavePolygonShape2D poly = new ConcavePolygonShape2D();
+            // poly.Segments
+
+            collisionShape = GetNode<Node2D>(collisionShapePath);
+
+            if (collisionShape is CollisionShape2D collisionShape2D)
+            {
+                shape = collisionShape2D.Shape;
+            }
+            else if (collisionShape is CollisionPolygon2D collisionPolygon2D)
+            {
+                collisionPolygon2D.BuildMode = CollisionPolygon2D.BuildModeEnum.Segments;
+                ConcavePolygonShape2D poly = new ConcavePolygonShape2D();
+                poly.Segments = collisionPolygon2D.Polygon;
+
+                shape = poly;
+            }
+
             shapeQueryParams = new Physics2DShapeQueryParameters();
             shapeQueryParams.SetShape(shape);
-            shapeQueryParams.Transform = new Transform2D(0, GlobalPosition + collisionShape.Position);
+            var xform = new Transform2D(0, GlobalPosition + collisionShape.Position);
+            xform.Scale = new Vector2(FlipH ? -1f : -1f, 1f);
             shapeQueryParams.CollideWithAreas = true;
             shapeQueryParams.CollisionLayer = 4;
         }

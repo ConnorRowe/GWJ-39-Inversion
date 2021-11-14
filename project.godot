@@ -78,6 +78,7 @@ g_spawn_orb={
 2d_physics/layer_2="InversionAreas"
 2d_physics/layer_3="ElementalEffects"
 2d_physics/layer_4="InversionOrb"
+2d_physics/layer_5="PhysicsEffects"
 
 [physics]
 

@@ -2,5 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>GWJ39</RootNamespace>
+    <NoWarn>0649</NoWarn>
   </PropertyGroup>
 </Project>
