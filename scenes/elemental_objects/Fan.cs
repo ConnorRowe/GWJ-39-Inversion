@@ -84,6 +84,8 @@ namespace Inversion
             if (isPowered)
                 return;
 
+            GD.Print($"{Name} powered");
+
             isPowered = true;
 
             foreach (var line in windLines)
@@ -96,6 +98,8 @@ namespace Inversion
         {
             if (alwaysPowered)
                 return;
+
+            GD.Print($"{Name} unpowered");
 
             isPowered = false;
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/levels/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/elemental_objects/Fan.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=9]
 
 [sub_resource type="PhysicsMaterial" id=2]
 friction = 0.68
@@ -68,7 +70,12 @@ tile_data = PoolIntArray( 15, 2, 3, 65551, 2, 65539, 131078, 536870916, 0, 13107
 position = Vector2( 36, 228 )
 
 [node name="BatteryOrGround" parent="." instance=ExtResource( 6 )]
-position = Vector2( 15, 232 )
+position = Vector2( 441, 230 )
+invertOnStart = true
+
+[node name="PowerTerminal" parent="." instance=ExtResource( 8 )]
+position = Vector2( 464, 231 )
+linkedWirePath = NodePath("../Wire1")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2( 210, 148 )
@@ -86,3 +93,40 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource( 1 )
+
+[node name="Wire1" parent="." instance=ExtResource( 9 )]
+position = Vector2( 434, 291 )
+connectedPoweredNodePath = NodePath("../Wire2")
+
+[node name="StartPos" parent="Wire1" index="0"]
+position = Vector2( 30, -52 )
+
+[node name="EndPos" parent="Wire1" index="1"]
+position = Vector2( 30, 45 )
+
+[node name="Wire2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 434, 291 )
+connectedPoweredNodePath = NodePath("../Wire3")
+
+[node name="StartPos" parent="Wire2" index="0"]
+position = Vector2( 32, 45 )
+
+[node name="EndPos" parent="Wire2" index="1"]
+position = Vector2( -420, 45 )
+
+[node name="Wire3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 434, 291 )
+connectedPoweredNodePath = NodePath("../PowerTerminal2")
+
+[node name="StartPos" parent="Wire3" index="0"]
+position = Vector2( -422, 47 )
+
+[node name="EndPos" parent="Wire3" index="1"]
+position = Vector2( -422, -51 )
+
+[node name="PowerTerminal2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 12, 232 )
+
+[editable path="Wire1"]
+[editable path="Wire2"]
+[editable path="Wire3"]

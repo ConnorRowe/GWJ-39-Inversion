@@ -66,7 +66,7 @@ namespace Inversion
             {
                 Node hitNode = ((Node)hit["collider"]);
 
-                if (hitNode.Owner is IHasElementalArea hasElementalArea && !hasElementalArea.IsDisabled())
+                if (hitNode.Owner != Owner && hitNode.Owner is IHasElementalArea hasElementalArea && !hasElementalArea.IsDisabled())
                 {
                     newElemOverlaps[hasElementalArea.GetAreaElement()] = true;
                 }

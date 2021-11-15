@@ -18,7 +18,7 @@ namespace Inversion
         private const float TerminalVel = 980f;
         private const float MaxSpeed = 1000f;
         private const float Acceleration = 600f;
-        private const float MovementDampening = 8f;
+        private const float MovementDamping = 8f;
 
         public InversionOrb InversionOrb { get; set; } = null;
 
@@ -188,11 +188,11 @@ namespace Inversion
                 targetCharAngle = 0f;
             }
 
-            velocity -= (velocity * MovementDampening * delta);
+            velocity -= (velocity * MovementDamping * delta);
 
             velocity += (new Vector2(inputDir, 0)) * Acceleration * delta;
 
-            externalVelocity -= (externalVelocity * MovementDampening * delta);
+            externalVelocity -= (externalVelocity * MovementDamping * delta);
 
             if (velocity.Length() > MaxSpeed)
                 velocity = velocity.Normalized() * MaxSpeed;
