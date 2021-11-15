@@ -214,6 +214,19 @@ namespace Inversion
             // Apply velocities
             MoveAndSlideWithSnap(velocity + externalVelocity + new Vector2(0, gravity), Vector2.Down, Vector2.Up, infiniteInertia: false);
 
+            // Push objects
+            if (inputDir != 0f)
+            {
+                int slideCount = GetSlideCount();
+                for (int i = 0; i < slideCount; ++i)
+                {
+                    var collision = GetSlideCollision(i);
+                    if (collision.Collider is RigidBody2D rigidBody)
+                    {
+                        rigidBody.ApplyImpulse(rigidBody.GlobalPosition - collision.Position, new Vector2(inputDir, 0) * (8f / rigidBody.Mass));
+                    }
+                }
+            }
             debugLabel.Text = $"";
         }
 
