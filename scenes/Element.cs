@@ -1,3 +1,5 @@
+using Godot;
+
 namespace Inversion
 {
     public enum Element
@@ -42,6 +44,28 @@ namespace Inversion
             }
 
             return "error";
+        }
+
+        private static readonly Color FireColour = new Color("e64539");
+        private static readonly Color WaterColour = new Color("4fa4b8");
+        private static readonly Color EarthColour = new Color("2f5753");
+        private static readonly Color LightningColour = new Color("ffee83");
+
+        public static Color GetColour(this Element e)
+        {
+            switch (e)
+            {
+                case Element.Fire:
+                    return FireColour;
+                case Element.Water:
+                    return WaterColour;
+                case Element.Earth:
+                    return EarthColour;
+                case Element.Lightning:
+                    return LightningColour;
+            }
+
+            return Godot.Colors.Black;
         }
     }
 }

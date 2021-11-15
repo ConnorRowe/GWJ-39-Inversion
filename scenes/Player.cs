@@ -192,7 +192,7 @@ namespace Inversion
 
             velocity += (new Vector2(inputDir, 0)) * Acceleration * delta;
 
-            externalVelocity -= (externalVelocity * 2f * delta);
+            externalVelocity -= (externalVelocity * MovementDampening * delta);
 
             if (velocity.Length() > MaxSpeed)
                 velocity = velocity.Normalized() * MaxSpeed;
@@ -212,7 +212,7 @@ namespace Inversion
                 gravity = 0;
 
             // Apply velocities
-            MoveAndSlideWithSnap(velocity + externalVelocity + new Vector2(0, gravity), Vector2.Down, Vector2.Up);
+            MoveAndSlideWithSnap(velocity + externalVelocity + new Vector2(0, gravity), Vector2.Down, Vector2.Up, infiniteInertia: false);
 
             debugLabel.Text = $"";
         }

@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/levels/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/elemental_objects/Squirter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://tileset/terrain_tiles/tileset_terrain_tiles.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/elemental_objects/Fan.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
+
+[sub_resource type="PhysicsMaterial" id=2]
+friction = 0.68
+bounce = 0.8
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 6 )
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -45,7 +54,7 @@ position = Vector2( 222, 280 )
 [node name="Squirter2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 391, 122 )
 rotation = 3.14159
-startAsWater = true
+invertOnStart = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 4 )
@@ -53,7 +62,28 @@ cell_size = Vector2( 40, 40 )
 cell_custom_transform = Transform2D( 40, 0, 0, 40, 0, 0 )
 collision_layer = 9
 format = 1
-tile_data = PoolIntArray( 131078, 536870916, 0, 131079, 2, 196608, 131080, 2, 196609, 131081, 2, 196610, 131082, 4, 0, 262148, 536870916, 0, 262149, 2, 196608, 262150, 2, 196610, 262151, 4, 0, 327683, 536870916, 0, 393216, 2, 0, 393217, 2, 1, 393218, 2, 1, 393219, 2, 1, 393220, 2, 2, 393225, 2, 0, 393226, 2, 1, 393227, 2, 2, 458752, 2, 65536, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65537, 458756, 2, 131077, 458757, 2, 1, 458758, 2, 1, 458759, 2, 1, 458760, 2, 1, 458761, 2, 131078, 458762, 2, 65537, 458763, 2, 65538, 524288, 2, 131072, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 131073, 524292, 2, 131073, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 131073, 524296, 2, 131073, 524297, 2, 131073, 524298, 2, 131073, 524299, 2, 131074 )
+tile_data = PoolIntArray( 15, 2, 3, 65551, 2, 65539, 131078, 536870916, 0, 131079, 2, 196608, 131080, 2, 196609, 131081, 2, 196610, 131082, 4, 0, 131087, 2, 65539, 196622, 2, 196608, 196623, 2, 262151, 262148, 536870916, 0, 262149, 2, 196608, 262150, 2, 196610, 262151, 4, 0, 262159, 2, 65539, 327683, 536870916, 0, 327695, 2, 65539, 393216, 2, 0, 393217, 2, 1, 393218, 2, 1, 393219, 2, 1, 393220, 2, 2, 393225, 2, 0, 393226, 2, 1, 393227, 2, 2, 393231, 2, 65539, 458752, 2, 65536, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65537, 458756, 2, 131077, 458757, 2, 1, 458758, 2, 1, 458759, 2, 1, 458760, 2, 1, 458761, 2, 131078, 458762, 2, 65537, 458763, 2, 65538, 458767, 2, 65539, 524288, 2, 131072, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 131073, 524292, 2, 131073, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 131073, 524296, 2, 131073, 524297, 2, 131073, 524298, 2, 131073, 524299, 2, 196613, 524300, 2, 196609, 524301, 2, 196609, 524302, 2, 196609, 524303, 2, 196615 )
 
 [node name="Fan" parent="." instance=ExtResource( 5 )]
-position = Vector2( 10, 228 )
+position = Vector2( 36, 228 )
+
+[node name="BatteryOrGround" parent="." instance=ExtResource( 6 )]
+position = Vector2( 15, 232 )
+invertOnStart = true
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2( 65, 178 )
+mass = 2.0
+physics_material_override = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="RigidBody2D"]
+self_modulate = Color( 0.337255, 0.0509804, 0.32549, 1 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 24, 24, 12, 12 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource( 1 )

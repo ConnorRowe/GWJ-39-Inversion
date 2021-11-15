@@ -31,10 +31,6 @@ namespace Inversion
 
         public override void _Ready()
         {
-            // CollisionPolygon2D test = new CollisionPolygon2D();
-            // ConcavePolygonShape2D poly = new ConcavePolygonShape2D();
-            // poly.Segments
-
             collisionShape = GetNode<Node2D>(collisionShapePath);
 
             if (collisionShape is CollisionShape2D collisionShape2D)

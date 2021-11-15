@@ -79,10 +79,12 @@ g_spawn_orb={
 2d_physics/layer_3="ElementalEffects"
 2d_physics/layer_4="InversionOrb"
 2d_physics/layer_5="PhysicsEffects"
+2d_physics/layer_6="PushAble"
 
 [physics]
 
 common/enable_pause_aware_picking=true
+2d/default_gravity=196
 
 [rendering]
 

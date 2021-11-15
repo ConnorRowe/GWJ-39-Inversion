@@ -72,6 +72,7 @@ extents = Vector2( 4, 5 )
 
 [node name="Squirter" type="Node2D"]
 script = ExtResource( 2 )
+elementalAreaPath = NodePath("SprayArea")
 
 [node name="2X2-white" type="Sprite" parent="."]
 modulate = Color( 0.355425, 0.349838, 0.394531, 1 )
