@@ -3,17 +3,14 @@ using System.Collections.Generic;
 
 namespace Inversion
 {
-    public class Fan : Sprite
+    public class Fan : LigntningPowered
     {
         [Export]
         public Vector2 PushVector { get; set; } = Vector2.Right;
         [Export]
         public float PushPower { get; set; } = 10f;
-        [Export]
-        private bool alwaysPowered = false;
 
         private HashSet<PhysicsBody2D> overlappedBodies = new HashSet<PhysicsBody2D>();
-        private bool isPowered = false;
 
         private Sprite[] windLines;
 
@@ -25,23 +22,12 @@ namespace Inversion
             pushArea.Connect("body_entered", this, nameof(BodyEntered));
             pushArea.Connect("body_exited", this, nameof(BodyExited));
 
-            var reactionHandler = GetNode<ReactionHandler>("ReactionHandler");
-            reactionHandler.Connect(nameof(ReactionHandler.ElementStarted), this, nameof(ElementStarted));
-            reactionHandler.Connect(nameof(ReactionHandler.ElementEnded), this, nameof(ElementEnded));
-
-            if (alwaysPowered)
-            {
-                Power();
-            }
-            else
-            {
-                UnPower();
-            }
+            base._Ready();
         }
 
         public override void _PhysicsProcess(float delta)
         {
-            if (!isPowered && !alwaysPowered)
+            if (!isLightningPowered && !alwaysLightningPowered)
                 return;
 
             foreach (var body in overlappedBodies)
@@ -79,14 +65,9 @@ namespace Inversion
             }
         }
 
-        private void Power()
+        protected override void LightningPower()
         {
-            if (isPowered)
-                return;
-
-            GD.Print($"{Name} powered");
-
-            isPowered = true;
+            base.LightningPower();
 
             foreach (var line in windLines)
             {
@@ -94,34 +75,13 @@ namespace Inversion
             }
         }
 
-        private void UnPower()
+        protected override void LightningUnPower()
         {
-            if (alwaysPowered)
-                return;
-
-            GD.Print($"{Name} unpowered");
-
-            isPowered = false;
+            base.LightningUnPower();
 
             foreach (var line in windLines)
             {
                 line.Visible = false;
-            }
-        }
-
-        private void ElementStarted(Element element)
-        {
-            if (element == Element.Lightning)
-            {
-                Power();
-            }
-        }
-
-        private void ElementEnded(Element element)
-        {
-            if (element == Element.Lightning)
-            {
-                UnPower();
             }
         }
     }

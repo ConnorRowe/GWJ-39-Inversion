@@ -2,7 +2,7 @@ using Godot;
 
 namespace Inversion
 {
-    public class Player : KinematicBody2D
+    public class Player : KinematicBody2D, IDamageable
     {
         private enum OrbState
         {
@@ -285,7 +285,7 @@ namespace Inversion
             InversionOrb.GlobalPosition = lightBase.GlobalPosition;
             tween.Stop(InversionOrb, "scale");
             tween.Stop(lightBase, "modulate");
-            tween.InterpolateProperty(InversionOrb, "scale", InversionOrb.Scale, Vector2.One, 1f, Tween.TransitionType.Cubic, Tween.EaseType.Out);
+            tween.InterpolateProperty(InversionOrb, "scale", Vector2.Zero, Vector2.One, 1f, Tween.TransitionType.Cubic, Tween.EaseType.Out);
             tween.InterpolateProperty(lightBase, "modulate", lightBase.Modulate, Colors.Transparent, .5f, Tween.TransitionType.Quad);
             tween.Start();
         }
@@ -311,6 +311,11 @@ namespace Inversion
         private void ResetCanInvert()
         {
             canInvert = true;
+        }
+
+        public void TakeDamage()
+        {
+            KillPlayer();
         }
     }
 }

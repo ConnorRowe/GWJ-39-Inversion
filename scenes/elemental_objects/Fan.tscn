@@ -28,12 +28,19 @@ extents = Vector2( 8, 8 )
 [sub_resource type="CircleShape2D" id=5]
 radius = 21.0238
 
-[node name="Fan" type="Sprite"]
+[node name="Fan" type="Node2D"]
+self_modulate = Color( 0.215686, 0.2, 0.2, 1 )
+script = ExtResource( 3 )
+reactionHandlerPath = NodePath("ReactionHandler")
+
+[node name="FanSprite" type="Sprite" parent="."]
 self_modulate = Color( 0.215686, 0.2, 0.2, 1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 24, 24, 16, 16 )
-script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Wind1" type="Sprite" parent="."]
 material = SubResource( 2 )

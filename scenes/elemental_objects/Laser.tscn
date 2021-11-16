@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://scenes/elemental_objects/ReactionHandler.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/elemental_objects/Laser.cs" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 3 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 12.0416
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.48, 0.704444 )
+colors = PoolColorArray( 0.6, 0.8, 1, 1, 0.6, 0.8, 1, 1, 0.6, 0.8, 1, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+trail_divisor = 4
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 97.57
+initial_velocity_random = 0.19
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 7 )
+color = Color( 0.6, 0.8, 1, 1 )
+color_ramp = SubResource( 5 )
+
+[node name="Laser" type="Node2D"]
+script = ExtResource( 3 )
+reactionHandlerPath = NodePath("ReactionHandler")
+
+[node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 0.254902, 0.345098, 0.415686, 1 )
+position = Vector2( 4, 0 )
+rotation = 1.5708
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 24, 24, 6, 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 4, 0 )
+shape = SubResource( 1 )
+
+[node name="PowerArea" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 0 )
+shape = SubResource( 2 )
+
+[node name="ReactionHandler" parent="." instance=ExtResource( 2 )]
+collisionShapePath = NodePath("../PowerArea")
+
+[node name="Particles2D" type="Particles2D" parent="."]
+amount = 50
+lifetime = 0.1
+process_material = SubResource( 3 )
