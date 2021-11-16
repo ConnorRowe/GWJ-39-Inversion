@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/levels/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/elemental_objects/Laser.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/elemental_objects/PoweredDoor.tscn" type="PackedScene" id=11]
 
 [sub_resource type="PhysicsMaterial" id=2]
 friction = 0.68
@@ -54,18 +55,35 @@ visible = false
 [node name="Squirter" parent="." instance=ExtResource( 3 )]
 position = Vector2( 222, 280 )
 
-[node name="Squirter2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 391, 122 )
-rotation = 3.14159
-invertOnStart = true
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 40, 40 )
 cell_custom_transform = Transform2D( 40, 0, 0, 40, 0, 0 )
 collision_layer = 9
 format = 1
-tile_data = PoolIntArray( 15, 2, 3, 65551, 2, 65539, 131078, 536870916, 0, 131079, 2, 196608, 131080, 2, 196609, 131081, 2, 196610, 131082, 4, 0, 131087, 2, 65539, 196621, 536870916, 0, 196622, 2, 196608, 196623, 2, 262151, 262148, 536870916, 0, 262149, 2, 196608, 262150, 2, 196610, 262151, 4, 0, 262159, 2, 65539, 327683, 536870916, 0, 327695, 2, 65539, 393216, 2, 0, 393217, 2, 1, 393218, 2, 1, 393219, 2, 1, 393220, 2, 2, 393225, 2, 0, 393226, 2, 1, 393227, 2, 2, 393228, 4, 0, 393231, 2, 65539, 458752, 2, 65536, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65537, 458756, 2, 131077, 458757, 2, 1, 458758, 2, 1, 458759, 2, 1, 458760, 2, 1, 458761, 2, 131078, 458762, 2, 65537, 458763, 2, 65538, 458767, 2, 65539, 524288, 2, 131072, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 131073, 524292, 2, 131073, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 131073, 524296, 2, 131073, 524297, 2, 131073, 524298, 2, 131073, 524299, 2, 196613, 524300, 2, 196609, 524301, 2, 196609, 524302, 2, 196609, 524303, 2, 196615 )
+tile_data = PoolIntArray( -1, 2, 0, -65536, 2, 5, -65535, 2, 196609, -65534, 2, 196609, -65533, 2, 196609, -65532, 2, 196609, -65531, 2, 196609, -65530, 2, 196609, -65529, 2, 196609, -65528, 2, 196609, -65527, 2, 196609, -65526, 2, 196609, -65525, 2, 196609, -65524, 2, 196609, -65523, 2, 196609, -65522, 2, 196609, -65521, 2, 7, 65535, 2, 65540, 0, 2, 131074, 15, 2, 65539, 131071, 2, 65539, 65551, 2, 65539, 196607, 2, 65539, 131078, 536870916, 0, 131079, 2, 196608, 131080, 2, 196609, 131081, 2, 196610, 131082, 4, 0, 131087, 2, 65539, 262143, 2, 65539, 196621, 536870916, 0, 196622, 2, 196608, 196623, 2, 262151, 327679, 2, 65539, 262148, 536870916, 0, 262149, 2, 196608, 262150, 2, 196610, 262151, 4, 0, 262159, 2, 65539, 393215, 2, 65539, 327683, 536870916, 0, 327684, 2, 3, 327695, 2, 65539, 458751, 2, 131076, 393216, 2, 1, 393217, 2, 1, 393218, 2, 1, 393219, 2, 1, 393220, 2, 131079, 393224, 2, 0, 393225, 2, 1, 393226, 2, 1, 393227, 2, 2, 393228, 4, 0, 393231, 2, 65539, 524287, 2, 65536, 458752, 2, 65537, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65537, 458756, 2, 131077, 458757, 2, 1, 458758, 2, 1, 458759, 2, 1, 458760, 2, 131078, 458761, 2, 65537, 458762, 2, 65537, 458763, 2, 65538, 458767, 2, 65539, 589823, 2, 131072, 524288, 2, 131073, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 131073, 524292, 2, 131073, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 131073, 524296, 2, 131073, 524297, 2, 131073, 524298, 2, 131073, 524299, 2, 196613, 524300, 2, 196609, 524301, 2, 196609, 524302, 2, 196609, 524303, 2, 196615 )
+
+[node name="BatteryOrGround2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 450, 8 )
+invertOnStart = true
+elementalAreaPath = NodePath("../BatteryOrGround/Area2D")
+
+[node name="PowerTerminal3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 428, 8 )
+linkedWirePath = NodePath("../Wire")
+
+[node name="Wire" parent="." instance=ExtResource( 9 )]
+position = Vector2( 414, -14 )
+connectedPoweredNodePath = NodePath("../PoweredDoor")
+
+[node name="StartPos" parent="Wire" index="0"]
+position = Vector2( 14, 14 )
+
+[node name="EndPos" parent="Wire" index="1"]
+position = Vector2( -57, 14 )
+
+[node name="PoweredDoor" parent="." instance=ExtResource( 11 )]
+position = Vector2( 357, 0 )
 
 [node name="Fan" parent="." instance=ExtResource( 5 )]
 position = Vector2( 36, 228 )
@@ -135,6 +153,7 @@ rotation = -3.14159
 position = Vector2( 12, 224 )
 rotation = -1.5708
 
+[editable path="Wire"]
 [editable path="Wire1"]
 [editable path="Wire2"]
 [editable path="Wire3"]
