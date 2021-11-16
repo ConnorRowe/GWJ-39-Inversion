@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/levels/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://scenes/elemental_objects/Laser.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/elemental_objects/PoweredDoor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/elemental_objects/WireBranch.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/RotationLerper.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/PositionLerper.tscn" type="PackedScene" id=14]
 
 [sub_resource type="PhysicsMaterial" id=2]
 friction = 0.68
@@ -155,6 +157,20 @@ position = Vector2( 12, 232 )
 position = Vector2( 433, 230 )
 rotation = -3.14159
 
+[node name="RotationLerper" parent="Laser" instance=ExtResource( 13 )]
+Speed = 0.25
+AngleSpread = 90.0
+BaseAngle = -135.0
+
+[node name="PositionLerper" parent="Laser" instance=ExtResource( 14 )]
+Speed = 0.1
+
+[node name="GlobalPointA" parent="Laser/PositionLerper" index="0"]
+position = Vector2( 433, 187 )
+
+[node name="GlobalPointB" parent="Laser/PositionLerper" index="1"]
+position = Vector2( 433, 230 )
+
 [node name="Laser2" parent="." instance=ExtResource( 10 )]
 position = Vector2( 12, 224 )
 rotation = -1.5708
@@ -164,3 +180,4 @@ rotation = -1.5708
 [editable path="Wire2"]
 [editable path="Wire3"]
 [editable path="Wire4"]
+[editable path="Laser/PositionLerper"]

@@ -22,7 +22,7 @@ namespace Inversion
 
         public override void _PhysicsProcess(float delta)
         {
-            particles.Rotation = -Rotation;
+            // particles.Rotation = -Rotation;
 
             if (!IsPowered())
                 return;
@@ -31,15 +31,15 @@ namespace Inversion
 
             var direction = new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation));
             var spaceState = GetWorld2d().DirectSpaceState;
-            var start = GlobalPosition + (direction * 8);
+            var start = GlobalPosition + (direction * 4);
             var end = start + (direction * LaserLength);
             var trace = spaceState.IntersectRay(start, end, exclude, collisionLayer: 1);
 
             if (trace.Keys.Count > 0)
             {
                 end = (Vector2)trace["position"];
-                var dir = (Vector2)trace["normal"];
-                particlesMaterial.Direction = new Vector3(dir.x, dir.y, 0f);
+                var dir = ((Vector2)trace["normal"]).Rotated(Mathf.Pi);
+                particlesMaterial.Direction = new Vector3(dir.y, dir.x, 0f);
 
                 if (trace["collider"] is IDamageable damageable)
                 {

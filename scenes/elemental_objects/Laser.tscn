@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/elemental_objects/ReactionHandler.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/elemental_objects/Laser.cs" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 1
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 3 )
@@ -36,12 +39,13 @@ color = Color( 0.6, 0.8, 1, 1 )
 color_ramp = SubResource( 5 )
 
 [node name="Laser" type="Node2D"]
+material = SubResource( 8 )
 script = ExtResource( 3 )
 reactionHandlerPath = NodePath("ReactionHandler")
 
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.254902, 0.345098, 0.415686, 1 )
-position = Vector2( 4, 0 )
+position = Vector2( 1.09673e-05, 1.45435e-05 )
 rotation = 1.5708
 texture = ExtResource( 1 )
 region_enabled = true
@@ -53,17 +57,17 @@ __meta__ = {
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 4, 0 )
 shape = SubResource( 1 )
 
 [node name="PowerArea" type="CollisionShape2D" parent="."]
-position = Vector2( 4, 0 )
+position = Vector2( 1.09673e-05, 1.45435e-05 )
 shape = SubResource( 2 )
 
 [node name="ReactionHandler" parent="." instance=ExtResource( 2 )]
 collisionShapePath = NodePath("../PowerArea")
 
 [node name="Particles2D" type="Particles2D" parent="."]
+use_parent_material = true
 amount = 50
 lifetime = 0.1
 process_material = SubResource( 3 )
