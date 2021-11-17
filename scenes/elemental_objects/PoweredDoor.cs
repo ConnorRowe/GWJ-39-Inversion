@@ -53,13 +53,15 @@ namespace Inversion
             {
                 doorCollision.Disabled = true;
 
-                tween.InterpolateProperty(doorSprite, "scale", doorSprite.Scale, new Vector2(1, 0), .25f);
+                tween.InterpolateProperty(doorSprite, "region_rect", doorSprite.RegionRect, new Rect2(0, 72, 16, 0), .35f, Tween.TransitionType.Cubic);
+                tween.InterpolateProperty(doorSprite, "offset", doorSprite.Offset, Vector2.Zero, .35f, Tween.TransitionType.Cubic);
                 tween.Start();
             }
             else
             {
                 doorCollision.Disabled = false;
-                tween.InterpolateProperty(doorSprite, "scale", doorSprite.Scale, new Vector2(1, 2), .25f);
+                tween.InterpolateProperty(doorSprite, "region_rect", doorSprite.RegionRect, new Rect2(0, 0, 16, 72), .35f, Tween.TransitionType.Cubic);
+                tween.InterpolateProperty(doorSprite, "offset", doorSprite.Offset, new Vector2(0, 36), .35f, Tween.TransitionType.Cubic);
                 tween.Start();
             }
         }

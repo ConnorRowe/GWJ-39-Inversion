@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="GWJ#39"
-run/main_scene="res://scenes/levels/BaseLevel.tscn"
+run/main_scene="res://scenes/levels/LevelOne.tscn"
 config/icon="res://icon.png"
 
 [display]

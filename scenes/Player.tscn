@@ -117,4 +117,10 @@ input_pickable = false
 build_mode = 1
 polygon = PoolVector2Array( -6, 0, -1, -21, 1, -25, 3, -25, 5, -21, 7, 0, 4, 0, 3, -7, -2, -7, -3, 0 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+process_mode = 0
+limit_smoothed = true
+smoothing_enabled = true
+
 [editable path="ReactionHandler"]

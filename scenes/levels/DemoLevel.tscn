@@ -1,0 +1,183 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scenes/levels/BaseLevel.cs" type="Script" id=1]
+[ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/elemental_objects/Squirter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tileset/terrain_tiles/tileset_terrain_tiles.tres" type="TileSet" id=4]
+[ext_resource path="res://scenes/elemental_objects/Fan.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/elemental_objects/Laser.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/elemental_objects/PoweredDoor.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/elemental_objects/WireBranch.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/RotationLerper.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/PositionLerper.tscn" type="PackedScene" id=14]
+
+[sub_resource type="PhysicsMaterial" id=2]
+friction = 0.68
+bounce = 0.24
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 6 )
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource( 1 )
+playerStartPosition = NodePath("PlayerStartPos")
+
+[node name="BGLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="BGLayer"]
+margin_right = 640.0
+margin_bottom = 360.0
+color = Color( 0.0784314, 0.0941176, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerStartPos" type="Position2D" parent="."]
+position = Vector2( 44, 113 )
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="debug" type="Label" parent="UILayer"]
+margin_left = 13.0
+margin_top = 13.0
+margin_right = 53.0
+margin_bottom = 27.0
+text = "debug"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InversionOrb" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="Squirter" parent="." instance=ExtResource( 3 )]
+position = Vector2( 222, 280 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 40, 40 )
+cell_custom_transform = Transform2D( 40, 0, 0, 40, 0, 0 )
+collision_layer = 9
+format = 1
+tile_data = PoolIntArray( -1, 2, 0, -65536, 2, 5, -65535, 2, 196609, -65534, 2, 196609, -65533, 2, 196609, -65532, 2, 196609, -65531, 2, 196609, -65530, 2, 196609, -65529, 2, 196609, -65528, 2, 196609, -65527, 2, 196609, -65526, 2, 196609, -65525, 2, 196609, -65524, 2, 196609, -65523, 2, 196609, -65522, 2, 196609, -65521, 2, 7, 65535, 2, 65540, 0, 2, 131074, 15, 2, 65539, 131071, 2, 65539, 65551, 2, 65539, 196607, 2, 65539, 131078, 536870916, 0, 131079, 2, 196608, 131080, 2, 196609, 131081, 2, 196610, 131082, 4, 0, 131087, 2, 65539, 262143, 2, 65539, 196620, 536870916, 0, 196621, 2, 196608, 196622, 2, 196609, 196623, 2, 262151, 327679, 2, 65539, 262148, 536870916, 0, 262149, 2, 196608, 262150, 2, 196610, 262151, 4, 0, 262159, 2, 65539, 393215, 2, 65539, 327683, 536870916, 0, 327684, 2, 3, 327695, 2, 65539, 458751, 2, 131076, 393216, 2, 1, 393217, 2, 1, 393218, 2, 1, 393219, 2, 1, 393220, 2, 131079, 393224, 2, 0, 393225, 2, 1, 393226, 2, 1, 393227, 2, 2, 393228, 4, 0, 393231, 2, 65539, 524287, 2, 65536, 458752, 2, 65537, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65537, 458756, 2, 131077, 458757, 2, 1, 458758, 2, 1, 458759, 2, 1, 458760, 2, 131078, 458761, 2, 65537, 458762, 2, 65537, 458763, 2, 65538, 458767, 2, 65539, 589823, 2, 131072, 524288, 2, 131073, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 131073, 524292, 2, 131073, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 131073, 524296, 2, 131073, 524297, 2, 131073, 524298, 2, 131073, 524299, 2, 196613, 524300, 2, 196609, 524301, 2, 196609, 524302, 2, 196609, 524303, 2, 196615 )
+
+[node name="DoorWire" parent="." instance=ExtResource( 9 )]
+position = Vector2( 414, -14 )
+connectedPoweredNodePath = NodePath("../PoweredDoor")
+
+[node name="StartPos" parent="DoorWire" index="0"]
+position = Vector2( -57, 352 )
+
+[node name="EndPos" parent="DoorWire" index="1"]
+position = Vector2( -57, 14 )
+
+[node name="PoweredDoor" parent="." instance=ExtResource( 11 )]
+position = Vector2( 357, 0 )
+
+[node name="Fan" parent="." instance=ExtResource( 5 )]
+position = Vector2( 36, 228 )
+
+[node name="BatteryOrGround" parent="." instance=ExtResource( 6 )]
+position = Vector2( 441, 230 )
+
+[node name="PowerTerminal" parent="." instance=ExtResource( 8 )]
+position = Vector2( 464, 231 )
+linkedWirePath = NodePath("../Wire1")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2( 210, 148 )
+mass = 2.0
+physics_material_override = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="RigidBody2D"]
+self_modulate = Color( 0.337255, 0.0509804, 0.32549, 1 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 24, 24, 12, 12 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource( 1 )
+
+[node name="Wire1" parent="." instance=ExtResource( 9 )]
+position = Vector2( 434, 291 )
+connectedPoweredNodePath = NodePath("../Wire2")
+
+[node name="StartPos" parent="Wire1" index="0"]
+position = Vector2( 30, -52 )
+
+[node name="EndPos" parent="Wire1" index="1"]
+position = Vector2( 30, 45 )
+
+[node name="Wire2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 434, 291 )
+connectedPoweredNodePath = NodePath("../WireBranch")
+
+[node name="StartPos" parent="Wire2" index="0"]
+position = Vector2( 32, 45 )
+
+[node name="EndPos" parent="Wire2" index="1"]
+position = Vector2( -77, 45 )
+
+[node name="WireBranch" parent="." instance=ExtResource( 12 )]
+position = Vector2( 357, 336 )
+connectedPoweredNodePaths = [ NodePath("../DoorWire"), NodePath("../Wire3") ]
+
+[node name="Wire3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 434, 291 )
+connectedPoweredNodePath = NodePath("../Wire4")
+
+[node name="StartPos" parent="Wire3" index="0"]
+position = Vector2( -77, 45 )
+
+[node name="EndPos" parent="Wire3" index="1"]
+position = Vector2( -420, 45 )
+
+[node name="Wire4" parent="." instance=ExtResource( 9 )]
+position = Vector2( 434, 291 )
+connectedPoweredNodePath = NodePath("../PowerTerminal2")
+
+[node name="StartPos" parent="Wire4" index="0"]
+position = Vector2( -422, 47 )
+
+[node name="EndPos" parent="Wire4" index="1"]
+position = Vector2( -422, -51 )
+
+[node name="PowerTerminal2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 12, 232 )
+
+[node name="Laser" parent="." instance=ExtResource( 10 )]
+position = Vector2( 433, 230 )
+rotation = -3.14159
+
+[node name="RotationLerper" parent="Laser" instance=ExtResource( 13 )]
+Speed = 0.25
+AngleSpread = 90.0
+BaseAngle = -135.0
+
+[node name="PositionLerper" parent="Laser" instance=ExtResource( 14 )]
+Speed = 0.1
+
+[node name="GlobalPointA" parent="Laser/PositionLerper" index="0"]
+position = Vector2( 433, 187 )
+
+[node name="GlobalPointB" parent="Laser/PositionLerper" index="1"]
+position = Vector2( 433, 230 )
+
+[node name="Laser2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 12, 219 )
+rotation = -1.5708
+
+[editable path="DoorWire"]
+[editable path="Wire1"]
+[editable path="Wire2"]
+[editable path="Wire3"]
+[editable path="Wire4"]
+[editable path="Laser/PositionLerper"]

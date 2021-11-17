@@ -6,6 +6,8 @@ namespace Inversion
     {
         [Export]
         private NodePath playerStartPosition;
+        [Export]
+        private Rect2 levelBounds = new Rect2(0, -10000000, 0, 360);
 
         public Player Player { get; set; }
 
@@ -19,6 +21,11 @@ namespace Inversion
             Player.InversionOrb = GetNode<InversionOrb>("InversionOrb");
 
             Player.Connect(nameof(Player.PlayerDied), this, nameof(PlayerDied));
+            var camera = Player.GetNode<Camera2D>("Camera2D");
+            camera.LimitLeft = (int)levelBounds.Position.x;
+            camera.LimitRight = (int)levelBounds.Position.y;
+            camera.LimitTop = (int)levelBounds.Size.x;
+            camera.LimitBottom = (int)levelBounds.Size.y;
         }
 
         private void PlayerDied()
