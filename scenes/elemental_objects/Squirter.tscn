@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://textures/2x2-white.png" type="Texture" id=1]
 [ext_resource path="res://scenes/elemental_objects/Squirter.cs" type="Script" id=2]
 [ext_resource path="res://textures/fire spray.png" type="Texture" id=3]
+[ext_resource path="res://scenes/FireWaterInversionParticles.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Gradient" id=10]
 offsets = PoolRealArray( 0, 0.869565, 0.931677, 1 )
@@ -91,6 +92,29 @@ color_ramp = SubResource( 7 )
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 4, 5 )
 
+[sub_resource type="Gradient" id=21]
+offsets = PoolRealArray( 0, 0.0288889, 0.515556, 0.531111, 0.548889, 0.975556, 0.997778 )
+colors = PoolColorArray( 0.901961, 0.270588, 0.223529, 0, 0.901961, 0.270588, 0.223529, 1, 0.901961, 0.270588, 0.223529, 1, 1, 1, 1, 1, 0.309804, 0.643137, 0.721569, 1, 0.309804, 0.643137, 0.721569, 1, 0.309804, 0.643137, 0.721569, 0 )
+
+[sub_resource type="GradientTexture" id=22]
+gradient = SubResource( 21 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=23]
+resource_local_to_scene = true
+lifetime_randomness = 0.6
+emission_shape = 1
+emission_sphere_radius = 12.84
+flag_disable_z = true
+orbit_velocity = 0.04
+orbit_velocity_random = 0.0
+radial_accel = 64.3
+radial_accel_random = 0.23
+damping = 63.01
+damping_random = 0.15
+color_ramp = SubResource( 22 )
+anim_speed = 8.0
+
 [node name="Squirter" type="Node2D"]
 script = ExtResource( 2 )
 elementalAreaPath = NodePath("SprayArea")
@@ -114,6 +138,7 @@ process_material = SubResource( 14 )
 [node name="FireSprite" type="AnimatedSprite" parent="FireStuff"]
 position = Vector2( 0, -42 )
 frames = SubResource( 20 )
+frame = 2
 playing = true
 
 [node name="WaterStuff" type="Node2D" parent="."]
@@ -142,4 +167,8 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SprayArea"]
-polygon = PoolVector2Array( -2, -6, -20, -64, -14, -76, 14, -76, 20, -65, 2, -6 )
+polygon = PoolVector2Array( -2, -6, -7, -41, -20, -62, -14, -76, 14, -76, 20, -62, 7, -41, 2, -6 )
+
+[node name="FireWaterInversionParticles" parent="." instance=ExtResource( 4 )]
+amount = 10
+process_material = SubResource( 23 )

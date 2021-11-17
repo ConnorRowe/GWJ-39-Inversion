@@ -1,13 +1,37 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://textures/battery.png" type="Texture" id=1]
 [ext_resource path="res://scenes/elemental_objects/BatteryOrGround.cs" type="Script" id=2]
+[ext_resource path="res://scenes/LightningEarthInversionParticles.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 8 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 19.105
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.0288889, 0.515556, 0.531111, 0.548889, 0.975556, 0.997778 )
+colors = PoolColorArray( 1, 0.933333, 0.513726, 0, 1, 0.933333, 0.513726, 1, 1, 0.933333, 0.513726, 1, 1, 1, 1, 1, 0.184314, 0.341176, 0.32549, 1, 0.184314, 0.341176, 0.32549, 1, 0.184314, 0.341176, 0.32549, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=5]
+resource_local_to_scene = true
+lifetime_randomness = 0.6
+emission_shape = 1
+emission_sphere_radius = 12.84
+flag_disable_z = true
+orbit_velocity = 0.04
+orbit_velocity_random = 0.0
+radial_accel = 64.3
+radial_accel_random = 0.23
+damping = 63.01
+damping_random = 0.15
+color_ramp = SubResource( 4 )
+anim_speed = 8.0
 
 [node name="BatteryOrGround" type="Node2D"]
 script = ExtResource( 2 )
@@ -31,3 +55,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
+
+[node name="FireWaterInversionParticles" parent="." instance=ExtResource( 3 )]
+amount = 10
+process_material = SubResource( 5 )

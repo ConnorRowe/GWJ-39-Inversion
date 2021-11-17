@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://textures/fire-water-switch.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.0288889, 0.515556, 0.531111, 0.548889, 0.975556, 0.997778 )
+colors = PoolColorArray( 1, 0.933333, 0.513726, 0, 1, 0.933333, 0.513726, 1, 1, 0.933333, 0.513726, 1, 1, 1, 1, 1, 0.184314, 0.341176, 0.32549, 1, 0.184314, 0.341176, 0.32549, 1, 0.184314, 0.341176, 0.32549, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=5]
+resource_local_to_scene = true
+lifetime_randomness = 0.6
+emission_shape = 1
+emission_sphere_radius = 12.84
+flag_disable_z = true
+orbit_velocity = 0.04
+orbit_velocity_random = 0.0
+radial_accel = 64.3
+radial_accel_random = 0.23
+damping = 63.01
+damping_random = 0.15
+color_ramp = SubResource( 4 )
+anim_speed = 8.0
+
+[node name="FireWaterInversionParticles" type="Particles2D"]
+material = SubResource( 1 )
+amount = 32
+lifetime = 4.0
+randomness = 0.52
+local_coords = false
+draw_order = 1
+process_material = SubResource( 5 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
