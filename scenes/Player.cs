@@ -21,6 +21,7 @@ namespace Inversion
         private const float MovementDamping = 8f;
 
         public InversionOrb InversionOrb { get; set; } = null;
+        public bool IsFrozen { get; set; } = false;
 
         private float inputDir = 0f;
         private Vector2 velocity = Vector2.Zero;
@@ -57,7 +58,7 @@ namespace Inversion
 
         public override void _Input(InputEvent evt)
         {
-            if (InversionOrb == null)
+            if (InversionOrb == null || IsFrozen)
                 return;
 
             if (evt.IsActionPressed("g_spawn_orb"))
@@ -212,7 +213,8 @@ namespace Inversion
                 gravity = 0;
 
             // Apply velocities
-            MoveAndSlideWithSnap(velocity + externalVelocity + new Vector2(0, gravity), Vector2.Down, Vector2.Up, infiniteInertia: false);
+            if (!IsFrozen)
+                MoveAndSlideWithSnap(velocity + externalVelocity + new Vector2(0, gravity), Vector2.Down, Vector2.Up, infiniteInertia: false);
 
             // Push objects
             if (inputDir != 0f)

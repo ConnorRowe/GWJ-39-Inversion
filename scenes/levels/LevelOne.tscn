@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/elemental_objects/PoweredDoor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/GoalPlatform.tscn" type="PackedScene" id=6]
 
 [node name="LevelOne" instance=ExtResource( 1 )]
 levelBounds = Rect2( 0, 880, 0, 360 )
@@ -82,6 +83,9 @@ linkedWirePath = NodePath("../Wire4")
 position = Vector2( 90, 168 )
 rotation = 3.14159
 invertOnStart = true
+
+[node name="GoalPlatform" parent="." index="13" instance=ExtResource( 6 )]
+position = Vector2( 487, 320 )
 
 [editable path="Wire0"]
 [editable path="Wire"]
