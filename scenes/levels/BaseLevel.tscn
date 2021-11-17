@@ -172,7 +172,7 @@ position = Vector2( 433, 187 )
 position = Vector2( 433, 230 )
 
 [node name="Laser2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 12, 224 )
+position = Vector2( 12, 219 )
 rotation = -1.5708
 
 [editable path="DoorWire"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://textures/laser.png" type="Texture" id=1]
 [ext_resource path="res://scenes/elemental_objects/ReactionHandler.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/elemental_objects/Laser.cs" type="Script" id=3]
 
@@ -46,10 +46,7 @@ reactionHandlerPath = NodePath("ReactionHandler")
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.254902, 0.345098, 0.415686, 1 )
 position = Vector2( 1.09673e-05, 1.45435e-05 )
-rotation = 1.5708
 texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 24, 24, 6, 8 )
 __meta__ = {
 "_editor_description_": ""
 }

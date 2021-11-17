@@ -63,7 +63,7 @@ namespace Inversion
         public override void _Draw()
         {
             if (IsPowered())
-                DrawLine(ToLocal(laserLine[0]), ToLocal(laserLine[1]), Colors.SkyBlue, 2.5f);
+                DrawLine(ToLocal(laserLine[0]), ToLocal(laserLine[1]), Colors.SkyBlue, 2f);
         }
 
         protected override void LightningPower()

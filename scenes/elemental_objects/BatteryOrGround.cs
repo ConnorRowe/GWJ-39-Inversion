@@ -4,6 +4,8 @@ namespace Inversion
 {
     public class BatteryOrGround : ElementalObject
     {
+        private static Texture batteryTex = GD.Load<Texture>("res://textures/battery.png");
+        private static Texture groundTex = GD.Load<Texture>("res://textures/stalegtite.png");
         private Sprite sprite;
 
         public override void _Ready()
@@ -17,7 +19,10 @@ namespace Inversion
         {
             base.Invert();
 
-            sprite.SelfModulate = currentElement.GetColour();
+            if (currentElement == Element.Lightning)
+                sprite.Texture = batteryTex;
+            else
+                sprite.Texture = groundTex;
         }
     }
 }
