@@ -15,7 +15,7 @@ namespace Inversion
 
         private const float JumpForce = 300f;
         private const float GravityAccel = 98f * 8;
-        private const float TerminalVel = 980f;
+        private const float TerminalVel = 245f;
         private const float MaxSpeed = 1000f;
         private const float Acceleration = 600f;
         private const float MovementDamping = 8f;

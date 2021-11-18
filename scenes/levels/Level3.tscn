@@ -1,0 +1,178 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/GoalPlatform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/elemental_objects/CrateMetal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/elemental_objects/Lava.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/elemental_objects/CrateWood.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/elemental_objects/PoweredDoor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/elemental_objects/WireBranch.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/elemental_objects/Fan.tscn" type="PackedScene" id=12]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.0355556, 0.0733333, 0.502222, 0.842222, 0.882222, 1 )
+colors = PoolColorArray( 0.309804, 0.643137, 0.721569, 0, 0.960784, 1, 0.909804, 1, 1, 0.933333, 0.513726, 1, 1, 0.537255, 0.2, 1, 0.9, 0.06, 0, 1, 0.901961, 0.270588, 0.223529, 0.682353, 0.901961, 0.270588, 0.223529, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 100
+
+[sub_resource type="Curve" id=7]
+max_value = 1.1
+_data = [ Vector2( 0, 0.823864 ), 0.0, 0.0, 0, 0, Vector2( 0.0486258, 1.1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.814773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+resource_local_to_scene = true
+lifetime_randomness = 0.3
+emission_shape = 2
+emission_box_extents = Vector3( 40, 1, 0 )
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 31.1
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.64
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.28
+damping = 2.44
+scale_random = 0.71
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=11]
+resource_local_to_scene = true
+extents = Vector2( 40, 40 )
+
+[sub_resource type="PhysicsMaterial" id=10]
+rough = true
+bounce = 1.0
+absorbent = true
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 40, 15.5 )
+
+[node name="Level3" instance=ExtResource( 4 )]
+
+[node name="PlayerStartPos" parent="." index="1"]
+position = Vector2( 86, 137 )
+
+[node name="TileMap" parent="." index="4"]
+tile_data = PoolIntArray( -131072, 2, 0, -131071, 2, 1, -131070, 2, 1, -131069, 2, 1, -131068, 2, 1, -131067, 2, 5, -131066, 2, 196609, -131065, 2, 196609, -131064, 2, 196609, -131063, 2, 196609, -131062, 2, 196609, -131061, 2, 6, -131060, 2, 1, -131059, 2, 1, -131058, 2, 1, -131057, 2, 2, -65536, 2, 65536, -65535, 2, 65537, -65534, 2, 65537, -65533, 2, 65537, -65532, 2, 65537, -65531, 2, 65538, -65525, 2, 65536, -65524, 2, 65537, -65523, 2, 65537, -65522, 2, 65537, -65521, 2, 65538, 0, 2, 65536, 1, 2, 65537, 2, 2, 65537, 3, 2, 65537, 4, 2, 65537, 5, 2, 65538, 11, 2, 65536, 12, 2, 65537, 13, 2, 65537, 14, 2, 65537, 15, 2, 65538, 65536, 2, 65540, 65537, 2, 131073, 65538, 2, 131073, 65539, 2, 131073, 65540, 2, 131073, 65541, 2, 196613, 65542, 2, 196609, 65543, 2, 196609, 65544, 2, 196610, 65547, 2, 131072, 65548, 2, 131073, 65549, 2, 131073, 65550, 2, 131073, 65551, 2, 65543, 131072, 2, 65539, 131087, 2, 65539, 196608, 2, 65539, 196623, 2, 65539, 262144, 2, 65539, 262159, 2, 65539, 327680, 2, 131076, 327681, 2, 1, 327682, 2, 1, 327683, 2, 1, 327684, 2, 2, 327687, 2, 0, 327688, 2, 2, 327691, 2, 0, 327692, 2, 1, 327693, 2, 1, 327694, 2, 1, 327695, 2, 131079, 393216, 2, 65536, 393217, 2, 65537, 393218, 2, 65537, 393219, 2, 65537, 393220, 2, 65538, 393223, 2, 65536, 393224, 2, 65538, 393227, 2, 65536, 393228, 2, 65537, 393229, 2, 65537, 393230, 2, 65537, 393231, 2, 65538, 458752, 2, 65536, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65537, 458756, 2, 131077, 458757, 2, 1, 458758, 2, 1, 458759, 2, 131078, 458760, 2, 65538, 458763, 2, 65536, 458764, 2, 65537, 458765, 2, 65537, 458766, 2, 65537, 458767, 2, 65538, 524288, 2, 131072, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 131073, 524292, 2, 131073, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 131073, 524296, 2, 131074, 524299, 2, 131072, 524300, 2, 131073, 524301, 2, 131073, 524302, 2, 131073, 524303, 2, 131074 )
+
+[node name="GoalPlatform" parent="." index="5" instance=ExtResource( 2 )]
+position = Vector2( 562, 200 )
+
+[node name="Fan" parent="." index="6" instance=ExtResource( 12 )]
+position = Vector2( 252, 27 )
+PushPower = 8.0
+
+[node name="CrateMetal" parent="." index="7" instance=ExtResource( 3 )]
+position = Vector2( 284, 19 )
+
+[node name="CrateMetal2" parent="." index="8" instance=ExtResource( 3 )]
+position = Vector2( 334, 19 )
+
+[node name="Lava" parent="." index="9" instance=ExtResource( 5 )]
+position = Vector2( 400, 320 )
+
+[node name="Flames" parent="Lava" index="0"]
+process_material = SubResource( 9 )
+
+[node name="CollisionRect" parent="Lava/Area2D" index="0"]
+shape = SubResource( 11 )
+
+[node name="StaticBody2D" parent="Lava" index="2"]
+physics_material_override = SubResource( 10 )
+
+[node name="Lava2" parent="." index="10" instance=ExtResource( 5 )]
+position = Vector2( 240, 256 )
+
+[node name="Flames" parent="Lava2" index="0"]
+position = Vector2( 0, -7 )
+process_material = SubResource( 9 )
+
+[node name="CollisionRect" parent="Lava2/Area2D" index="0"]
+position = Vector2( 0, 8.5 )
+shape = SubResource( 12 )
+
+[node name="StaticBody2D" parent="Lava2" index="2"]
+physics_material_override = SubResource( 10 )
+
+[node name="CrateWood" parent="." index="11" instance=ExtResource( 6 )]
+position = Vector2( 342, 180 )
+
+[node name="PoweredDoor" parent="." index="12" instance=ExtResource( 7 )]
+position = Vector2( 280, 208 )
+rotation = 1.5708
+
+[node name="PowerTerminal" parent="PoweredDoor" index="4"]
+connectedPoweredNodePath = NodePath("../../WireBranch")
+
+[node name="BatteryOrGround" parent="." index="13" instance=ExtResource( 8 )]
+position = Vector2( 289, 192 )
+invertOnStart = true
+
+[node name="Wire" parent="." index="14" instance=ExtResource( 10 )]
+connectedPoweredNodePath = NodePath("../Wire2")
+
+[node name="StartPos" parent="Wire" index="0"]
+position = Vector2( 289, 200 )
+
+[node name="EndPos" parent="Wire" index="1"]
+position = Vector2( 289, 59 )
+
+[node name="Wire2" parent="." index="15" instance=ExtResource( 10 )]
+connectedPoweredNodePath = NodePath("../Wire3")
+
+[node name="StartPos" parent="Wire2" index="0"]
+position = Vector2( 291, 61 )
+
+[node name="EndPos" parent="Wire2" index="1"]
+position = Vector2( 240, 61 )
+
+[node name="Wire3" parent="." index="16" instance=ExtResource( 10 )]
+connectedPoweredNodePath = NodePath("../PowerTerminal")
+
+[node name="StartPos" parent="Wire3" index="0"]
+position = Vector2( 238, 63 )
+
+[node name="EndPos" parent="Wire3" index="1"]
+position = Vector2( 238, 13 )
+
+[node name="WireBranch" parent="." index="17" instance=ExtResource( 9 )]
+position = Vector2( 276, 200 )
+connectedPoweredNodePaths = [ NodePath("../Wire"), NodePath("../PoweredDoor") ]
+
+[node name="PowerTerminal" parent="." index="18" instance=ExtResource( 11 )]
+position = Vector2( 248, 10 )
+rotation = 1.5708
+
+[node name="Label" type="Label" parent="." index="19"]
+margin_left = 124.0
+margin_top = 132.0
+margin_right = 233.0
+margin_bottom = 225.0
+rect_rotation = 3.8114
+custom_colors/font_color = Color( 0.8, 0.184314, 0.482353, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Don't go in the lava."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[editable path="Lava"]
+[editable path="Lava2"]
+[editable path="PoweredDoor"]
+[editable path="Wire"]
+[editable path="Wire2"]
+[editable path="Wire3"]

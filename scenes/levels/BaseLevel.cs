@@ -5,9 +5,11 @@ namespace Inversion
     public class BaseLevel : Node2D
     {
         [Export]
+        public string LevelName { get; set; } = "";
+        [Export]
         private NodePath playerStartPosition;
         [Export]
-        private Rect2 levelBounds = new Rect2(0, -10000000, 0, 360);
+        private Rect2 levelBounds = new Rect2(0, 640, 0, 360);
 
         public Player Player { get; set; }
 

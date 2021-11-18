@@ -48,7 +48,7 @@ color_ramp = SubResource( 3 )
 extents = Vector2( 23, 23 )
 
 [node name="CrateWood" type="RigidBody2D"]
-collision_layer = 29
+collision_layer = 9
 mass = 2.0
 script = ExtResource( 4 )
 

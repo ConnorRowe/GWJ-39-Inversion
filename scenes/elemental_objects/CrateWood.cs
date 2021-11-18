@@ -84,10 +84,10 @@ namespace Inversion
         {
             //make cool wood fragments
 
-            flames.Emitting = false;
-            GetNode<Sprite>("Sprite").Visible = false;
-            Sleeping = true;
-            GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
+            // flames.Emitting = false;
+            // GetNode<Sprite>("Sprite").Visible = false;
+            // Sleeping = true;
+            // GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
 
             foreach (var chunk in chunks)
             {

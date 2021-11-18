@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/elemental_objects/Lava.cs" type="Script" id=1]
+[ext_resource path="res://Flames.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.0355556, 0.0733333, 0.502222, 0.842222, 0.882222, 1 )
+colors = PoolColorArray( 0.309804, 0.643137, 0.721569, 0, 0.960784, 1, 0.909804, 1, 1, 0.933333, 0.513726, 1, 1, 0.537255, 0.2, 1, 0.9, 0.06, 0, 1, 0.901961, 0.270588, 0.223529, 0.682353, 0.901961, 0.270588, 0.223529, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 100
+
+[sub_resource type="Curve" id=7]
+max_value = 1.1
+_data = [ Vector2( 0, 0.823864 ), 0.0, 0.0, 0, 0, Vector2( 0.0486258, 1.1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.814773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+resource_local_to_scene = true
+lifetime_randomness = 0.3
+emission_shape = 2
+emission_box_extents = Vector3( 40, 1, 0 )
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 31.1
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.64
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.28
+damping = 2.44
+scale_random = 0.71
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 40, 40 )
+
+[node name="Lava" type="Node2D"]
+z_index = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Flames" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -40 )
+z_index = -1
+amount = 40
+process_material = SubResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="."]
+z_index = 1
+collision_layer = 4
+collision_mask = 0
+input_pickable = false
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionRect" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 9

@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/elemental_objects/PoweredDoor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/GoalPlatform.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/GoalPlatform.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/elemental_objects/Squirter.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/elemental_objects/CrateWood.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/elemental_objects/Squirter.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/elemental_objects/CrateMetal.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/elemental_objects/PoweredDoor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/elemental_objects/CrateWood.tscn" type="PackedScene" id=9]
 
-[node name="LevelOne" instance=ExtResource( 1 )]
+[node name="LevelOne" instance=ExtResource( 6 )]
 levelBounds = Rect2( 0, 880, 0, 360 )
 
 [node name="PlayerStartPos" parent="." index="1"]
@@ -18,10 +19,10 @@ position = Vector2( 78, 288 )
 [node name="TileMap" parent="." index="4"]
 tile_data = PoolIntArray( -65536, 2, 4, -65535, 2, 196609, -65534, 2, 196609, -65533, 2, 196609, -65532, 2, 196609, -65531, 2, 196609, -65530, 2, 196609, -65529, 2, 196609, -65528, 2, 196609, -65527, 2, 196609, -65526, 2, 196609, -65525, 2, 196609, -65524, 2, 196609, -65523, 2, 196609, -65522, 2, 196609, -65521, 2, 196609, -65520, 2, 196609, -65519, 2, 196609, -65518, 2, 196609, -65517, 2, 196609, -65516, 2, 196609, -65515, 2, 7, 0, 2, 65539, 21, 2, 65539, 65536, 2, 65539, 65557, 2, 65539, 131072, 2, 65539, 131093, 2, 65539, 196608, 2, 262148, 196609, 2, 196609, 196610, 2, 196609, 196611, 2, 196609, 196612, 2, 196609, 196613, 2, 7, 196629, 2, 65539, 262144, 2, 65539, 262149, 2, 65539, 262165, 2, 65539, 327680, 2, 65539, 327685, 2, 131075, 327701, 2, 65539, 393216, 2, 65539, 393237, 2, 65539, 458752, 2, 65539, 458773, 2, 65539, 524288, 2, 196612, 524289, 2, 196609, 524290, 2, 196609, 524291, 2, 196609, 524292, 2, 196609, 524293, 2, 196609, 524294, 2, 196609, 524295, 2, 196609, 524296, 2, 196609, 524297, 2, 196609, 524298, 2, 196609, 524299, 2, 196609, 524300, 2, 196609, 524301, 2, 196609, 524302, 2, 196609, 524303, 2, 196609, 524304, 2, 196609, 524305, 2, 196609, 524306, 2, 196609, 524307, 2, 196609, 524308, 2, 196609, 524309, 2, 196615 )
 
-[node name="CrateWood2" parent="." index="5" instance=ExtResource( 8 )]
+[node name="CrateWood2" parent="." index="5" instance=ExtResource( 9 )]
 position = Vector2( 293, 91 )
 
-[node name="BatteryOrGround" parent="." index="6" instance=ExtResource( 5 )]
+[node name="BatteryOrGround" parent="." index="6" instance=ExtResource( 1 )]
 position = Vector2( 90, 168 )
 rotation = 3.14159
 
@@ -80,33 +81,42 @@ position = Vector2( -69, 4 )
 [node name="EndPos" parent="Wire5" index="1"]
 position = Vector2( -69, 24 )
 
-[node name="PoweredDoor" parent="." index="13" instance=ExtResource( 2 )]
+[node name="PoweredDoor" parent="." index="13" instance=ExtResource( 8 )]
 position = Vector2( 208, 240 )
 
-[node name="GoalPlatform" parent="." index="14" instance=ExtResource( 6 )]
+[node name="GoalPlatform" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 487, 320 )
 
-[node name="Squirter" parent="." index="15" instance=ExtResource( 7 )]
+[node name="Squirter" parent="." index="15" instance=ExtResource( 5 )]
 position = Vector2( 241, 213 )
 rotation = 1.5708
 
-[node name="CrateWood" parent="." index="16" instance=ExtResource( 8 )]
+[node name="CrateWood" parent="." index="16" instance=ExtResource( 9 )]
 position = Vector2( 294, 300 )
 
-[node name="CrateWood7" parent="." index="17" instance=ExtResource( 8 )]
+[node name="CrateWood7" parent="." index="17" instance=ExtResource( 9 )]
 position = Vector2( 294, 258 )
 
-[node name="CrateWood3" parent="." index="18" instance=ExtResource( 8 )]
+[node name="CrateWood3" parent="." index="18" instance=ExtResource( 9 )]
 position = Vector2( 335, 300 )
 
-[node name="CrateWood4" parent="." index="19" instance=ExtResource( 8 )]
+[node name="CrateWood4" parent="." index="19" instance=ExtResource( 9 )]
 position = Vector2( 377, 300 )
 
-[node name="CrateWood5" parent="." index="20" instance=ExtResource( 8 )]
+[node name="CrateWood5" parent="." index="20" instance=ExtResource( 9 )]
 position = Vector2( 377, 259 )
 
-[node name="CrateWood6" parent="." index="21" instance=ExtResource( 8 )]
+[node name="CrateWood6" parent="." index="21" instance=ExtResource( 9 )]
 position = Vector2( 377, 213 )
+
+[node name="BatteryOrGround2" parent="." index="22" instance=ExtResource( 1 )]
+position = Vector2( 610, 312 )
+
+[node name="CrateMetal" parent="." index="23" instance=ExtResource( 7 )]
+position = Vector2( 577, 300 )
+
+[node name="CrateMetal2" parent="." index="24" instance=ExtResource( 7 )]
+position = Vector2( 577, 260 )
 
 [editable path="Wire1"]
 [editable path="Wire2"]
