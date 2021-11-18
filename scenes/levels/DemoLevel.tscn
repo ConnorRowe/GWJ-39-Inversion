@@ -25,6 +25,7 @@ extents = Vector2( 6, 6 )
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource( 1 )
 playerStartPosition = NodePath("PlayerStartPos")
+levelBounds = Rect2( 0, 640, 0, 360 )
 
 [node name="BGLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -87,7 +88,7 @@ position = Vector2( 441, 230 )
 
 [node name="PowerTerminal" parent="." instance=ExtResource( 8 )]
 position = Vector2( 464, 231 )
-linkedWirePath = NodePath("../Wire1")
+connectedPoweredNodePath = NodePath("../Wire1")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2( 210, 148 )

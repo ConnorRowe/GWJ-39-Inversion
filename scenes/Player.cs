@@ -41,6 +41,7 @@ namespace Inversion
         private float lightPulseSpeed = .25f;
         private bool canInvert = true;
         private Area2D hitBox;
+        private Particles2D feetDust;
 
         public override void _Ready()
         {
@@ -52,6 +53,7 @@ namespace Inversion
             lightGlow = GetNode<Sprite>("AnimatedSprite/Light/Glow");
             tween = GetNode<Tween>("Tween");
             hitBox = GetNode<Area2D>("HitBox");
+            feetDust = GetNode<Particles2D>("FeetDust");
 
             debugLabel = GetNode<Label>("debuglabel");
         }
@@ -85,7 +87,9 @@ namespace Inversion
             if ((velocity + externalVelocity).LengthSquared() > 50f)
             {
                 if (inputDir == 0f)
+                {
                     charSprite.Animation = "slide";
+                }
                 else
                 {
                     charSprite.Animation = "run";
@@ -96,6 +100,8 @@ namespace Inversion
             {
                 charSprite.Animation = "idle";
             }
+
+            feetDust.Emitting = charSprite.Animation != "idle" && IsOnFloor();
 
             if (inputDir > 0f)
                 charSprite.FlipH = false;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/Player.cs" type="Script" id=1]
 [ext_resource path="res://scenes/elemental_objects/ReactionHandler.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://textures/char_idle.png" type="Texture" id=5]
 [ext_resource path="res://textures/char_slide.png" type="Texture" id=6]
 [ext_resource path="res://textures/char_light_glow_thin.png" type="Texture" id=7]
+[ext_resource path="res://textures/dust.png" type="Texture" id=8]
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
@@ -65,6 +66,23 @@ blend_mode = 1
 radius = 4.0
 height = 16.0
 
+[sub_resource type="CanvasItemMaterial" id=14]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=15]
+emission_shape = 2
+emission_box_extents = Vector3( 5.5, 1.5, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 4.07
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+anim_speed = 1.0
+
 [node name="Player" type="KinematicBody2D"]
 collision/safe_margin = 0.16
 script = ExtResource( 1 )
@@ -122,5 +140,14 @@ current = true
 process_mode = 0
 limit_smoothed = true
 smoothing_enabled = true
+
+[node name="FeetDust" type="Particles2D" parent="."]
+material = SubResource( 14 )
+emitting = false
+amount = 6
+lifetime = 0.5
+local_coords = false
+process_material = SubResource( 15 )
+texture = ExtResource( 8 )
 
 [editable path="ReactionHandler"]

@@ -6,6 +6,7 @@ namespace Inversion
     {
         private bool nearHeat = false;
         private bool ignited = false;
+        private bool wet = false;
         private float ignitionTime = .5f;
         private float life = 3f;
         private Particles2D flames;
@@ -23,10 +24,10 @@ namespace Inversion
         {
             base._Process(delta);
 
-            if (nearHeat)
+            if (nearHeat && !wet)
                 ignitionTime -= delta;
 
-            if (ignitionTime <= 0f && !ignited)
+            if (ignitionTime <= 0f && !ignited && !wet)
             {
                 Ignite();
             }
@@ -46,6 +47,12 @@ namespace Inversion
             {
                 nearHeat = true;
             }
+            else if (element == Element.Water)
+            {
+                wet = true;
+
+                Extinguish();
+            }
         }
 
         private void ElementEnded(Element element)
@@ -54,13 +61,23 @@ namespace Inversion
             {
                 nearHeat = false;
             }
+            else if (element == Element.Water)
+            {
+                wet = false;
+            }
         }
 
         private void Ignite()
         {
             ignited = true;
-
             flames.Emitting = true;
+        }
+
+        private void Extinguish()
+        {
+            ignited = false;
+            flames.Emitting = false;
+            ignitionTime = .5f;
         }
 
         private void Destroy()
