@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://textures/flame.png" type="Texture" id=1]
+[ext_resource path="res://Flames.cs" type="Script" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.0355556, 0.0733333, 0.502222, 0.842222, 0.882222, 1 )
+colors = PoolColorArray( 0.309804, 0.643137, 0.721569, 0, 0.960784, 1, 0.909804, 1, 1, 0.933333, 0.513726, 1, 1, 0.537255, 0.2, 1, 0.9, 0.06, 0, 1, 0.901961, 0.270588, 0.223529, 0.682353, 0.901961, 0.270588, 0.223529, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 100
+
+[sub_resource type="Curve" id=7]
+max_value = 1.1
+_data = [ Vector2( 0, 0.823864 ), 0.0, 0.0, 0, 0, Vector2( 0.0486258, 1.1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.814773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+resource_local_to_scene = true
+lifetime_randomness = 0.3
+emission_shape = 2
+emission_box_extents = Vector3( 20, 20, 0 )
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 31.1
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.64
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.28
+damping = 2.44
+scale_random = 0.71
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 3 )
+
+[node name="Flames" type="Particles2D"]
+material = SubResource( 1 )
+amount = 64
+lifetime = 0.7
+explosiveness = 0.1
+local_coords = false
+draw_order = 1
+process_material = SubResource( 4 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

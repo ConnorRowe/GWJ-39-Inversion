@@ -151,7 +151,7 @@ polygon = PoolVector2Array( -20, 0, -10, -5, 10, -5, 20, 0 )
 
 [node name="Arrow" type="AnimatedSprite" parent="."]
 modulate = Color( 0.784314, 0.831373, 0.364706, 1 )
-position = Vector2( 0, -26.4178 )
+position = Vector2( 0, -29.7728 )
 frames = SubResource( 4 )
 frame = 3
 playing = true
@@ -173,7 +173,6 @@ offset = Vector2( -20, 0 )
 anims/Arrow = SubResource( 10 )
 
 [node name="EOLExplosion" type="AnimatedSprite" parent="."]
-modulate = Color( 1, 1, 1, 0.564706 )
 material = SubResource( 5 )
 position = Vector2( 0, -21 )
 frames = SubResource( 21 )

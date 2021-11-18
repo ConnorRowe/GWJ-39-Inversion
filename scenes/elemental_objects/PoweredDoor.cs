@@ -2,7 +2,7 @@ using Godot;
 
 namespace Inversion
 {
-    public class PoweredDoor : LigntningPowered, IWirePowered
+    public class PoweredDoor : Node2D, IWirePowered
     {
         private bool isWirePowered = false;
 
@@ -19,22 +19,10 @@ namespace Inversion
             base._Ready();
         }
 
-        protected override void LightningPower()
-        {
-            base.LightningPower();
-
-            PowerChanged();
-        }
-
-        protected override void LightningUnPower()
-        {
-            base.LightningUnPower();
-
-            PowerChanged();
-        }
-
         public void WirePower()
         {
+            GD.Print($"{Name} powered.");
+
             isWirePowered = true;
 
             PowerChanged();
@@ -42,6 +30,8 @@ namespace Inversion
 
         public void WireUnPower()
         {
+            GD.Print($"{Name} unpowered.");
+
             isWirePowered = false;
 
             PowerChanged();
@@ -49,7 +39,7 @@ namespace Inversion
 
         private void PowerChanged()
         {
-            if (IsPowered())
+            if (isWirePowered)
             {
                 doorCollision.Disabled = true;
 
@@ -64,11 +54,6 @@ namespace Inversion
                 tween.InterpolateProperty(doorSprite, "offset", doorSprite.Offset, new Vector2(0, 36), .35f, Tween.TransitionType.Cubic);
                 tween.Start();
             }
-        }
-
-        public override bool IsPowered()
-        {
-            return base.IsPowered() || isWirePowered;
         }
     }
 }

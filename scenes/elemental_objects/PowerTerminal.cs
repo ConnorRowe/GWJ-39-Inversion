@@ -5,11 +5,12 @@ namespace Inversion
     public class PowerTerminal : Node2D, IWirePowered, IHasElementalArea
     {
         [Export]
-        private NodePath linkedWirePath;
+        private NodePath connectedPoweredNodePath;
         private Sprite sprite;
         private bool hasElementalPower = false;
         private bool hasWirePower = false;
-        private Wire linkedWire;
+        private IWirePowered connectedPoweredNode;
+        private Particles2D sparks;
 
         public override void _Ready()
         {
@@ -18,13 +19,14 @@ namespace Inversion
             var reactionHandler = GetNode<ReactionHandler>("ReactionHandler");
             reactionHandler.Connect(nameof(ReactionHandler.ElementStarted), this, nameof(ElementStarted));
             reactionHandler.Connect(nameof(ReactionHandler.ElementEnded), this, nameof(ElementEnded));
+            sparks = GetNode<Particles2D>("Sparks");
 
-            if (linkedWirePath != null && !linkedWirePath.IsEmpty() && GetNode(linkedWirePath) is Wire wire)
+            if (connectedPoweredNodePath != null && !connectedPoweredNodePath.IsEmpty() && GetNode(connectedPoweredNodePath) is IWirePowered wirePowered)
             {
-                linkedWire = wire;
+                connectedPoweredNode = wirePowered;
             }
 
-            PowerChanged();
+            CallDeferred(nameof(PowerChanged));
         }
 
         public void WirePower()
@@ -68,23 +70,25 @@ namespace Inversion
         {
             if (hasWirePower || hasElementalPower)
             {
-                sprite.SelfModulate = Element.Lightning.GetColour();
                 GD.Print($"{Name} powered");
 
-                if (IsInstanceValid(linkedWire))
+                if (connectedPoweredNode != null)
                 {
-                    linkedWire.WirePower();
+                    connectedPoweredNode.WirePower();
                 }
+
+                sparks.Emitting = true;
             }
             else
             {
-                sprite.SelfModulate = Element.Earth.GetColour();
                 GD.Print($"{Name} unpowered");
 
-                if (IsInstanceValid(linkedWire))
+                if (connectedPoweredNode != null)
                 {
-                    linkedWire.WireUnPower();
+                    connectedPoweredNode.WireUnPower();
                 }
+
+                sparks.Emitting = false;
             }
         }
 

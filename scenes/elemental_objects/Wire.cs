@@ -5,6 +5,8 @@ namespace Inversion
     [Tool]
     public class Wire : Node2D, IWirePowered
     {
+        private static readonly DynamicFont smallFont = GD.Load<DynamicFont>("res://font/small_dynamicfont.tres");
+
         private Position2D startPos;
         private Position2D endPos;
         [Export]
@@ -39,6 +41,9 @@ namespace Inversion
 
             lastUpdatePositions[0] = startPos.Position;
             lastUpdatePositions[1] = endPos.Position;
+
+            if (Engine.EditorHint)
+                DrawString(smallFont, startPos.Position.LinearInterpolate(endPos.Position, .5f), Name);
         }
 
         public void WirePower()

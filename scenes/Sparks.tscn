@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://textures/spark.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=2]
+resource_local_to_scene = true
+lifetime_randomness = 0.22
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 100.0
+damping = 92.68
+angle = 720.0
+angle_random = 1.0
+anim_speed = 1.0
+
+[node name="Sparks" type="Particles2D"]
+material = SubResource( 1 )
+amount = 3
+explosiveness = 0.76
+process_material = SubResource( 2 )
+texture = ExtResource( 1 )

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://textures/battery.png" type="Texture" id=1]
 [ext_resource path="res://scenes/elemental_objects/BatteryOrGround.cs" type="Script" id=2]
 [ext_resource path="res://scenes/LightningEarthInversionParticles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Sparks.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 8 )
@@ -33,6 +34,21 @@ damping_random = 0.15
 color_ramp = SubResource( 4 )
 anim_speed = 8.0
 
+[sub_resource type="ParticlesMaterial" id=6]
+resource_local_to_scene = true
+lifetime_randomness = 0.22
+emission_shape = 1
+emission_sphere_radius = 4.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 100.0
+damping = 92.68
+angle = 720.0
+angle_random = 1.0
+anim_speed = 1.0
+
 [node name="BatteryOrGround" type="Node2D"]
 script = ExtResource( 2 )
 elementalAreaPath = NodePath("Area2D")
@@ -59,3 +75,6 @@ shape = SubResource( 2 )
 [node name="FireWaterInversionParticles" parent="." instance=ExtResource( 3 )]
 amount = 10
 process_material = SubResource( 5 )
+
+[node name="Sparks" parent="." instance=ExtResource( 4 )]
+process_material = SubResource( 6 )
