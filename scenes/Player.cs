@@ -42,6 +42,11 @@ namespace Inversion
         private bool canInvert = true;
         private Area2D hitBox;
         private Particles2D feetDust;
+        private AudioStreamPlayer footstepPlayer;
+        private AudioStreamPlayer slidePlayer;
+        private AudioStreamPlayer jumpPlayer;
+        private AnimatedSprite jumpEffect;
+        private bool inAirLastFrame = false;
 
         public override void _Ready()
         {
@@ -54,6 +59,12 @@ namespace Inversion
             tween = GetNode<Tween>("Tween");
             hitBox = GetNode<Area2D>("HitBox");
             feetDust = GetNode<Particles2D>("FeetDust");
+            footstepPlayer = GetNode<AudioStreamPlayer>("FootstepPlayer");
+            slidePlayer = GetNode<AudioStreamPlayer>("SlidePlayer");
+            jumpPlayer = GetNode<AudioStreamPlayer>("JumpPlayer");
+            jumpEffect = GetNode<AnimatedSprite>("JumpEffect");
+
+            charSprite.Connect("frame_changed", this, nameof(FrameChanged));
 
             debugLabel = GetNode<Label>("debuglabel");
         }
@@ -84,22 +95,38 @@ namespace Inversion
             glowColour.a = .25f + (Mathf.Sin(count * Mathf.Pi) * .2f);
             lightGlow.Modulate = glowColour;
 
+            bool shouldEndSlide = false;
+
+            slidePlayer.VolumeDb = -7 + (((velocity + externalVelocity).LengthSquared() / 5200f) * 7f);
+
             if ((velocity + externalVelocity).LengthSquared() > 50f)
             {
                 if (inputDir == 0f)
                 {
+                    if (charSprite.Animation != "slide")
+                        StartSlide();
+
                     charSprite.Animation = "slide";
                 }
                 else
                 {
+                    if (charSprite.Animation == "slide")
+                        shouldEndSlide = true;
+
                     charSprite.Animation = "run";
                     charSprite.SpeedScale = velocity.LengthSquared() * .0001f;
                 }
             }
             else
             {
+                if (charSprite.Animation == "slide")
+                    shouldEndSlide = true;
+
                 charSprite.Animation = "idle";
             }
+
+            if (shouldEndSlide)
+                EndSlide();
 
             feetDust.Emitting = charSprite.Animation != "idle" && IsOnFloor();
 
@@ -193,6 +220,9 @@ namespace Inversion
 
                 charSprite.Rotation = 0f;
                 targetCharAngle = 0f;
+
+                jumpPlayer.Play();
+                MakeJumpEffect();
             }
 
             velocity -= (velocity * MovementDamping * delta);
@@ -236,6 +266,11 @@ namespace Inversion
                 }
             }
             debugLabel.Text = $"";
+
+            if (IsOnFloor() && inAirLastFrame)
+                footstepPlayer.Play();
+
+            inAirLastFrame = !IsOnFloor();
         }
 
         public void ApplyExternalImpulse(Vector2 impulse)
@@ -324,6 +359,35 @@ namespace Inversion
         public void TakeDamage()
         {
             KillPlayer();
+        }
+
+        private void FrameChanged()
+        {
+            if ((charSprite.Frame == 1 || charSprite.Frame == 4) && IsOnFloor())
+            {
+                footstepPlayer.Play();
+            }
+        }
+
+        private void StartSlide()
+        {
+            slidePlayer.Play();
+        }
+
+        private void EndSlide()
+        {
+            slidePlayer.Stop();
+        }
+
+        private void MakeJumpEffect()
+        {
+            var newJumpEffect = (AnimatedSprite)jumpEffect.Duplicate();
+            GetTree().CurrentScene.AddChild(newJumpEffect);
+            newJumpEffect.GlobalPosition = jumpEffect.GlobalPosition;
+            newJumpEffect.Visible = true;
+            newJumpEffect.Play("default");
+
+            GetTree().CreateTimer(0.83334f).Connect("timeout", newJumpEffect, "queue_free");
         }
     }
 }

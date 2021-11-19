@@ -24,6 +24,7 @@ extents = Vector2( 6, 6 )
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource( 1 )
+LevelName = "DemoLvl"
 playerStartPosition = NodePath("PlayerStartPos")
 
 [node name="BGLayer" type="CanvasLayer" parent="."]
