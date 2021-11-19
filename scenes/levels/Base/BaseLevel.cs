@@ -10,6 +10,8 @@ namespace Inversion
         private NodePath playerStartPosition;
         [Export]
         private Rect2 levelBounds = new Rect2(0, 640, 0, 360);
+        [Export]
+        private PackedScene nextLevel;
 
         public Player Player { get; set; }
 
@@ -38,6 +40,12 @@ namespace Inversion
         private void RestartLevel()
         {
             Player.Position = GetNode<Node2D>(playerStartPosition).Position;
+        }
+
+        public void GotoNextLevel()
+        {
+            GetTree().ChangeSceneTo(nextLevel);
+            QueueFree();
         }
     }
 }

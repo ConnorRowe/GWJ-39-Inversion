@@ -52,6 +52,8 @@ namespace Inversion
         private void EndLevel()
         {
             GD.Print($"{GetTree().CurrentScene.Name} ended.");
+
+            ((BaseLevel)GetTree().CurrentScene).GotoNextLevel();
         }
     }
 }

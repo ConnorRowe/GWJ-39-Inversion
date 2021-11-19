@@ -314,7 +314,7 @@ namespace Inversion
         private void ActivateOrb(bool activate = true)
         {
             InversionOrb.Visible = activate;
-            InversionOrb.SetProcessInternal(activate);
+            InversionOrb.Start();
         }
 
         private void SpawnOrbPressed()
@@ -335,6 +335,8 @@ namespace Inversion
 
         private void SpawnOrbReleased()
         {
+            InversionOrb.End();
+
             if (orbState != OrbState.Active)
                 return;
 

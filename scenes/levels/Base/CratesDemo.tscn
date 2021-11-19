@@ -90,6 +90,7 @@ position = Vector2( 487, 320 )
 [node name="Squirter" parent="." index="15" instance=ExtResource( 5 )]
 position = Vector2( 241, 213 )
 rotation = 1.5708
+invertOnStart = true
 
 [node name="CrateWood" parent="." index="16" instance=ExtResource( 9 )]
 position = Vector2( 294, 300 )

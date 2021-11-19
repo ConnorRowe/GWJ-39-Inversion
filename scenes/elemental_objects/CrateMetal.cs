@@ -20,6 +20,8 @@ namespace Inversion
             {
                 isCharged = true;
                 sparks.Emitting = true;
+
+                GlobalNodes.Singleton.MakeBzztSound();
             }
         }
 

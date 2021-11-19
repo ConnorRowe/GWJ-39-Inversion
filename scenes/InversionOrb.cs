@@ -5,6 +5,8 @@ namespace Inversion
 {
     public class InversionOrb : KinematicBody2D
     {
+        private static readonly AudioStreamSample invertFailSample = GD.Load<AudioStreamSample>("res://sound/inversion_fail.wav");
+        private static readonly AudioStreamSample invertSuccSample = GD.Load<AudioStreamSample>("res://sound/inversion_success.wav");
         private const float MaxSpeed = 180f;
         private const float Acceleration = 180f;
         private static readonly Color baseColour = new Color("e64539");
@@ -18,6 +20,9 @@ namespace Inversion
         private Color glowColour = new Color(1, 1, 1, .3f);
         private Color targetColour = baseColour;
         private float count = 0f;
+        private AudioStreamPlayer tonePlayer;
+        private AudioStreamPlayer overlapPlayer;
+        private AudioStreamPlayer endPlayer;
 
         public override void _Ready()
         {
@@ -26,6 +31,9 @@ namespace Inversion
             inversionArea.Connect("area_exited", this, nameof(InversionAreaExited));
             baseSprite = GetNode<Sprite>("Sprite");
             glow = GetNode<Sprite>("Sprite/Glow");
+            tonePlayer = GetNode<AudioStreamPlayer>("TonePlayer");
+            overlapPlayer = GetNode<AudioStreamPlayer>("OverlapPlayer");
+            endPlayer = GetNode<AudioStreamPlayer>("EndPlayer");
         }
 
         public override void _Process(float delta)
@@ -42,6 +50,9 @@ namespace Inversion
             baseSprite.Modulate = baseSprite.Modulate.LinearInterpolate(targetColour, delta * 4f);
             glowColour.a = .25f + (Mathf.Sin(count * Mathf.Pi) * .2f);
             glow.Modulate = glowColour;
+
+            if (!Visible && tonePlayer.Playing)
+                tonePlayer.Stop();
         }
 
         public override void _PhysicsProcess(float delta)
@@ -51,6 +62,9 @@ namespace Inversion
 
             var mousePos = GetLocalMousePosition();
 
+            float moveDelta = 0f;
+            Vector2 lastPos = Position;
+
             if (Mathf.Abs(mousePos.x) > 1f || Mathf.Abs(mousePos.y) > 1f)
             {
                 if (speed < MaxSpeed)
@@ -59,17 +73,22 @@ namespace Inversion
                     speed = MaxSpeed;
 
                 float mouseDist = mousePos.Length();
-                if (mouseDist < 8f)
+                if (mouseDist < 24f)
                 {
-                    speed *= (mouseDist / 8f);
+                    speed *= .85f;
                 }
 
                 var collision = MoveAndCollide((mousePos.Normalized()) * speed * delta, false);
+                moveDelta = (lastPos - Position).Length();
             }
             else
             {
                 speed -= (speed * 12 * delta);
             }
+
+            var audioScale = moveDelta / 3f;
+            tonePlayer.PitchScale = .8f + (audioScale * .6f);
+            tonePlayer.VolumeDb = -20f + (audioScale * 10f);
         }
 
         private void InversionAreaEntered(Area2D area)
@@ -79,6 +98,8 @@ namespace Inversion
                 overlappedInvertables.Add(invertable);
 
                 GD.Print($"invert overlap -> {invertable}");
+
+                overlapPlayer.Play(0);
             }
         }
 
@@ -94,16 +115,34 @@ namespace Inversion
 
         public void TryInvert()
         {
+            bool success = false;
+
             foreach (var invertable in overlappedInvertables)
             {
                 if (!invertable.IsDisabled())
                 {
                     invertable.Invert();
                     GD.Print($"inverting -> {invertable}");
+                    success = true;
                 }
             }
 
+            ((AudioStreamRandomPitch)endPlayer.Stream).AudioStream = success ? invertSuccSample : invertFailSample;
+            endPlayer.Play(0f);
+
             overlappedInvertables.Clear();
+        }
+
+        public void Start()
+        {
+            tonePlayer.Play();
+        }
+
+        public void End()
+        {
+            GD.Print("End inversion orb.");
+            speed = 0f;
+            tonePlayer.Stop();
         }
     }
 }

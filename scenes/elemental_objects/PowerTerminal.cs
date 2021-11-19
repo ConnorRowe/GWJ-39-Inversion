@@ -78,6 +78,8 @@ namespace Inversion
                 }
 
                 sparks.Emitting = true;
+
+                GlobalNodes.Singleton.MakeBzztSound();
             }
             else
             {

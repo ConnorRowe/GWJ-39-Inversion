@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/levels/Level4.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/elemental_objects/CrateMetal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/elemental_objects/Lava.tscn" type="PackedScene" id=5]
@@ -62,6 +63,7 @@ extents = Vector2( 40, 15.5 )
 
 [node name="Level3" instance=ExtResource( 4 )]
 LevelName = "Fan and Lava"
+nextLevel = ExtResource( 2 )
 
 [node name="PlayerStartPos" parent="." index="1"]
 position = Vector2( 86, 137 )

@@ -1,17 +1,20 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://textures/lvl1_arrow.png" type="Texture" id=1]
 [ext_resource path="res://textures/lmb.png" type="Texture" id=2]
 [ext_resource path="res://textures/lvl1_arrow_2.png" type="Texture" id=3]
 [ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=5]
+[ext_resource path="res://textures/lightning-earth_cycle.png" type="Texture" id=6]
 [ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/elemental_objects/PoweredDoor.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/levels/Level2.tscn" type="PackedScene" id=11]
 
 [node name="Level1" instance=ExtResource( 9 )]
 LevelName = "Inversion Tutorial"
+nextLevel = ExtResource( 11 )
 
 [node name="PlayerStartPos" parent="." index="1"]
 position = Vector2( 77, 276 )
@@ -125,6 +128,10 @@ texture = ExtResource( 3 )
 
 [node name="GoalPlatform1" parent="." index="18"]
 position = Vector2( 581, 200 )
+
+[node name="Lightning-earthCycle" type="Sprite" parent="." index="19"]
+position = Vector2( 101, 311 )
+texture = ExtResource( 6 )
 
 [editable path="Wire1"]
 [editable path="Wire2"]

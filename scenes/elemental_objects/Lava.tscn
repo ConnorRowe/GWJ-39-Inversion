@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/elemental_objects/Lava.cs" type="Script" id=1]
-[ext_resource path="res://Flames.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Flames.tscn" type="PackedScene" id=2]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.0355556, 0.0733333, 0.502222, 0.842222, 0.882222, 1 )

@@ -46,6 +46,8 @@ namespace Inversion
                 tween.InterpolateProperty(doorSprite, "region_rect", doorSprite.RegionRect, new Rect2(0, 72, 16, 0), .35f, Tween.TransitionType.Cubic);
                 tween.InterpolateProperty(doorSprite, "offset", doorSprite.Offset, Vector2.Zero, .35f, Tween.TransitionType.Cubic);
                 tween.Start();
+
+                GlobalNodes.Singleton.MakeBzztSound();
             }
             else
             {
