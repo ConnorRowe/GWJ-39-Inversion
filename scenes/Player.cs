@@ -97,7 +97,7 @@ namespace Inversion
 
             bool shouldEndSlide = false;
 
-            slidePlayer.VolumeDb = -7 + (((velocity + externalVelocity).LengthSquared() / 5200f) * 7f);
+            slidePlayer.VolumeDb = -4 + (((velocity + externalVelocity).LengthSquared() / 5200f) * 10f);
 
             if ((velocity + externalVelocity).LengthSquared() > 50f)
             {
@@ -110,7 +110,7 @@ namespace Inversion
                 }
                 else
                 {
-                    if (charSprite.Animation == "slide")
+                    if (charSprite.Animation == "slide" || slidePlayer.Playing)
                         shouldEndSlide = true;
 
                     charSprite.Animation = "run";
@@ -313,6 +313,7 @@ namespace Inversion
 
         private void ActivateOrb(bool activate = true)
         {
+            InversionOrb.Active = activate;
             InversionOrb.Visible = activate;
             InversionOrb.Start();
         }
@@ -326,9 +327,9 @@ namespace Inversion
             orbState = OrbState.Active;
             ActivateOrb();
             InversionOrb.GlobalPosition = lightBase.GlobalPosition;
-            tween.Stop(InversionOrb, "scale");
+            tween.Stop(InversionOrb.BaseSprite, "scale");
             tween.Stop(lightBase, "modulate");
-            tween.InterpolateProperty(InversionOrb, "scale", Vector2.Zero, Vector2.One, 1f, Tween.TransitionType.Cubic, Tween.EaseType.Out);
+            tween.InterpolateProperty(InversionOrb.BaseSprite, "scale", Vector2.Zero, Vector2.One, 1f, Tween.TransitionType.Cubic, Tween.EaseType.Out);
             tween.InterpolateProperty(lightBase, "modulate", lightBase.Modulate, Colors.Transparent, .5f, Tween.TransitionType.Quad);
             tween.Start();
         }
@@ -343,9 +344,9 @@ namespace Inversion
             orbState = OrbState.Hidden;
             InversionOrb.TryInvert();
 
-            tween.Stop(InversionOrb, "scale");
+            tween.Stop(InversionOrb.BaseSprite, "scale");
             tween.Stop(lightBase, "modulate");
-            tween.InterpolateProperty(InversionOrb, "scale", InversionOrb.Scale, Vector2.Zero, .5f, Tween.TransitionType.Cubic, Tween.EaseType.In);
+            tween.InterpolateProperty(InversionOrb.BaseSprite, "scale", InversionOrb.Scale, Vector2.Zero, .5f, Tween.TransitionType.Cubic, Tween.EaseType.In);
             tween.InterpolateProperty(lightBase, "modulate", lightBase.Modulate, Colors.White, 1f, Tween.TransitionType.Quad, delay: .5f);
             tween.Start();
 

@@ -53,7 +53,7 @@ namespace Inversion
 
             GD.Print($"{Name} powered");
 
-            if (IsInstanceValid((Node)connectedPoweredNode))
+            if (connectedPoweredNode != null)
             {
                 connectedPoweredNode.WirePower();
             }
@@ -66,7 +66,7 @@ namespace Inversion
 
             GD.Print($"{Name} unpowered");
 
-            if (IsInstanceValid((Node)connectedPoweredNode))
+            if (connectedPoweredNode != null)
             {
                 connectedPoweredNode.WireUnPower();
             }

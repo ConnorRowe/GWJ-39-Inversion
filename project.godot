@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="GWJ#39"
-run/main_scene="res://scenes/levels/Level1.tscn"
+run/main_scene="res://scenes/levels/Level3.tscn"
 config/icon="res://icon.png"
 
 [autoload]

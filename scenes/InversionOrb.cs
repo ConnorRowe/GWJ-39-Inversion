@@ -12,10 +12,10 @@ namespace Inversion
         private static readonly Color baseColour = new Color("e64539");
         private static readonly Color overlapColour = new Color("ff8933");
 
-        public bool Active { get; set; } = true;
+        public bool Active { get; set; } = false;
+        public Sprite BaseSprite { get; set; }
         private float speed = 0f;
         private List<IInvertable> overlappedInvertables = new List<IInvertable>();
-        private Sprite baseSprite;
         private Sprite glow;
         private Color glowColour = new Color(1, 1, 1, .3f);
         private Color targetColour = baseColour;
@@ -29,7 +29,7 @@ namespace Inversion
             Area2D inversionArea = GetNode<Area2D>("InversionArea");
             inversionArea.Connect("area_entered", this, nameof(InversionAreaEntered));
             inversionArea.Connect("area_exited", this, nameof(InversionAreaExited));
-            baseSprite = GetNode<Sprite>("Sprite");
+            BaseSprite = GetNode<Sprite>("Sprite");
             glow = GetNode<Sprite>("Sprite/Glow");
             tonePlayer = GetNode<AudioStreamPlayer>("TonePlayer");
             overlapPlayer = GetNode<AudioStreamPlayer>("OverlapPlayer");
@@ -47,7 +47,7 @@ namespace Inversion
             else
                 targetColour = baseColour;
 
-            baseSprite.Modulate = baseSprite.Modulate.LinearInterpolate(targetColour, delta * 4f);
+            BaseSprite.Modulate = BaseSprite.Modulate.LinearInterpolate(targetColour, delta * 4f);
             glowColour.a = .25f + (Mathf.Sin(count * Mathf.Pi) * .2f);
             glow.Modulate = glowColour;
 
@@ -78,7 +78,7 @@ namespace Inversion
                     speed *= .85f;
                 }
 
-                var collision = MoveAndCollide((mousePos.Normalized()) * speed * delta, false);
+                var collision = MoveAndCollide((mousePos.Normalized()) * speed * delta, infiniteInertia: false);
                 moveDelta = (lastPos - Position).Length();
             }
             else

@@ -20,7 +20,7 @@ namespace Inversion
 
             foreach (var path in connectedPoweredNodePaths)
             {
-                if (!path.IsEmpty() && GetNode<Node2D>(path) is IWirePowered wirePowered)
+                if (GetNode<Node2D>(path) is IWirePowered wirePowered)
                 {
                     connectedPoweredNodes.Add(wirePowered);
                 }

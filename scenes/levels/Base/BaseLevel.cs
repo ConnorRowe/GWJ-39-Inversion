@@ -39,7 +39,10 @@ namespace Inversion
 
         private void RestartLevel()
         {
-            Player.Position = GetNode<Node2D>(playerStartPosition).Position;
+            // Player.Position = GetNode<Node2D>(playerStartPosition).Position;
+
+            GetTree().ReloadCurrentScene();
+            QueueFree();
         }
 
         public void GotoNextLevel()
