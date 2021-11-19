@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://scenes/levels/BaseLevel.cs" type="Script" id=1]
+[ext_resource path="res://scenes/levels/Base/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/elemental_objects/Squirter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://tileset/terrain_tiles/tileset_terrain_tiles.tres" type="TileSet" id=4]

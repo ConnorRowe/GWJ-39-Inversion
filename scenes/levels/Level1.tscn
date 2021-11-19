@@ -1,14 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://textures/lvl1_arrow.png" type="Texture" id=1]
 [ext_resource path="res://textures/lmb.png" type="Texture" id=2]
 [ext_resource path="res://textures/lvl1_arrow_2.png" type="Texture" id=3]
 [ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/GoalPlatform.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/elemental_objects/PoweredDoor.tscn" type="PackedScene" id=10]
 
 [node name="Level1" instance=ExtResource( 9 )]
@@ -120,12 +119,12 @@ texture = ExtResource( 1 )
 position = Vector2( 99, 241 )
 texture = ExtResource( 2 )
 
-[node name="GoalPlatform" parent="." index="17" instance=ExtResource( 6 )]
-position = Vector2( 580, 200 )
-
-[node name="Lvl1Arrow2" type="Sprite" parent="." index="18"]
+[node name="Lvl1Arrow2" type="Sprite" parent="." index="17"]
 position = Vector2( 517, 112 )
 texture = ExtResource( 3 )
+
+[node name="GoalPlatform1" parent="." index="18"]
+position = Vector2( 581, 200 )
 
 [editable path="Wire1"]
 [editable path="Wire2"]

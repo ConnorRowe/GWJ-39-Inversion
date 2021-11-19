@@ -7,13 +7,11 @@ namespace Inversion
         private const float LaserLength = 9999f;
         private static readonly Vector2 laserOffset = new Vector2(-8, 0);
         private Vector2[] laserLine = new Vector2[2] { Vector2.Zero, Vector2.Zero };
-        private Godot.Collections.Array exclude = new Godot.Collections.Array();
         private Particles2D particles;
         private ParticlesMaterial particlesMaterial;
 
         public override void _Ready()
         {
-            exclude.Add(GetNode("StaticBody2D"));
             particles = GetNode<Particles2D>("Particles2D");
             particlesMaterial = (ParticlesMaterial)particles.ProcessMaterial;
 
@@ -33,7 +31,7 @@ namespace Inversion
             var spaceState = GetWorld2d().DirectSpaceState;
             var start = GlobalPosition + (direction * 4);
             var end = start + (direction * LaserLength);
-            var trace = spaceState.IntersectRay(start, end, exclude, collisionLayer: 1);
+            var trace = spaceState.IntersectRay(start, end, collisionLayer: 1);
 
             if (trace.Keys.Count > 0)
             {

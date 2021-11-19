@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://scenes/GoalPlatform.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/elemental_objects/Squirter.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=4]
 
 [node name="Level2" instance=ExtResource( 4 )]
+LevelName = "Squirter Tutorial"
 
 [node name="PlayerStartPos" parent="." index="1"]
 position = Vector2( 86, 137 )
@@ -13,18 +13,15 @@ position = Vector2( 86, 137 )
 [node name="TileMap" parent="." index="4"]
 tile_data = PoolIntArray( -65536, 2, 4, -65535, 2, 196609, -65534, 2, 196609, -65533, 2, 196609, -65532, 2, 8, -65531, 2, 196609, -65530, 2, 196609, -65529, 2, 8, -65528, 2, 196609, -65527, 2, 196609, -65526, 2, 196609, -65525, 2, 196609, -65524, 2, 196609, -65523, 2, 196609, -65522, 2, 196609, -65521, 2, 7, 0, 2, 65539, 4, 2, 65539, 7, 2, 65539, 15, 2, 65539, 65536, 2, 65539, 65540, 2, 131075, 65543, 2, 131075, 65551, 2, 65539, 131072, 2, 65539, 131087, 2, 65539, 196608, 2, 65539, 196623, 2, 65539, 262144, 2, 131076, 262145, 2, 1, 262146, 2, 1, 262147, 2, 1, 262148, 2, 1, 262149, 2, 1, 262150, 2, 1, 262151, 2, 2, 262159, 2, 65539, 327680, 2, 65536, 327681, 2, 65537, 327682, 2, 65537, 327683, 2, 65537, 327684, 2, 65537, 327685, 2, 65537, 327686, 2, 65537, 327687, 2, 65538, 327695, 2, 65539, 393216, 2, 65536, 393217, 2, 65537, 393218, 2, 65537, 393219, 2, 65537, 393220, 2, 65537, 393221, 2, 65537, 393222, 2, 65537, 393223, 2, 65538, 393231, 2, 65539, 458752, 2, 65536, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65537, 458756, 2, 65537, 458757, 2, 65537, 458758, 2, 65537, 458759, 2, 65538, 458767, 2, 65539, 524288, 2, 131072, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 131073, 524292, 2, 131073, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 196613, 524296, 2, 196609, 524297, 2, 196609, 524298, 2, 196609, 524299, 2, 196609, 524300, 2, 196609, 524301, 2, 196609, 524302, 2, 196609, 524303, 2, 196615 )
 
-[node name="GoalPlatform" parent="." index="5" instance=ExtResource( 2 )]
-position = Vector2( 562, 320 )
-
-[node name="Squirter" parent="." index="6" instance=ExtResource( 3 )]
+[node name="Squirter" parent="." index="5" instance=ExtResource( 3 )]
 position = Vector2( 179, 80 )
 rotation = 3.14159
 
-[node name="Squirter2" parent="." index="7" instance=ExtResource( 3 )]
+[node name="Squirter2" parent="." index="6" instance=ExtResource( 3 )]
 position = Vector2( 301, 80 )
 rotation = 3.14159
 
-[node name="Label" type="Label" parent="." index="8"]
+[node name="Label" type="Label" parent="." index="7"]
 margin_left = 53.0
 margin_top = 32.0
 margin_right = 162.0
@@ -37,3 +34,6 @@ text = "Fire will kill you.
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GoalPlatform1" parent="." index="8"]
+position = Vector2( 576, 320 )

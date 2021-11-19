@@ -8,6 +8,8 @@ namespace Inversion
         public float Speed { get; set; } = 1f;
         [Export]
         public bool IsActive { get; set; } = true;
+        [Export]
+        public float PercentOffset { get; set; } = 0f;
 
         private Vector2 globalPosA;
         private Vector2 globalPosB;
@@ -27,7 +29,7 @@ namespace Inversion
                 if (count > 1f)
                     count--;
 
-                float weight = (Mathf.Sin(count * Mathf.Tau) + 1f) * .5f;
+                float weight = (Mathf.Sin((count + PercentOffset) * Mathf.Tau) + 1f) * .5f;
                 node2D.GlobalPosition = new Vector2(Mathf.Lerp(globalPosA.x, globalPosB.x, weight), Mathf.Lerp(globalPosA.y, globalPosB.y, weight));
             }
         }

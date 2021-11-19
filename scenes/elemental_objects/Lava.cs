@@ -35,7 +35,7 @@ namespace Inversion
             flames.Amount = (int)extents.x;
         }
 
-		public Element GetAreaElement()
+        public Element GetAreaElement()
         {
             return Element.Fire;
         }
