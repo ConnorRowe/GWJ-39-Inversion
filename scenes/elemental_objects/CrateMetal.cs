@@ -8,12 +8,14 @@ namespace Inversion
         private Particles2D sparks;
         private Vector2 startPosition;
         private float maxY = 999999;
+        private ReactionHandler reactionHandler;
 
         public override void _Ready()
         {
             sparks = GetNode<Particles2D>("Sparks");
-            GetNode("ReactionHandler").Connect(nameof(ReactionHandler.ElementStarted), this, nameof(ElementStarted));
-            GetNode("ReactionHandler").Connect(nameof(ReactionHandler.ElementEnded), this, nameof(ElementEnded));
+            reactionHandler = GetNode<ReactionHandler>("ReactionHandler");
+            reactionHandler.Connect(nameof(ReactionHandler.ElementStarted), this, nameof(ElementStarted));
+            reactionHandler.Connect(nameof(ReactionHandler.ElementEnded), this, nameof(ElementEnded));
             startPosition = GlobalPosition;
             maxY = ((BaseLevel)GetTree().CurrentScene).levelBounds.Position.y;
         }
@@ -28,12 +30,20 @@ namespace Inversion
                 AngularVelocity = 0f;
                 GlobalPosition = startPosition;
             }
+
+            if (reactionHandler.LightningSource == null || (reactionHandler.LightningSource != null && reactionHandler.LightningSource.IsDisabled()))
+            {
+                isCharged = false;
+                sparks.Emitting = false;
+            }
         }
 
-        private void ElementStarted(Element element)
+        private void ElementStarted(Element element, Node source)
         {
-            if (element == Element.Lightning)
+            if (element == Element.Lightning && source != null)
             {
+                reactionHandler.LightningSource = (IHasElementalArea)source;
+
                 isCharged = true;
                 sparks.Emitting = true;
 
@@ -58,6 +68,16 @@ namespace Inversion
         public bool IsDisabled()
         {
             return !isCharged;
+        }
+
+        public bool IsSource()
+        {
+            return false;
+        }
+
+        public IHasElementalArea GetSource()
+        {
+            return reactionHandler.LightningSource;
         }
     }
 }

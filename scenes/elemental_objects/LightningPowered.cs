@@ -9,12 +9,13 @@ namespace Inversion
         [Export]
         protected bool alwaysLightningPowered = false;
         protected bool isLightningPowered = false;
+        private ReactionHandler reactionHandler;
 
         public override void _Ready()
         {
             base._Ready();
 
-            var reactionHandler = GetNode<ReactionHandler>(reactionHandlerPath);
+            reactionHandler = GetNode<ReactionHandler>(reactionHandlerPath);
             reactionHandler.Connect(nameof(ReactionHandler.ElementStarted), this, nameof(ElementStarted));
             reactionHandler.Connect(nameof(ReactionHandler.ElementEnded), this, nameof(ElementEnded));
 
@@ -48,10 +49,12 @@ namespace Inversion
             isLightningPowered = false;
         }
 
-        private void ElementStarted(Element element)
+        private void ElementStarted(Element element, IHasElementalArea source)
         {
             if (element == Element.Lightning)
             {
+                reactionHandler.LightningSource = source;
+
                 LightningPower();
             }
         }

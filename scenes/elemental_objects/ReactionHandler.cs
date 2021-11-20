@@ -6,7 +6,7 @@ namespace Inversion
     public class ReactionHandler : Node2D
     {
         [Signal]
-        public delegate void ElementStarted(Element element);
+        public delegate void ElementStarted(Element element, Node source);
         [Signal]
         public delegate void ElementEnded(Element element);
 
@@ -28,6 +28,7 @@ namespace Inversion
         private Shape2D shape;
         private Physics2DShapeQueryParameters shapeQueryParams;
         private Dictionary<Element, bool> elementOverlaps = new Dictionary<Element, bool>(emptyElementOverlaps);
+        public IHasElementalArea LightningSource { get; set; } = null;
 
         public override void _Ready()
         {
@@ -69,7 +70,20 @@ namespace Inversion
                 if (hitNode.Owner != Owner && hitNode.Owner is IHasElementalArea hasElementalArea && !hasElementalArea.IsDisabled())
                 {
                     newElemOverlaps[hasElementalArea.GetAreaElement()] = true;
+
+                    if (hasElementalArea.GetAreaElement() == Element.Lightning)
+                    {
+                        if(hasElementalArea.IsSource())
+                            LightningSource = hasElementalArea;
+                        else if(hasElementalArea.GetSource() != null && !hasElementalArea.GetSource().IsDisabled())
+                            LightningSource = hasElementalArea.GetSource();
+                    }
                 }
+            }
+
+            if (LightningSource == null || (LightningSource != null && LightningSource.IsDisabled()))
+            {
+                newElemOverlaps[Element.Lightning] = false;
             }
 
             foreach (var elem in newElemOverlaps.Keys)
@@ -77,7 +91,7 @@ namespace Inversion
                 if (newElemOverlaps[elem] != elementOverlaps[elem])
                 {
                     if (newElemOverlaps[elem])
-                        EmitSignal(nameof(ElementStarted), elem);
+                        EmitSignal(nameof(ElementStarted), elem, (Node)LightningSource);
                     else
                         EmitSignal(nameof(ElementEnded), elem);
 

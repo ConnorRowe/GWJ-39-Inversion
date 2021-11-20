@@ -4,6 +4,6 @@ namespace Inversion
     {
         Element GetCurrentElement();
         void Invert();
-        bool IsDisabled();
+        bool IsInversionDisabled();
     }
 }

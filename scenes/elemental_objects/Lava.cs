@@ -44,5 +44,15 @@ namespace Inversion
         {
             return false;
         }
+
+        public bool IsSource()
+        {
+            return true;
+        }
+
+        public IHasElementalArea GetSource()
+        {
+            return null;
+        }
     }
 }

@@ -55,7 +55,7 @@ namespace Inversion
             return !isCharged;
         }
 
-        private void ElementStarted(Element element)
+        private void ElementStarted(Element element, IHasElementalArea source)
         {
             if (element == Element.Lightning)
             {
@@ -71,6 +71,16 @@ namespace Inversion
                 isCharged = false;
                 sparks.Emitting = false;
             }
+        }
+
+        public bool IsSource()
+        {
+            return false;
+        }
+
+        public IHasElementalArea GetSource()
+        {
+            return null;
         }
     }
 }

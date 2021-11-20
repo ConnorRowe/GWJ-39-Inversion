@@ -4,5 +4,7 @@ namespace Inversion
     {
         Element GetAreaElement();
         bool IsDisabled();
+        bool IsSource();
+        IHasElementalArea GetSource();
     }
 }

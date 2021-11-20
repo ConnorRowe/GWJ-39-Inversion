@@ -29,5 +29,10 @@ namespace Inversion
             else
                 sprite.Texture = groundTex;
         }
+
+        public override bool IsDisabled()
+        {
+            return currentElement != Element.Lightning;
+        }
     }
 }

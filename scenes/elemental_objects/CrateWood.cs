@@ -41,7 +41,7 @@ namespace Inversion
             }
         }
 
-        private void ElementStarted(Element element)
+        private void ElementStarted(Element element, IHasElementalArea source)
         {
             if (!ignited && element == Element.Fire)
             {
@@ -116,6 +116,15 @@ namespace Inversion
         public bool IsDisabled()
         {
             return !ignited;
+        }
+
+        public bool IsSource()
+        {
+            return false;
+        }
+        public IHasElementalArea GetSource()
+        {
+            return null;
         }
     }
 }

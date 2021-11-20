@@ -11,12 +11,13 @@ namespace Inversion
         private bool hasWirePower = false;
         private IWirePowered connectedPoweredNode;
         private Particles2D sparks;
+        private ReactionHandler reactionHandler;
 
         public override void _Ready()
         {
             sprite = GetNode<Sprite>("Sprite");
 
-            var reactionHandler = GetNode<ReactionHandler>("ReactionHandler");
+            reactionHandler = GetNode<ReactionHandler>("ReactionHandler");
             reactionHandler.Connect(nameof(ReactionHandler.ElementStarted), this, nameof(ElementStarted));
             reactionHandler.Connect(nameof(ReactionHandler.ElementEnded), this, nameof(ElementEnded));
             sparks = GetNode<Particles2D>("Sparks");
@@ -46,10 +47,14 @@ namespace Inversion
             PowerChanged();
         }
 
-        private void ElementStarted(Element element)
+        private void ElementStarted(Element element, Node source)
         {
-            if (element == Element.Lightning)
+            if (element == Element.Lightning && source != null)
             {
+                GD.Print($"{source.Name}");
+
+                reactionHandler.LightningSource = (IHasElementalArea)source;
+
                 hasElementalPower = true;
 
                 PowerChanged();
@@ -102,6 +107,16 @@ namespace Inversion
         public bool IsDisabled()
         {
             return !(hasWirePower || hasElementalPower);
+        }
+
+        public bool IsSource()
+        {
+            return false;
+        }
+        
+        public IHasElementalArea GetSource()
+        {
+            return reactionHandler.LightningSource;
         }
     }
 }

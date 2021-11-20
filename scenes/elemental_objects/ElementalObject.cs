@@ -37,9 +37,23 @@ namespace Inversion
             return GetCurrentElement();
         }
 
-        public bool IsDisabled()
+        public bool IsInversionDisabled()
         {
             return isDisabled;
+        }
+
+        public virtual bool IsDisabled()
+        {
+            return isDisabled;
+        }
+
+        public bool IsSource()
+        {
+            return true;
+        }
+        public IHasElementalArea GetSource()
+        {
+            return null;
         }
     }
 }

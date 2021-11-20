@@ -119,7 +119,7 @@ namespace Inversion
 
             foreach (var invertable in overlappedInvertables)
             {
-                if (!invertable.IsDisabled())
+                if (!invertable.IsInversionDisabled())
                 {
                     invertable.Invert();
                     GD.Print($"inverting -> {invertable}");
