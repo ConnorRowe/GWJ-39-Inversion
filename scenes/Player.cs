@@ -338,7 +338,7 @@ namespace Inversion
             EmitSignal(nameof(PlayerDied));
         }
 
-        private void ElementAreaEntered(Element element, IHasElementalArea source)
+        private void ElementAreaEntered(Element element, Node source)
         {
             GD.Print($"Element Area Entered -> {element.ToString()}");
 

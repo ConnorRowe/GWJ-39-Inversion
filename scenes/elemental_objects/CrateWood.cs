@@ -41,7 +41,7 @@ namespace Inversion
             }
         }
 
-        private void ElementStarted(Element element, IHasElementalArea source)
+        private void ElementStarted(Element element, Node source)
         {
             if (!ignited && element == Element.Fire)
             {

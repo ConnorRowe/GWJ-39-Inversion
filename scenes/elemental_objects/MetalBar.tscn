@@ -54,3 +54,4 @@ process_material = SubResource( 2 )
 
 [node name="ReactionHandler" parent="." instance=ExtResource( 4 )]
 collisionShapePath = NodePath("../LightningArea/CollisionRect")
+NeedsSource = true

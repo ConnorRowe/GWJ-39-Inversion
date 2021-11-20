@@ -55,7 +55,7 @@ namespace Inversion
             return !isCharged;
         }
 
-        private void ElementStarted(Element element, IHasElementalArea source)
+        private void ElementStarted(Element element, Node source)
         {
             if (element == Element.Lightning)
             {

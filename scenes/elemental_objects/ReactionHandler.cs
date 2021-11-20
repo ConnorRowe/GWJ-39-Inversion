@@ -20,6 +20,8 @@ namespace Inversion
 
         [Export]
         private NodePath collisionShapePath;
+        [Export]
+        private bool NeedsSource = false;
 
         public bool IsActive { get; set; } = true;
         public bool FlipH { get; set; } = false;
@@ -29,6 +31,7 @@ namespace Inversion
         private Physics2DShapeQueryParameters shapeQueryParams;
         private Dictionary<Element, bool> elementOverlaps = new Dictionary<Element, bool>(emptyElementOverlaps);
         public IHasElementalArea LightningSource { get; set; } = null;
+
 
         public override void _Ready()
         {
@@ -73,15 +76,15 @@ namespace Inversion
 
                     if (hasElementalArea.GetAreaElement() == Element.Lightning)
                     {
-                        if(hasElementalArea.IsSource())
+                        if (hasElementalArea.IsSource())
                             LightningSource = hasElementalArea;
-                        else if(hasElementalArea.GetSource() != null && !hasElementalArea.GetSource().IsDisabled())
+                        else if (hasElementalArea.GetSource() != null && !hasElementalArea.GetSource().IsDisabled())
                             LightningSource = hasElementalArea.GetSource();
                     }
                 }
             }
 
-            if (LightningSource == null || (LightningSource != null && LightningSource.IsDisabled()))
+            if (NeedsSource && (LightningSource == null || (LightningSource != null && LightningSource.IsDisabled())))
             {
                 newElemOverlaps[Element.Lightning] = false;
             }
@@ -91,7 +94,12 @@ namespace Inversion
                 if (newElemOverlaps[elem] != elementOverlaps[elem])
                 {
                     if (newElemOverlaps[elem])
-                        EmitSignal(nameof(ElementStarted), elem, (Node)LightningSource);
+                    {
+                        if (elem == Element.Lightning && LightningSource is Node node)
+                            EmitSignal(nameof(ElementStarted), elem, node);
+                        else
+                            EmitSignal(nameof(ElementStarted), elem, null);
+                    }
                     else
                         EmitSignal(nameof(ElementEnded), elem);
 
