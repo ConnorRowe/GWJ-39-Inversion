@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/Player.cs" type="Script" id=1]
 [ext_resource path="res://scenes/elemental_objects/ReactionHandler.tscn" type="PackedScene" id=2]
@@ -12,6 +12,12 @@
 [ext_resource path="res://sound/slide.wav" type="AudioStream" id=10]
 [ext_resource path="res://sound/jump.wav" type="AudioStream" id=11]
 [ext_resource path="res://textures/jump_effect.png" type="Texture" id=12]
+[ext_resource path="res://shaders/PlayerOverrideColour.gdshader" type="Shader" id=13]
+
+[sub_resource type="ShaderMaterial" id=27]
+shader = ExtResource( 13 )
+shader_param/override_percent = 0.0
+shader_param/override_colour = Color( 0.678431, 0.184314, 0.270588, 1 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
@@ -142,6 +148,7 @@ position = Vector2( 0, -12.5 )
 scale = Vector2( 1, 1.35 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 27 )
 frames = SubResource( 12 )
 animation = "idle"
 playing = true
@@ -214,7 +221,8 @@ bus = "SFX"
 
 [node name="JumpEffect" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( 0, -16 )
+modulate = Color( 0.8, 0.184314, 0.482353, 1 )
+position = Vector2( 0, -17 )
 frames = SubResource( 25 )
 centered = false
 offset = Vector2( -8, 0 )

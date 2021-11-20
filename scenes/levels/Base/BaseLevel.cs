@@ -14,6 +14,8 @@ namespace Inversion
         private PackedScene nextLevel;
 
         public Player Player { get; set; }
+        private bool playerDead = false;
+        private bool canRespawn = false;
 
         public override void _Ready()
         {
@@ -32,9 +34,36 @@ namespace Inversion
             camera.LimitBottom = (int)levelBounds.Size.y;
         }
 
+        public override void _Input(InputEvent evt)
+        {
+            if (canRespawn && playerDead && evt.IsActionReleased("g_respawn"))
+            {
+                RestartLevel();
+            }
+        }
+
         private void PlayerDied()
         {
-            RestartLevel();
+            playerDead = true;
+            Globals.LevelDeathCount++;
+            Player.IsFrozen = true;
+
+            // Show dead UI
+            var tween = GetNode<Tween>("Tween");
+            var bg = GetNode<ColorRect>("UILayer/DeadColorRect");
+            var youDied = GetNode<Node2D>("UILayer/YouDied");
+            var deathCount = GetNode<Label>("UILayer/DeathCount");
+
+            deathCount.Text = $"You've died {Globals.LevelDeathCount} time{(Globals.LevelDeathCount == 1 ? "" : "s")} on this level so far...";
+            bg.Visible = youDied.Visible = deathCount.Visible = true;
+
+            tween.InterpolateProperty(bg, "modulate", Colors.Transparent, new Color(1f, 1f, 1f, .7f), 2.5f, Tween.TransitionType.Cubic);
+            tween.InterpolateProperty(youDied, "modulate", Colors.Transparent, Colors.White, 2.5f, Tween.TransitionType.Cubic);
+            tween.InterpolateProperty(deathCount, "modulate", Colors.Transparent, Colors.White, 2.5f, Tween.TransitionType.Cubic);
+
+            tween.Start();
+
+            GetTree().CreateTimer(.75f).Connect("timeout", this, nameof(EnableRespawn));
         }
 
         private void RestartLevel()
@@ -49,6 +78,12 @@ namespace Inversion
         {
             GetTree().ChangeSceneTo(nextLevel);
             QueueFree();
+            Globals.LevelDeathCount = 0;
+        }
+
+        private void EnableRespawn()
+        {
+            canRespawn = true;
         }
     }
 }

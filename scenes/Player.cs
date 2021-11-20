@@ -13,6 +13,8 @@ namespace Inversion
         [Signal]
         public delegate void PlayerDied();
 
+        private static readonly AudioStreamSample deathSample = GD.Load<AudioStreamSample>("res://sound/player_death_sound.wav");
+
         private const float JumpForce = 300f;
         private const float GravityAccel = 98f * 8;
         private const float TerminalVel = 245f;
@@ -47,6 +49,7 @@ namespace Inversion
         private AudioStreamPlayer jumpPlayer;
         private AnimatedSprite jumpEffect;
         private bool inAirLastFrame = false;
+        private bool dead = false;
 
         public override void _Ready()
         {
@@ -67,6 +70,9 @@ namespace Inversion
             charSprite.Connect("frame_changed", this, nameof(FrameChanged));
 
             debugLabel = GetNode<Label>("debuglabel");
+
+            var playerMat = (ShaderMaterial)charSprite.Material;
+            playerMat.SetShaderParam("override_percent", 0f);
         }
 
         public override void _Input(InputEvent evt)
@@ -84,10 +90,17 @@ namespace Inversion
                 // hide & deactivate orb
                 SpawnOrbReleased();
             }
+            else if (evt.IsActionPressed("g_restart_level"))
+            {
+                KillPlayer();
+            }
         }
 
         public override void _Process(float delta)
         {
+            if (dead)
+                return;
+
             count += delta * lightPulseSpeed;
             if (count > 1f)
                 count--;
@@ -293,6 +306,27 @@ namespace Inversion
 
         public void KillPlayer()
         {
+            if (dead)
+                return;
+
+            dead = true;
+
+            jumpPlayer.Stream = deathSample;
+            jumpPlayer.Play();
+            slidePlayer.Stop();
+            charSprite.Animation = "idle";
+
+            var playerMat = charSprite.Material;
+
+            tween.InterpolateProperty(lightBase, "modulate", lightBase.Modulate, Colors.Transparent, .5f, Tween.TransitionType.Cubic);
+            tween.InterpolateProperty(lightGlow, "modulate", lightGlow.Modulate, Colors.Transparent, .5f, Tween.TransitionType.Cubic);
+            tween.InterpolateProperty(playerMat, "shader_param/override_percent", 0f, 1f, .5f, Tween.TransitionType.Cubic);
+            tween.InterpolateProperty(playerMat, "shader_param/override_colour", new Color("ad2f45"), new Color("ff8933"), .3f, Tween.TransitionType.Cubic, delay: .25f);
+            tween.InterpolateProperty(playerMat, "shader_param/override_colour", new Color("ff8933"), new Color("21181b"), .1f, Tween.TransitionType.Cubic, delay: .55f);
+            tween.InterpolateProperty(playerMat, "shader_param/override_colour", new Color("21181b"), new Color("0021181b"), .3f, Tween.TransitionType.Cubic, delay: 1.55f);
+
+            tween.Start();
+
             EmitSignal(nameof(PlayerDied));
         }
 

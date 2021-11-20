@@ -25,15 +25,19 @@ position = Vector2( 301, 80 )
 rotation = 3.14159
 
 [node name="Label" type="Label" parent="." index="7"]
-margin_left = 53.0
-margin_top = 32.0
-margin_right = 162.0
-margin_bottom = 125.0
+margin_left = 56.0
+margin_top = 31.0
+margin_right = 165.0
+margin_bottom = 124.0
+rect_rotation = 1.93129
 custom_colors/font_color = Color( 0.8, 0.184314, 0.482353, 1 )
 custom_fonts/font = ExtResource( 1 )
-text = "Fire will kill you.
+text = "Fire will kill you
 
-        Invert them."
+    I'm serious
+		   
+	  Go ahead
+            Try"
 __meta__ = {
 "_edit_use_anchors_": false
 }

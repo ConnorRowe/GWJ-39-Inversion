@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/GlobalNodes.cs" type="Script" id=1]
 [ext_resource path="res://sound/bzzt.wav" type="AudioStream" id=2]
+[ext_resource path="res://sound/theme_loop.ogg" type="AudioStream" id=3]
 
 [sub_resource type="AudioStreamRandomPitch" id=1]
 audio_stream = ExtResource( 2 )
@@ -13,3 +14,8 @@ script = ExtResource( 1 )
 stream = SubResource( 1 )
 volume_db = -3.0
 bus = "InversionOrb"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+bus = "Music"

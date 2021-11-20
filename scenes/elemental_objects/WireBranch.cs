@@ -7,7 +7,7 @@ namespace Inversion
         private bool isPowered = false;
 
         [Export]
-        private Godot.Collections.Array<NodePath> connectedPoweredNodePaths = new Godot.Collections.Array<NodePath>();
+        private Godot.Collections.Array<NodePath> connectedPoweredNodePaths;
         private System.Collections.Generic.HashSet<IWirePowered> connectedPoweredNodes = new System.Collections.Generic.HashSet<IWirePowered>();
 
         public override void _Ready()
@@ -18,6 +18,11 @@ namespace Inversion
             RemoveChild(label);
             label.QueueFree();
 
+            if (connectedPoweredNodePaths.Count <= 0)
+            {
+                GD.PrintErr("WIREBRANCH CONNECTED NODES EMPTY BUT WHYYYYYYYYY????!!!");
+            }
+
             foreach (var path in connectedPoweredNodePaths)
             {
                 if (GetNode<Node2D>(path) is IWirePowered wirePowered)
@@ -25,8 +30,6 @@ namespace Inversion
                     connectedPoweredNodes.Add(wirePowered);
                 }
             }
-
-            connectedPoweredNodePaths.Clear();
         }
 
         public void WirePower()
