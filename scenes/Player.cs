@@ -50,6 +50,7 @@ namespace Inversion
         private AnimatedSprite jumpEffect;
         private bool inAirLastFrame = false;
         private bool dead = false;
+        private float maxY = 999999;
 
         public override void _Ready()
         {
@@ -73,6 +74,8 @@ namespace Inversion
 
             var playerMat = (ShaderMaterial)charSprite.Material;
             playerMat.SetShaderParam("override_percent", 0f);
+
+            maxY = ((BaseLevel)GetTree().CurrentScene).levelBounds.Position.y;
         }
 
         public override void _Input(InputEvent evt)
@@ -184,6 +187,11 @@ namespace Inversion
                             break;
                     }
                     break;
+            }
+
+            if (GlobalPosition.y > maxY) // Offscreen
+            {
+                KillPlayer();
             }
         }
 

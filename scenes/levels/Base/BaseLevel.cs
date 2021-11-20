@@ -9,7 +9,7 @@ namespace Inversion
         [Export]
         private NodePath playerStartPosition;
         [Export]
-        private Rect2 levelBounds = new Rect2(0, 640, 0, 360);
+        public Rect2 levelBounds = new Rect2(0, 640, 0, 360);
         [Export]
         private PackedScene nextLevel;
 
