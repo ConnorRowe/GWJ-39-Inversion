@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/GlobalNodes.cs" type="Script" id=1]
 [ext_resource path="res://sound/bzzt.wav" type="AudioStream" id=2]
 [ext_resource path="res://sound/theme_loop.ogg" type="AudioStream" id=3]
+[ext_resource path="res://sound/ui_click.wav" type="AudioStream" id=4]
 
 [sub_resource type="AudioStreamRandomPitch" id=1]
 audio_stream = ExtResource( 2 )
+
+[sub_resource type="AudioStreamRandomPitch" id=2]
+audio_stream = ExtResource( 4 )
+random_pitch = 1.4
 
 [node name="GlobalNodes" type="Node"]
 script = ExtResource( 1 )
@@ -15,7 +20,14 @@ stream = SubResource( 1 )
 volume_db = -3.0
 bus = "InversionOrb"
 
+[node name="UIClickPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = SubResource( 2 )
+volume_db = 2.5
+bus = "SFX"
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 3 )
 autoplay = true
 bus = "Music"

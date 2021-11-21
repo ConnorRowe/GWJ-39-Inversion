@@ -23,6 +23,7 @@ namespace Inversion
                 newButton.Text = $"{i + 1}";
                 newButton.Disabled = i > SaveData.MaxLevel;
                 newButton.Connect("pressed", this, nameof(StartLevel), new Godot.Collections.Array(i));
+                newButton.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
 
                 gridContainer.AddChild(newButton);
 
@@ -30,6 +31,7 @@ namespace Inversion
             }
 
             GetNode("Return").Connect("pressed", GetTree(), "change_scene_to", new Godot.Collections.Array(GD.Load<PackedScene>("res://scenes/menus/MainMenu.tscn")));
+            GetNode("Return").Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
         }
 
         private void StartLevel(int level)

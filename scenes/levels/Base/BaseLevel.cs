@@ -39,6 +39,8 @@ namespace Inversion
 
             unpauseBtn.Connect("pressed", this, nameof(UnPause));
             exit.Connect("pressed", this, nameof(Exit));
+            unpauseBtn.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
+            exit.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
         }
 
         public override void _Input(InputEvent evt)

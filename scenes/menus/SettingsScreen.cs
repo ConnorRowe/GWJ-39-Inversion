@@ -6,6 +6,7 @@ namespace Inversion
     {
         public override void _Ready()
         {
+            GetNode("Return").Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
             GetNode("Return").Connect("pressed", this, nameof(Return));
         }
 

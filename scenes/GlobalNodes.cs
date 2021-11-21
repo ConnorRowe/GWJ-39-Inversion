@@ -8,10 +8,12 @@ namespace Inversion
         private static GlobalNodes singleton;
 
         private AudioStreamPlayer bzztPlayer;
+        private AudioStreamPlayer uiClickPlayer;
 
         public override void _Ready()
         {
             bzztPlayer = GetNode<AudioStreamPlayer>("BzztPlayer");
+            uiClickPlayer = GetNode<AudioStreamPlayer>("UIClickPlayer");
 
             singleton = this;
         }
@@ -30,6 +32,11 @@ namespace Inversion
             {
                 bzztPlayer.Play();
             }
+        }
+
+        public void UIClick()
+        {
+            uiClickPlayer.Play();
         }
     }
 }

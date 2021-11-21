@@ -35,6 +35,11 @@ namespace Inversion
             musicSlider.Connect("value_changed", this, nameof(MusicChanged));
             sfxSlider.Connect("value_changed", this, nameof(SFXChanged));
             fullscreenToggle.Connect("toggled", this, nameof(FullscreenToggled));
+
+            masterSlider.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
+            musicSlider.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
+            sfxSlider.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
+            fullscreenToggle.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
         }
 
         private float GetBusVol(int busId)
