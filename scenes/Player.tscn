@@ -194,6 +194,7 @@ current = true
 process_mode = 0
 limit_smoothed = true
 smoothing_enabled = true
+editor_draw_limits = true
 
 [node name="FeetDust" type="Particles2D" parent="."]
 material = SubResource( 14 )

@@ -16,6 +16,7 @@ namespace Inversion
         public Player Player { get; set; }
         private bool playerDead = false;
         private bool canRespawn = false;
+        private bool paused = false;
 
         public override void _Ready()
         {
@@ -32,6 +33,12 @@ namespace Inversion
             camera.LimitRight = (int)levelBounds.Position.y;
             camera.LimitTop = (int)levelBounds.Size.x;
             camera.LimitBottom = (int)levelBounds.Size.y;
+
+            var unpauseBtn = GetNode<Button>("UILayer/PausePopup/Control/Unpause");
+            var exit = GetNode<Button>("UILayer/PausePopup/Control/Exit");
+
+            unpauseBtn.Connect("pressed", this, nameof(UnPause));
+            exit.Connect("pressed", this, nameof(Exit));
         }
 
         public override void _Input(InputEvent evt)
@@ -39,6 +46,11 @@ namespace Inversion
             if (canRespawn && playerDead && evt.IsActionReleased("g_respawn"))
             {
                 RestartLevel();
+            }
+
+            if (!paused && evt.IsActionReleased("g_pause"))
+            {
+                Pause();
             }
         }
 
@@ -79,11 +91,37 @@ namespace Inversion
             GetTree().ChangeSceneTo(nextLevel);
             QueueFree();
             Globals.LevelDeathCount = 0;
+            Globals.CurrentLevel++;
+            if (Globals.CurrentLevel > SaveData.MaxLevel)
+                SaveData.SaveMaxLevel(Globals.CurrentLevel);
         }
 
         private void EnableRespawn()
         {
             canRespawn = true;
+        }
+
+        private void Pause()
+        {
+            GetNode<PopupPanel>("UILayer/PausePopup").PopupCentered();
+
+            paused = GetTree().Paused = true;
+        }
+
+        private void UnPause()
+        {
+            GetNode<PopupPanel>("UILayer/PausePopup").Hide();
+            GetNode<Settings>("UILayer/PausePopup/Control/PanelContainer/Settings").SaveSettings();
+
+            paused = GetTree().Paused = false;
+        }
+
+        private void Exit()
+        {
+            paused = GetTree().Paused = false;
+            GetNode<Settings>("UILayer/PausePopup/Control/PanelContainer/Settings").SaveSettings();
+
+            GetTree().ChangeSceneTo(GD.Load<PackedScene>("res://scenes/menus/MainMenu.tscn"));
         }
     }
 }

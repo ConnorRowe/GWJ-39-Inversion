@@ -18,11 +18,6 @@ namespace Inversion
             RemoveChild(label);
             label.QueueFree();
 
-            if (connectedPoweredNodePaths.Count <= 0)
-            {
-                GD.PrintErr("WIREBRANCH CONNECTED NODES EMPTY BUT WHYYYYYYYYY????!!!");
-            }
-
             foreach (var path in connectedPoweredNodePaths)
             {
                 if (GetNode<Node2D>(path) is IWirePowered wirePowered)

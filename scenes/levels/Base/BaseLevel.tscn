@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/levels/Base/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
@@ -6,6 +6,59 @@
 [ext_resource path="res://tileset/terrain_tiles/tileset_terrain_tiles.tres" type="TileSet" id=4]
 [ext_resource path="res://font/large_dynamicfont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/RotationLerper.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Settings.tscn" type="PackedScene" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0784314, 0.0941176, 0.180392, 0.917647 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.784314, 0.831373, 0.364706, 1 )
+border_width_bottom = 6
+border_color = Color( 0.388235, 0.670588, 0.247059, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.411765, 0.141176, 0.392157, 1 )
+border_width_top = 6
+border_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.25098, 0.286275, 0.45098, 1 )
+border_width_bottom = 6
+border_color = Color( 0.172549, 0.207843, 0.301961, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.901961, 0.270588, 0.223529, 1 )
+border_width_bottom = 6
+border_color = Color( 0.678431, 0.184314, 0.270588, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.388235, 0.670588, 0.247059, 1 )
+border_width_bottom = 6
+border_color = Color( 0.231373, 0.490196, 0.309804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.811765, 0.458824, 0.168627, 1 )
+border_width_top = 6
+border_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.231373, 0.490196, 0.309804, 1 )
+border_width_bottom = 6
+border_color = Color( 0.184314, 0.341176, 0.32549, 1 )
+
+[sub_resource type="InputEventAction" id=10]
+action = "g_pause"
+
+[sub_resource type="ShortCut" id=11]
+shortcut = SubResource( 10 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color( 0.160784, 0.113725, 0.168627, 1 )
+corner_detail = 1
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -86,6 +139,106 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PausePopup" type="PopupPanel" parent="UILayer"]
+pause_mode = 2
+visible = true
+margin_right = 8.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 640, 360 )
+custom_styles/panel = SubResource( 1 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="UILayer/PausePopup"]
+margin_right = 640.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="UILayer/PausePopup/Control"]
+pause_mode = 2
+margin_left = 205.0
+margin_top = 299.0
+margin_right = 435.0
+margin_bottom = 333.0
+rect_min_size = Vector2( 64, 32 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 9 )
+enabled_focus_mode = 0
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unpause" type="Button" parent="UILayer/PausePopup/Control"]
+pause_mode = 2
+margin_left = 205.0
+margin_top = 253.0
+margin_right = 435.0
+margin_bottom = 287.0
+rect_min_size = Vector2( 64, 32 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+shortcut = SubResource( 11 )
+text = "Return"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="UILayer/PausePopup/Control"]
+pause_mode = 2
+margin_left = 120.0
+margin_top = 71.0
+margin_right = 526.0
+margin_bottom = 245.0
+rect_min_size = Vector2( 406, 174 )
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" parent="UILayer/PausePopup/Control/PanelContainer" instance=ExtResource( 7 )]
+pause_mode = 2
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 390.0
+margin_bottom = 158.0
+
+[node name="TitleHolder" type="Node2D" parent="UILayer/PausePopup/Control"]
+pause_mode = 2
+position = Vector2( 326, 40 )
+
+[node name="Title" type="Label" parent="UILayer/PausePopup/Control/TitleHolder"]
+margin_left = -72.0
+margin_top = -13.0
+margin_right = 73.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 5 )
+text = "Paused"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RotationLerper" parent="UILayer/PausePopup/Control/TitleHolder" instance=ExtResource( 6 )]
+Speed = 0.2
+AngleSpread = 10.0
 
 [node name="InversionOrb" parent="." instance=ExtResource( 2 )]
 visible = false

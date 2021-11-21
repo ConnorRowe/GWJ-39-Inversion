@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://textures/goal_platform.png" type="Texture" id=1]
 [ext_resource path="res://textures/goal_arrow_glow.png" type="Texture" id=2]
 [ext_resource path="res://textures/goal_arrow.png" type="Texture" id=3]
 [ext_resource path="res://textures/end_level_explosion.png" type="Texture" id=4]
 [ext_resource path="res://scenes/GoalPlatform.cs" type="Script" id=5]
+[ext_resource path="res://sound/inversion_fail.wav" type="AudioStream" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -151,7 +152,7 @@ polygon = PoolVector2Array( -20, 0, -10, -5, 10, -5, 20, 0 )
 
 [node name="Arrow" type="AnimatedSprite" parent="."]
 modulate = Color( 0.784314, 0.831373, 0.364706, 1 )
-position = Vector2( 0, -29.7728 )
+position = Vector2( 0, -32 )
 frames = SubResource( 4 )
 frame = 3
 playing = true
@@ -188,3 +189,9 @@ position = Vector2( 0, -13.5 )
 shape = SubResource( 22 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -11.398
+pitch_scale = 0.53
+bus = "InversionOrb"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/elemental_objects/CrateMetal.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/elemental_objects/WireBranch.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=9]
+[ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=10]
 
 [node name="Level6" instance=ExtResource( 1 )]
 LevelName = "Bridge the Gap"
@@ -157,6 +158,37 @@ position = Vector2( 231, 294 )
 
 [node name="EndPos" parent="Wire6" index="1"]
 position = Vector2( 200, 294 )
+
+[node name="Label" type="Label" parent="." index="27"]
+margin_left = 218.0
+margin_top = 232.0
+margin_right = 327.0
+margin_bottom = 325.0
+rect_rotation = -4.8867
+custom_colors/font_color = Color( 0.8, 0.184314, 0.482353, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "         Remember,  you  can
+reset   with  the 
+                   'r'   key"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="." index="28"]
+modulate = Color( 0.183333, 0, 1, 0.141176 )
+margin_left = 217.5
+margin_top = 231.5
+margin_right = 358.5
+margin_bottom = 324.5
+rect_rotation = -4.8867
+custom_colors/font_color = Color( 0.8, 0.184314, 0.482353, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "         Remember,  you  can
+reset   with  the 
+                   'r'   key"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [editable path="Wire"]
 [editable path="Wire2"]

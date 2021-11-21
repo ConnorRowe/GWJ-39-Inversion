@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://textures/slider_grabber.png" type="Texture" id=2]
+[ext_resource path="res://textures/slider_grabber_down.png" type="Texture" id=3]
+[ext_resource path="res://textures/switch_off.png" type="Texture" id=4]
+[ext_resource path="res://textures/switch_on.png" type="Texture" id=5]
+[ext_resource path="res://scenes/Settings.cs" type="Script" id=6]
+
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 0.411765, 0.141176, 0.392157, 1 )
+thickness = 6
+
+[sub_resource type="StyleBoxFlat" id=2]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.8, 0.184314, 0.482353, 1 )
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.611765, 0.164706, 0.439216, 1 )
+
+[node name="Settings" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 640.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.611765, 0.164706, 0.439216, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Master Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MasterSlider" type="HSlider" parent="."]
+margin_top = 18.0
+margin_right = 640.0
+margin_bottom = 30.0
+focus_neighbour_bottom = NodePath("../MusicSlider")
+focus_next = NodePath("../MusicSlider")
+size_flags_horizontal = 3
+custom_icons/grabber_highlight = ExtResource( 3 )
+custom_icons/grabber = ExtResource( 2 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Label2" type="Label" parent="."]
+margin_top = 34.0
+margin_right = 640.0
+margin_bottom = 48.0
+custom_colors/font_color = Color( 0.611765, 0.164706, 0.439216, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicSlider" type="HSlider" parent="."]
+margin_top = 52.0
+margin_right = 640.0
+margin_bottom = 64.0
+focus_neighbour_top = NodePath("../MasterSlider")
+focus_neighbour_bottom = NodePath("../SFXSlider")
+focus_next = NodePath("../SFXSlider")
+focus_previous = NodePath("../MasterSlider")
+size_flags_horizontal = 3
+custom_icons/grabber_highlight = ExtResource( 3 )
+custom_icons/grabber = ExtResource( 2 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+max_value = 1.0
+step = 0.01
+value = 0.5
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label3" type="Label" parent="."]
+margin_top = 68.0
+margin_right = 640.0
+margin_bottom = 82.0
+custom_colors/font_color = Color( 0.611765, 0.164706, 0.439216, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Sound Effects"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXSlider" type="HSlider" parent="."]
+margin_top = 86.0
+margin_right = 640.0
+margin_bottom = 98.0
+focus_neighbour_top = NodePath("../MusicSlider")
+focus_neighbour_bottom = NodePath("../FullscreenToggle")
+focus_next = NodePath("../FullscreenToggle")
+focus_previous = NodePath("../MusicSlider")
+size_flags_horizontal = 3
+custom_icons/grabber_highlight = ExtResource( 3 )
+custom_icons/grabber = ExtResource( 2 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+max_value = 1.0
+step = 0.01
+value = 0.5
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FullscreenToggle" type="CheckButton" parent="."]
+margin_top = 102.0
+margin_right = 640.0
+margin_bottom = 142.0
+focus_neighbour_top = NodePath("../SFXSlider")
+focus_neighbour_right = NodePath("../CursorToggle")
+focus_next = NodePath("../CursorToggle")
+focus_previous = NodePath("../SFXSlider")
+custom_colors/font_color = Color( 0.611765, 0.164706, 0.439216, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_icons/off = ExtResource( 4 )
+custom_icons/on = ExtResource( 5 )
+text = "Toggle Fullscreen"

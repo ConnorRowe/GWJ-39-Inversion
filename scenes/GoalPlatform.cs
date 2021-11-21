@@ -32,6 +32,7 @@ namespace Inversion
                 tween.InterpolateProperty(GetNode("Arrow"), "modulate", new Color(.78f, .83f, .36f), new Color(.78f, .83f, .36f, 0f), .25f, Tween.TransitionType.Cubic);
                 tween.Start();
                 eolExplosion.Play("default");
+                GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
             }
         }
 
