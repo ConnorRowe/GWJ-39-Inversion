@@ -6,8 +6,6 @@ namespace Inversion
     public class Fan : LigntningPowered
     {
         [Export]
-        public Vector2 PushVector { get; set; } = Vector2.Right;
-        [Export]
         public float PushPower { get; set; } = 10f;
 
         private HashSet<PhysicsBody2D> overlappedBodies = new HashSet<PhysicsBody2D>();
@@ -30,15 +28,17 @@ namespace Inversion
             if (!isLightningPowered && !alwaysLightningPowered)
                 return;
 
+            var pushVector = Vector2.Right.Rotated(Rotation);
+
             foreach (var body in overlappedBodies)
             {
                 if (body is RigidBody2D rigidBody)
                 {
-                    rigidBody.ApplyCentralImpulse(PushVector * PushPower);
+                    rigidBody.ApplyCentralImpulse(pushVector * PushPower);
                 }
                 else if (body is Player player)
                 {
-                    player.ApplyExternalImpulse(PushVector * PushPower);
+                    player.ApplyExternalImpulse(pushVector * PushPower);
                 }
             }
         }

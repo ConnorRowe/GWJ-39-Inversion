@@ -90,7 +90,7 @@ namespace Inversion
 
             var audioScale = moveDelta / 3f;
             tonePlayer.PitchScale = .8f + (audioScale * .6f);
-            tonePlayer.VolumeDb = -20f + (audioScale * 10f);
+            tonePlayer.VolumeDb = Mathf.Min(-20f + (audioScale * 10f), 0f);
         }
 
         private void InversionAreaEntered(Area2D area)

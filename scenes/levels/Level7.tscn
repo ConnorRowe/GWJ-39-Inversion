@@ -1,0 +1,176 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/elemental_objects/Fan.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/elemental_objects/SmallCrateMetal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/elemental_objects/WireBranch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/elemental_objects/Laser.tscn" type="PackedScene" id=8]
+[ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=9]
+[ext_resource path="res://textures/lvl7_laser_point.png" type="Texture" id=10]
+[ext_resource path="res://scenes/levels/Level8.tscn" type="PackedScene" id=11]
+
+[node name="Level7" instance=ExtResource( 1 )]
+LevelName = "Floating Platforms"
+levelBounds = Rect2( 0, 640, 0, 480 )
+nextLevel = ExtResource( 11 )
+
+[node name="TileMap" parent="." index="4"]
+tile_data = PoolIntArray( -1, 2, 4, -65536, 2, 196609, -65535, 2, 196609, -65534, 2, 196609, -65533, 2, 196609, -65532, 2, 196609, -65531, 2, 196609, -65530, 2, 196609, -65529, 2, 196609, -65528, 2, 196609, -65527, 2, 196609, -65526, 2, 196609, -65525, 2, 196609, -65524, 2, 196609, -65523, 2, 196609, -65522, 2, 196609, -65521, 2, 7, 65535, 2, 65539, 15, 2, 65539, 131071, 2, 65539, 65551, 2, 65539, 196607, 2, 65539, 131087, 2, 65539, 262143, 2, 65539, 196623, 2, 65539, 327679, 2, 65539, 262159, 2, 65539, 393215, 2, 65539, 327695, 2, 65539, 458751, 2, 65539, 393231, 2, 65539, 524287, 2, 65539, 458767, 2, 65539, 589823, 2, 65539, 524289, 2, 196608, 524290, 2, 196609, 524291, 2, 196609, 524292, 2, 196609, 524293, 2, 196610, 524296, 2, 196611, 524299, 2, 0, 524300, 2, 1, 524301, 2, 1, 524302, 2, 1, 524303, 2, 131079, 655359, 2, 65539, 589824, 4, 0, 589835, 2, 65536, 589836, 2, 65537, 589837, 2, 65537, 589838, 2, 65537, 589839, 2, 65538, 720895, 2, 131076, 655360, 2, 1, 655361, 2, 1, 655362, 2, 1, 655363, 2, 1, 655364, 2, 1, 655365, 2, 2, 655368, 2, 3, 655371, 2, 65536, 655372, 2, 65537, 655373, 2, 65537, 655374, 2, 65537, 655375, 2, 65538, 786431, 2, 65536, 720896, 2, 65537, 720897, 2, 65537, 720898, 2, 65537, 720899, 2, 65537, 720900, 2, 65537, 720901, 2, 131077, 720902, 2, 1, 720903, 2, 1, 720904, 2, 131080, 720905, 2, 1, 720906, 2, 1, 720907, 2, 131078, 720908, 2, 65537, 720909, 2, 65537, 720910, 2, 65537, 720911, 2, 65538, 851967, 2, 131072, 786432, 2, 131073, 786433, 2, 131073, 786434, 2, 131073, 786435, 2, 131073, 786436, 2, 131073, 786437, 2, 131073, 786438, 2, 131073, 786439, 2, 131073, 786440, 2, 131073, 786441, 2, 131073, 786442, 2, 131073, 786443, 2, 131073, 786444, 2, 131073, 786445, 2, 131073, 786446, 2, 131073, 786447, 2, 131074 )
+
+[node name="Sprite" type="Sprite" parent="." index="7"]
+position = Vector2( 302, 258 )
+rotation = -0.0636795
+texture = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="." index="8"]
+margin_left = 277.0
+margin_top = 282.0
+margin_right = 410.0
+margin_bottom = 381.0
+rect_rotation = -3.64857
+custom_colors/font_color = Color( 0.8, 0.184314, 0.482353, 1 )
+custom_fonts/font = ExtResource( 9 )
+text = "lasers"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fan" parent="." index="9" instance=ExtResource( 2 )]
+position = Vector2( 261, 441 )
+rotation = -1.57079
+PushPower = 8.0
+
+[node name="Fan2" parent="." index="10" instance=ExtResource( 2 )]
+position = Vector2( 299, 441 )
+rotation = -1.57079
+PushPower = 8.0
+
+[node name="Fan3" parent="." index="11" instance=ExtResource( 2 )]
+position = Vector2( 378, 441 )
+rotation = -1.57079
+PushPower = 8.0
+
+[node name="Fan4" parent="." index="12" instance=ExtResource( 2 )]
+position = Vector2( 420, 441 )
+rotation = -1.57079
+PushPower = 8.0
+
+[node name="BatteryOrGround" parent="." index="13" instance=ExtResource( 3 )]
+position = Vector2( 340, 312 )
+invertOnStart = true
+
+[node name="PowerTerminal" parent="." index="14" instance=ExtResource( 4 )]
+position = Vector2( 325, 312 )
+connectedPoweredNodePath = NodePath("../WireBranch")
+
+[node name="PowerTerminal2" parent="." index="15" instance=ExtResource( 4 )]
+position = Vector2( 355, 312 )
+connectedPoweredNodePath = NodePath("../WireR1")
+
+[node name="WireL1" parent="." index="16" instance=ExtResource( 5 )]
+connectedPoweredNodePath = NodePath("../WireL2")
+
+[node name="StartPos" parent="WireL1" index="0"]
+position = Vector2( 325, 320 )
+
+[node name="EndPos" parent="WireL1" index="1"]
+position = Vector2( 325, 460 )
+
+[node name="WireL2" parent="." index="17" instance=ExtResource( 5 )]
+connectedPoweredNodePath = NodePath("../WireL3")
+
+[node name="StartPos" parent="WireL2" index="0"]
+position = Vector2( 327, 458 )
+
+[node name="EndPos" parent="WireL2" index="1"]
+position = Vector2( 280, 458 )
+
+[node name="WireL3" parent="." index="18" instance=ExtResource( 5 )]
+connectedPoweredNodePath = NodePath("../PowerTerminalL")
+
+[node name="StartPos" parent="WireL3" index="0"]
+position = Vector2( 280, 460 )
+
+[node name="EndPos" parent="WireL3" index="1"]
+position = Vector2( 280, 440 )
+
+[node name="WireR1" parent="." index="19" instance=ExtResource( 5 )]
+connectedPoweredNodePath = NodePath("../WireR2")
+
+[node name="StartPos" parent="WireR1" index="0"]
+position = Vector2( 355, 320 )
+
+[node name="EndPos" parent="WireR1" index="1"]
+position = Vector2( 355, 460 )
+
+[node name="WireR2" parent="." index="20" instance=ExtResource( 5 )]
+connectedPoweredNodePath = NodePath("../WireR3")
+
+[node name="StartPos" parent="WireR2" index="0"]
+position = Vector2( 353, 458 )
+
+[node name="EndPos" parent="WireR2" index="1"]
+position = Vector2( 399, 458 )
+
+[node name="WireR3" parent="." index="21" instance=ExtResource( 5 )]
+connectedPoweredNodePath = NodePath("../PowerTerminalR")
+
+[node name="StartPos" parent="WireR3" index="0"]
+position = Vector2( 399, 460 )
+
+[node name="EndPos" parent="WireR3" index="1"]
+position = Vector2( 399, 440 )
+
+[node name="LaserWire" parent="." index="22" instance=ExtResource( 5 )]
+connectedPoweredNodePath = NodePath("../LaserTerminal")
+
+[node name="StartPos" parent="LaserWire" index="0"]
+position = Vector2( 340, 320 )
+
+[node name="EndPos" parent="LaserWire" index="1"]
+position = Vector2( 340, 0 )
+
+[node name="PowerTerminalL" parent="." index="23" instance=ExtResource( 4 )]
+position = Vector2( 280, 432 )
+
+[node name="PowerTerminalR" parent="." index="24" instance=ExtResource( 4 )]
+position = Vector2( 399, 432 )
+
+[node name="CrateMetal" parent="." index="25" instance=ExtResource( 6 )]
+position = Vector2( 260, 392 )
+
+[node name="CrateMetal2" parent="." index="26" instance=ExtResource( 6 )]
+position = Vector2( 299, 392 )
+
+[node name="CrateMetal3" parent="." index="27" instance=ExtResource( 6 )]
+position = Vector2( 380, 392 )
+
+[node name="CrateMetal4" parent="." index="28" instance=ExtResource( 6 )]
+position = Vector2( 419, 392 )
+
+[node name="WireBranch" parent="." index="29" instance=ExtResource( 7 )]
+position = Vector2( 325, 320 )
+connectedPoweredNodePaths = [ NodePath("../WireL1"), NodePath("../LaserWire") ]
+
+[node name="LaserTerminal" parent="." index="30" instance=ExtResource( 4 )]
+position = Vector2( 340, 8 )
+rotation = -3.14159
+
+[node name="Laser" parent="." index="31" instance=ExtResource( 8 )]
+position = Vector2( 328, 5 )
+rotation = 1.5708
+
+[node name="Laser2" parent="." index="32" instance=ExtResource( 8 )]
+position = Vector2( 353, 5 )
+rotation = 1.5708
+
+[editable path="WireL1"]
+[editable path="WireL2"]
+[editable path="WireL3"]
+[editable path="WireR1"]
+[editable path="WireR2"]
+[editable path="WireR3"]
+[editable path="LaserWire"]

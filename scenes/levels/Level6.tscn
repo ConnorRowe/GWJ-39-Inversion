@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/elemental_objects/CrateWood.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/elemental_objects/Squirter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scenes/levels/Level7.tscn" type="PackedScene" id=5]
+
+[node name="Level6" instance=ExtResource( 1 )]
+position = Vector2( 0, -1 )
+LevelName = "Bwurnies"
+levelBounds = Rect2( 0, 880, -40, 360 )
+nextLevel = ExtResource( 5 )
+
+[node name="PlayerStartPos" parent="." index="1"]
+position = Vector2( 70, 56 )
+
+[node name="TileMap" parent="." index="4"]
+tile_data = PoolIntArray( -65536, 2, 4, -65535, 2, 196609, -65534, 2, 196609, -65533, 2, 196609, -65532, 2, 196609, -65531, 2, 196609, -65530, 2, 196609, -65529, 2, 196609, -65528, 2, 196609, -65527, 2, 196609, -65526, 2, 196609, -65525, 2, 196609, -65524, 2, 196609, -65523, 2, 196609, -65522, 2, 196609, -65521, 2, 8, -65520, 2, 196609, -65519, 2, 196609, -65518, 2, 196609, -65517, 2, 196609, -65516, 2, 196609, -65515, 2, 196609, -65514, 2, 7, 0, 2, 65539, 15, 2, 65539, 22, 2, 65539, 65536, 2, 65539, 65551, 2, 65539, 65558, 2, 65539, 131072, 2, 262148, 131073, 2, 196609, 131074, 2, 196609, 131075, 2, 196610, 131087, 2, 131075, 131094, 2, 65539, 196608, 2, 65539, 196630, 2, 65539, 262144, 2, 65539, 262166, 2, 65539, 327680, 2, 65539, 327693, 2, 196611, 327702, 2, 65539, 393216, 2, 65539, 393238, 2, 65539, 458752, 2, 65539, 458774, 2, 65539, 524288, 2, 196612, 524289, 2, 196609, 524290, 2, 196609, 524291, 2, 196609, 524292, 2, 196609, 524293, 2, 196609, 524294, 2, 196609, 524295, 2, 196609, 524296, 2, 196609, 524297, 2, 196609, 524298, 2, 196609, 524299, 2, 196609, 524300, 2, 196609, 524301, 2, 196609, 524302, 2, 196609, 524303, 2, 196609, 524304, 2, 196609, 524305, 2, 196609, 524306, 2, 196609, 524307, 2, 196609, 524308, 2, 196609, 524309, 2, 196609, 524310, 2, 196615 )
+
+[node name="GoalPlatform1" parent="." index="5"]
+position = Vector2( 785, 321 )
+
+[node name="Label" type="Label" parent="." index="7"]
+margin_left = 162.0
+margin_top = 283.0
+margin_right = 295.0
+margin_bottom = 382.0
+rect_rotation = -3.64857
+custom_colors/font_color = Color( 0.8, 0.184314, 0.482353, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "the  wooden ones
+          don't  come  back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CrateWood" parent="." index="8" instance=ExtResource( 2 )]
+position = Vector2( 620, 300 )
+
+[node name="CrateWood2" parent="." index="9" instance=ExtResource( 2 )]
+position = Vector2( 620, 260 )
+
+[node name="CrateWood3" parent="." index="10" instance=ExtResource( 2 )]
+position = Vector2( 620, 220 )
+
+[node name="CrateWood4" parent="." index="11" instance=ExtResource( 2 )]
+position = Vector2( 620, 180 )
+
+[node name="CrateWood5" parent="." index="12" instance=ExtResource( 2 )]
+position = Vector2( 620, 140 )
+
+[node name="CrateWood6" parent="." index="13" instance=ExtResource( 2 )]
+position = Vector2( 575, 300 )
+
+[node name="CrateWood7" parent="." index="14" instance=ExtResource( 2 )]
+position = Vector2( 530, 300 )
+
+[node name="CrateWood8" parent="." index="15" instance=ExtResource( 2 )]
+position = Vector2( 486, 300 )
+
+[node name="CrateWood9" parent="." index="16" instance=ExtResource( 2 )]
+position = Vector2( 442, 300 )
+
+[node name="CrateWood10" parent="." index="17" instance=ExtResource( 2 )]
+position = Vector2( 398, 300 )
+
+[node name="CrateWood11" parent="." index="18" instance=ExtResource( 2 )]
+position = Vector2( 354, 300 )
+
+[node name="CrateWood12" parent="." index="19" instance=ExtResource( 2 )]
+position = Vector2( 310, 300 )
+
+[node name="CrateWood13" parent="." index="20" instance=ExtResource( 2 )]
+position = Vector2( 147, 300 )
+
+[node name="CrateWood14" parent="." index="21" instance=ExtResource( 2 )]
+position = Vector2( 87, 300 )
+
+[node name="Squirter" parent="." index="22" instance=ExtResource( 3 )]
+position = Vector2( 271, 320 )
+invertOnStart = true
+
+[node name="Squirter2" parent="." index="23" instance=ExtResource( 3 )]
+position = Vector2( 555, 240 )
+rotation = 2.35619
+invertOnStart = true

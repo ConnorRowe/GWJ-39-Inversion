@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/elemental_objects/CrateMetal.tscn" type="PackedScene" id=2]
@@ -10,9 +10,11 @@
 [ext_resource path="res://scenes/elemental_objects/WireBranch.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=9]
 [ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=10]
+[ext_resource path="res://scenes/levels/Level6.tscn" type="PackedScene" id=11]
 
 [node name="Level6" instance=ExtResource( 1 )]
 LevelName = "Bridge the Gap"
+nextLevel = ExtResource( 11 )
 
 [node name="PlayerStartPos" parent="." index="1"]
 position = Vector2( 32, 263 )

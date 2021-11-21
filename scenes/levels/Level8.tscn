@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/elemental_objects/CrateMetal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/elemental_objects/BatteryOrGround.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/elemental_objects/PowerTerminal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/elemental_objects/Fan.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/RotationLerper.tscn" type="PackedScene" id=6]
+
+[node name="Level8" instance=ExtResource( 1 )]
+LevelName = "Flying Metal"
+
+[node name="PlayerStartPos" parent="." index="1"]
+position = Vector2( 23, 107 )
+
+[node name="TileMap" parent="." index="4"]
+tile_data = PoolIntArray( -1, 2, 4, -65536, 2, 196609, -65535, 2, 196609, -65534, 2, 196609, -65533, 2, 196609, -65532, 2, 196609, -65531, 2, 196609, -65530, 2, 196609, -65529, 2, 196609, -65528, 2, 196609, -65527, 2, 196609, -65526, 2, 196609, -65525, 2, 196609, -65524, 2, 196609, -65523, 2, 196609, -65522, 2, 196609, -65521, 2, 7, 65535, 2, 65539, 15, 2, 65539, 131071, 2, 65539, 65551, 2, 65539, 196607, 2, 65539, 131087, 2, 65539, 262143, 2, 131076, 196608, 2, 1, 196609, 2, 1, 196610, 2, 2, 196611, 4, 0, 196614, 2, 196611, 196617, 536870916, 0, 196618, 2, 0, 196619, 2, 1, 196620, 2, 2, 196623, 2, 65539, 327679, 2, 65536, 262144, 2, 65537, 262145, 2, 65537, 262146, 2, 131077, 262147, 2, 2, 262153, 2, 0, 262154, 2, 131078, 262155, 2, 65537, 262156, 2, 65538, 262159, 2, 65539, 393215, 2, 65536, 327680, 2, 65537, 327681, 2, 65537, 327682, 2, 65537, 327683, 2, 65538, 327689, 2, 65536, 327690, 2, 65537, 327691, 2, 65537, 327692, 2, 65538, 327695, 2, 65539, 458751, 2, 65536, 393216, 2, 65537, 393217, 2, 65537, 393218, 2, 65537, 393219, 2, 65538, 393225, 2, 65536, 393226, 2, 65537, 393227, 2, 65537, 393228, 2, 65538, 393231, 2, 65539, 524287, 2, 65536, 458752, 2, 65537, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65538, 458761, 2, 65536, 458762, 2, 65537, 458763, 2, 65537, 458764, 2, 65538, 458767, 2, 65539, 589823, 2, 131072, 524288, 2, 131073, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 196613, 524292, 2, 196609, 524293, 2, 196609, 524294, 2, 196609, 524295, 2, 196609, 524296, 2, 196609, 524297, 2, 196614, 524298, 2, 131073, 524299, 2, 131073, 524300, 2, 196613, 524301, 2, 196609, 524302, 2, 196609, 524303, 2, 196615 )
+
+[node name="CrateMetal" parent="." index="7" instance=ExtResource( 2 )]
+position = Vector2( 153, 97 )
+rotation = 0.20143
+
+[node name="CrateMetal3" parent="." index="8" instance=ExtResource( 2 )]
+position = Vector2( 358, 102 )
+
+[node name="CrateMetal2" parent="." index="9" instance=ExtResource( 2 )]
+position = Vector2( 74, 100 )
+
+[node name="BatteryOrGround" parent="." index="10" instance=ExtResource( 3 )]
+position = Vector2( 242, 291 )
+
+[node name="BatteryOrGround2" parent="." index="11" instance=ExtResource( 3 )]
+position = Vector2( 277, 291 )
+
+[node name="PowerTerminal" parent="." index="12" instance=ExtResource( 4 )]
+position = Vector2( 191, 312 )
+
+[node name="PowerTerminal2" parent="." index="13" instance=ExtResource( 4 )]
+position = Vector2( 328, 312 )
+
+[node name="Fan" parent="." index="14" instance=ExtResource( 5 )]
+position = Vector2( 175, 310 )
+rotation = -0.785398
+PushPower = 25.0
+
+[node name="RotationLerper" parent="Fan" index="8" instance=ExtResource( 6 )]
+Speed = 0.5
+BaseAngle = -45.0
+
+[node name="Fan2" parent="." index="15" instance=ExtResource( 5 )]
+position = Vector2( 219, 310 )
+rotation = -1.57079
+PushPower = 20.0
+
+[node name="RotationLerper" parent="Fan2" index="8" instance=ExtResource( 6 )]
+Speed = 0.2
+AngleSpread = 22.0
+BaseAngle = -90.0
+
+[node name="Fan3" parent="." index="16" instance=ExtResource( 5 )]
+position = Vector2( 301, 310 )
+rotation = -1.57079
+PushPower = 20.0
+
+[node name="RotationLerper" parent="Fan3" index="8" instance=ExtResource( 6 )]
+Speed = 0.2
+AngleSpread = 22.0
+BaseAngle = -90.0
+
+[node name="Fan5" parent="." index="17" instance=ExtResource( 5 )]
+position = Vector2( 260, 320 )
+rotation = -1.57079
+PushPower = 12.0
+
+[node name="RotationLerper" parent="Fan5" index="8" instance=ExtResource( 6 )]
+Speed = 0.2
+BaseAngle = -90.0
+
+[node name="Fan4" parent="." index="18" instance=ExtResource( 5 )]
+position = Vector2( 352, 310 )
+rotation = -2.35619
+PushPower = 25.0
+
+[node name="RotationLerper" parent="Fan4" index="8" instance=ExtResource( 6 )]
+Speed = 0.5
+BaseAngle = -135.0

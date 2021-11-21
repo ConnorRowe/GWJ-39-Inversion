@@ -113,7 +113,7 @@ namespace Inversion
 
             bool shouldEndSlide = false;
 
-            slidePlayer.VolumeDb = -4 + (((velocity + externalVelocity).LengthSquared() / 5200f) * 10f);
+            slidePlayer.VolumeDb = Mathf.Min(-4 + (((velocity + externalVelocity).LengthSquared() / 5200f) * 10f), 0f);
 
             if ((velocity + externalVelocity).LengthSquared() > 50f)
             {
