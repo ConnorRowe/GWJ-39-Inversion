@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/elemental_objects/Laser.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/elemental_objects/Lava.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/elemental_objects/Fan.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/elemental_objects/Wire.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/menus/WinScreen.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.0355556, 0.0733333, 0.502222, 0.842222, 0.882222, 1 )
@@ -50,6 +51,7 @@ extents = Vector2( 40, 7.5 )
 
 [node name="Level10" instance=ExtResource( 1 )]
 LevelName = "I Believe I Can Fly"
+nextLevel = ExtResource( 8 )
 
 [node name="PlayerStartPos" parent="." index="1"]
 position = Vector2( 53, 78 )

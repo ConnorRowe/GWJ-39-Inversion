@@ -10,9 +10,12 @@ config_version=4
 
 [application]
 
-config/name="GWJ#39"
+config/name="Elemental Inversion"
 run/main_scene="res://scenes/menus/MainMenu.tscn"
+boot_splash/image="res://textures/wildjamsplash.png"
+boot_splash/bg_color=Color( 0.0784314, 0.0941176, 0.180392, 1 )
 config/icon="res://icon.png"
+config/windows_native_icon="res://win_icon.ico"
 
 [autoload]
 

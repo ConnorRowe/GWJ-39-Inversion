@@ -33,9 +33,9 @@ namespace Inversion
         {
             save.Clear();
             save.SetValue("Inversion", "maxLevel", 0);
-            save.SetValue("Inversion", "volMaster", 1.0);
-            save.SetValue("Inversion", "volMusic", 1.0);
-            save.SetValue("Inversion", "volSFX", 1.0);
+            save.SetValue("Inversion", "volMaster", .5f);
+            save.SetValue("Inversion", "volMusic", 1.0f);
+            save.SetValue("Inversion", "volSFX", 1.0f);
             save.SetValue("Inversion", "fullscreen", false);
             save.Save(savePath);
         }

@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://font/title_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://font/large_dynamicfont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/RotationLerper.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/menus/ControlsScreen.cs" type="Script" id=4]
+[ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://scenes/PositionLerper.tscn" type="PackedScene" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color( 0.160784, 0.113725, 0.168627, 1 )
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.388235, 0.670588, 0.247059, 1 )
+border_width_bottom = 6
+border_color = Color( 0.231373, 0.490196, 0.309804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.811765, 0.458824, 0.168627, 1 )
+border_width_top = 6
+border_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.25098, 0.286275, 0.45098, 1 )
+border_width_bottom = 6
+border_color = Color( 0.172549, 0.207843, 0.301961, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.231373, 0.490196, 0.309804, 1 )
+border_width_bottom = 6
+border_color = Color( 0.184314, 0.341176, 0.32549, 1 )
+
+[node name="ControlsScreen" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="BG" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 640.0
+margin_bottom = 360.0
+color = Color( 0.0784314, 0.0941176, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 38.0
+margin_top = 90.0
+margin_right = 609.0
+margin_bottom = 264.0
+rect_min_size = Vector2( 571, 174 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PanelContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 555.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_constants/line_spacing = 7
+custom_fonts/font = ExtResource( 2 )
+text = "You completed Elemental Inversion!  Thanks a lot for playing all the way to the end.  I hope you enjoyed your time playing!
+                                                      - Connor"
+autowrap = true
+
+[node name="TitleHolder" type="Node2D" parent="."]
+position = Vector2( 326, 40 )
+
+[node name="Title" type="Label" parent="TitleHolder"]
+margin_left = -129.0
+margin_top = -21.0
+margin_right = 129.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 1 )
+text = "Congratulations!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RotationLerper" parent="TitleHolder" instance=ExtResource( 3 )]
+Speed = 0.2
+AngleSpread = 10.0
+
+[node name="SubtitleHolder" type="Node2D" parent="."]
+position = Vector2( 537, 80 )
+
+[node name="Subtitle" type="Label" parent="SubtitleHolder"]
+margin_left = -72.0
+margin_top = -13.0
+margin_right = 73.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 5 )
+text = "you deserve a gold star"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RotationLerper" parent="SubtitleHolder" instance=ExtResource( 3 )]
+Speed = 0.5
+AngleSpread = 10.0
+
+[node name="PositionLerper" parent="SubtitleHolder" instance=ExtResource( 6 )]
+Speed = 0.25
+
+[node name="GlobalPointA" parent="SubtitleHolder/PositionLerper" index="0"]
+position = Vector2( 537, 64 )
+
+[node name="GlobalPointB" parent="SubtitleHolder/PositionLerper" index="1"]
+position = Vector2( 537, 80 )
+
+[node name="Return" type="Button" parent="."]
+margin_left = 205.0
+margin_top = 303.0
+margin_right = 435.0
+margin_bottom = 337.0
+rect_min_size = Vector2( 64, 32 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+enabled_focus_mode = 0
+text = "Return"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[editable path="SubtitleHolder/PositionLerper"]
