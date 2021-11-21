@@ -24,7 +24,7 @@ angle = 720.0
 angle_random = 1.0
 anim_speed = 1.0
 
-[node name="CrateMetal" instance=ExtResource( 1 )]
+[node name="SmallCrateMetal" instance=ExtResource( 1 )]
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )

@@ -61,7 +61,7 @@ namespace Inversion
         public override void _PhysicsProcess(float delta)
         {
             var spaceState = GetWorld2d().DirectSpaceState;
-            shapeQueryParams.Transform = new Transform2D(0, GlobalPosition + collisionShape.Position);
+            shapeQueryParams.Transform = new Transform2D(GlobalRotation, GlobalPosition + collisionShape.Position);
             var results = spaceState.IntersectShape(shapeQueryParams);
 
             var newElemOverlaps = new Dictionary<Element, bool>(emptyElementOverlaps);

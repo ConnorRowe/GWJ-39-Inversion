@@ -141,15 +141,19 @@ position = Vector2( 399, 432 )
 
 [node name="CrateMetal" parent="." index="25" instance=ExtResource( 6 )]
 position = Vector2( 260, 392 )
+physics_material_override = null
 
 [node name="CrateMetal2" parent="." index="26" instance=ExtResource( 6 )]
 position = Vector2( 299, 392 )
+physics_material_override = null
 
 [node name="CrateMetal3" parent="." index="27" instance=ExtResource( 6 )]
 position = Vector2( 380, 392 )
+physics_material_override = null
 
 [node name="CrateMetal4" parent="." index="28" instance=ExtResource( 6 )]
 position = Vector2( 419, 392 )
+physics_material_override = null
 
 [node name="WireBranch" parent="." index="29" instance=ExtResource( 7 )]
 position = Vector2( 325, 320 )
