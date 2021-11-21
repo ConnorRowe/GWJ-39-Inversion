@@ -365,15 +365,17 @@ namespace Inversion
             if (!canInvert || orbState == OrbState.Active)
                 return;
 
+            InversionOrb.GlobalPosition = lightBase.GlobalPosition;
             canInvert = false;
             orbState = OrbState.Active;
             ActivateOrb();
-            InversionOrb.GlobalPosition = lightBase.GlobalPosition;
             tween.Stop(InversionOrb.BaseSprite, "scale");
             tween.Stop(lightBase, "modulate");
             tween.InterpolateProperty(InversionOrb.BaseSprite, "scale", Vector2.Zero, Vector2.One, 1f, Tween.TransitionType.Cubic, Tween.EaseType.Out);
             tween.InterpolateProperty(lightBase, "modulate", lightBase.Modulate, Colors.Transparent, .5f, Tween.TransitionType.Quad);
             tween.Start();
+
+            InversionOrb.KinematicCollisionShape.Disabled = false;
         }
 
         private void SpawnOrbReleased()
@@ -391,6 +393,8 @@ namespace Inversion
             tween.InterpolateProperty(InversionOrb.BaseSprite, "scale", InversionOrb.Scale, Vector2.Zero, .5f, Tween.TransitionType.Cubic, Tween.EaseType.In);
             tween.InterpolateProperty(lightBase, "modulate", lightBase.Modulate, Colors.White, 1f, Tween.TransitionType.Quad, delay: .5f);
             tween.Start();
+
+            InversionOrb.KinematicCollisionShape.Disabled = true;
 
             GetTree().CreateTimer(1.5f).Connect("timeout", this, nameof(ResetCanInvert));
             GetTree().CreateTimer(.5f).Connect("timeout", this, nameof(ActivateOrb), new Godot.Collections.Array(false));

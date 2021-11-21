@@ -14,6 +14,7 @@ namespace Inversion
 
         public bool Active { get; set; } = false;
         public Sprite BaseSprite { get; set; }
+        public CollisionShape2D KinematicCollisionShape { get; set; }
         private float speed = 0f;
         private List<IInvertable> overlappedInvertables = new List<IInvertable>();
         private Sprite glow;
@@ -34,6 +35,7 @@ namespace Inversion
             tonePlayer = GetNode<AudioStreamPlayer>("TonePlayer");
             overlapPlayer = GetNode<AudioStreamPlayer>("OverlapPlayer");
             endPlayer = GetNode<AudioStreamPlayer>("EndPlayer");
+            KinematicCollisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
         }
 
         public override void _Process(float delta)

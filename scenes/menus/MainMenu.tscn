@@ -1,22 +1,92 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/menus/MainMenu.cs" type="Script" id=1]
 [ext_resource path="res://font/large_dynamicfont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/RotationLerper.tscn" type="PackedScene" id=3]
 [ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/PositionLerper.tscn" type="PackedScene" id=5]
+[ext_resource path="res://textures/logo-nobg-1x.png" type="Texture" id=6]
+[ext_resource path="res://scenes/Flames.tscn" type="PackedScene" id=7]
+[ext_resource path="res://textures/flame.png" type="Texture" id=8]
+
+[sub_resource type="Gradient" id=15]
+offsets = PoolRealArray( 0, 0.0355556, 0.0733333, 0.502222, 0.842222, 0.882222, 1 )
+colors = PoolColorArray( 0.309804, 0.643137, 0.721569, 0, 0.960784, 1, 0.909804, 1, 1, 0.933333, 0.513726, 1, 1, 0.537255, 0.2, 1, 0.9, 0.06, 0, 1, 0.901961, 0.270588, 0.223529, 0.682353, 0.901961, 0.270588, 0.223529, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 15 )
+width = 100
+
+[sub_resource type="Curve" id=7]
+max_value = 1.1
+_data = [ Vector2( 0, 0.823864 ), 0.0, 0.0, 0, 0, Vector2( 0.0486258, 1.1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.814773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+resource_local_to_scene = true
+lifetime_randomness = 0.3
+emission_shape = 2
+emission_box_extents = Vector3( 80, 20, 0 )
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 31.1
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.64
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.28
+damping = 2.44
+scale_random = 0.71
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=16]
+offsets = PoolRealArray( 0, 0.0355556, 0.0733333, 0.502222, 0.842222, 0.882222 )
+colors = PoolColorArray( 0.909804, 0.992157, 1, 0, 0.909804, 0.992157, 1, 1, 0.686275, 0.976471, 1, 1, 0, 0.521569, 0.901961, 1, 0, 0.521569, 0.901961, 0.670588, 0, 0.521569, 0.901961, 0 )
+
+[sub_resource type="GradientTexture" id=17]
+gradient = SubResource( 16 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=18]
+resource_local_to_scene = true
+lifetime_randomness = 0.3
+emission_shape = 2
+emission_box_extents = Vector3( 80, 20, 0 )
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 31.1
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 10.64
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.28
+scale_random = 0.71
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 17 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.784314, 0.831373, 0.364706, 1 )
 border_width_bottom = 6
 border_color = Color( 0.388235, 0.670588, 0.247059, 1 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.411765, 0.141176, 0.392157, 1 )
 border_width_top = 6
 border_color = Color( 0, 0, 0, 0 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.25098, 0.286275, 0.45098, 1 )
 border_width_bottom = 6
 border_color = Color( 0.172549, 0.207843, 0.301961, 1 )
@@ -26,12 +96,12 @@ bg_color = Color( 0.901961, 0.270588, 0.223529, 1 )
 border_width_bottom = 6
 border_color = Color( 0.678431, 0.184314, 0.270588, 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.388235, 0.670588, 0.247059, 1 )
 border_width_bottom = 6
 border_color = Color( 0.231373, 0.490196, 0.309804, 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0.811765, 0.458824, 0.168627, 1 )
 border_width_top = 6
 border_color = Color( 0, 0, 0, 0 )
@@ -61,23 +131,37 @@ __meta__ = {
 }
 
 [node name="TitleHolder" type="Node2D" parent="."]
-position = Vector2( 326, 40 )
+position = Vector2( 326, 81 )
 
-[node name="Title" type="Label" parent="TitleHolder"]
-margin_left = -72.0
-margin_top = -13.0
-margin_right = 73.0
-margin_bottom = 13.0
-custom_fonts/font = ExtResource( 2 )
-text = "Logo goes here"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Flames" parent="TitleHolder" instance=ExtResource( 7 )]
+position = Vector2( -48, -26 )
+process_material = SubResource( 10 )
+
+[node name="Water" type="Particles2D" parent="TitleHolder"]
+material = SubResource( 1 )
+position = Vector2( 54, 27 )
+rotation = -0.130541
+amount = 32
+lifetime = 1.8
+explosiveness = 0.1
+local_coords = false
+draw_order = 1
+process_material = SubResource( 18 )
+texture = ExtResource( 8 )
 
 [node name="RotationLerper" parent="TitleHolder" instance=ExtResource( 3 )]
 Speed = 0.2
 AngleSpread = 10.0
+
+[node name="TextureRect" type="TextureRect" parent="TitleHolder"]
+margin_left = -128.0
+margin_top = -72.0
+margin_right = 128.0
+margin_bottom = 72.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SubtitleHolder" type="Node2D" parent="."]
 modulate = Color( 0.294118, 0.113725, 0.321569, 1 )
@@ -89,7 +173,7 @@ margin_top = -13.0
 margin_right = 73.0
 margin_bottom = 13.0
 custom_fonts/font = ExtResource( 4 )
-text = "made by Connor Magson
+text = "made by Connor Magson in 9 days
 for the 39th Godot Wild Jam"
 align = 1
 __meta__ = {
@@ -118,8 +202,8 @@ rect_min_size = Vector2( 64, 48 )
 focus_mode = 0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/disabled = SubResource( 8 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/disabled = SubResource( 12 )
 custom_styles/normal = SubResource( 9 )
 enabled_focus_mode = 0
 text = "Play"
@@ -135,8 +219,8 @@ margin_bottom = 279.0
 rect_min_size = Vector2( 64, 32 )
 focus_mode = 0
 custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 14 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 enabled_focus_mode = 0
@@ -153,8 +237,8 @@ margin_bottom = 329.0
 rect_min_size = Vector2( 64, 32 )
 focus_mode = 0
 custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 14 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 enabled_focus_mode = 0
