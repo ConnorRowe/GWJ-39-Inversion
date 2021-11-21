@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/levels/Base/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
@@ -7,6 +7,13 @@
 [ext_resource path="res://font/large_dynamicfont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/RotationLerper.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Settings.tscn" type="PackedScene" id=7]
+[ext_resource path="res://font/retganon.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=12]
+size = 32
+outline_size = 1
+outline_color = Color( 0.105882, 0.121569, 0.129412, 1 )
+font_data = ExtResource( 8 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0784314, 0.0941176, 0.180392, 0.917647 )
@@ -101,6 +108,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LabelNameParent" type="Node2D" parent="UILayer"]
+position = Vector2( 320, 25 )
+
+[node name="LevelName" type="Label" parent="UILayer/LabelNameParent"]
+margin_left = -57.0
+margin_top = -14.0
+margin_right = 57.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.294118, 0.113725, 0.321569, 1 )
+custom_fonts/font = SubResource( 12 )
+text = "Level Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RotationLerper" parent="UILayer/LabelNameParent" instance=ExtResource( 6 )]
+Speed = 0.5
+AngleSpread = 10.0
+
 [node name="YouDied" type="Node2D" parent="UILayer"]
 visible = false
 modulate = Color( 1, 1, 1, 0 )
@@ -142,7 +168,6 @@ __meta__ = {
 
 [node name="PausePopup" type="PopupPanel" parent="UILayer"]
 pause_mode = 2
-visible = true
 margin_right = 8.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 640, 360 )

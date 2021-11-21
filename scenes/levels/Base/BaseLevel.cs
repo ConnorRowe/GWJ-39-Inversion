@@ -17,9 +17,12 @@ namespace Inversion
         private bool playerDead = false;
         private bool canRespawn = false;
         private bool paused = false;
+        private Tween tween;
 
         public override void _Ready()
         {
+            tween = GetNode<Tween>("Tween");
+
             // Spawn player
             var startPos = GetNode<Node2D>(playerStartPosition);
             Player = GD.Load<PackedScene>("res://scenes/Player.tscn").Instance<Player>();
@@ -41,6 +44,19 @@ namespace Inversion
             exit.Connect("pressed", this, nameof(Exit));
             unpauseBtn.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
             exit.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
+
+            var levelNameParent = GetNode<Node2D>("UILayer/LabelNameParent");
+            var levelNameLabel = GetNode<Label>("UILayer/LabelNameParent/LevelName");
+
+            levelNameLabel.Text = LevelName;
+            levelNameParent.Visible = true;
+            CallDeferred(nameof(UpdateLevelNamePos));
+
+            tween.InterpolateProperty(levelNameParent, "scale", Vector2.Zero, Vector2.One, .6f, Tween.TransitionType.Bounce);
+            tween.InterpolateProperty(levelNameParent, "scale", Vector2.One, Vector2.Zero, .6f, Tween.TransitionType.Cubic, Tween.EaseType.In, 6f);
+            tween.Start();
+
+            GetTree().CreateTimer(6.6f).Connect("timeout", levelNameParent, "set", new Godot.Collections.Array("visible", false));
         }
 
         public override void _Input(InputEvent evt)
@@ -63,7 +79,6 @@ namespace Inversion
             Player.IsFrozen = true;
 
             // Show dead UI
-            var tween = GetNode<Tween>("Tween");
             var bg = GetNode<ColorRect>("UILayer/DeadColorRect");
             var youDied = GetNode<Node2D>("UILayer/YouDied");
             var deathCount = GetNode<Label>("UILayer/DeathCount");
@@ -124,6 +139,12 @@ namespace Inversion
             GetNode<Settings>("UILayer/PausePopup/Control/PanelContainer/Settings").SaveSettings();
 
             GetTree().ChangeSceneTo(GD.Load<PackedScene>("res://scenes/menus/MainMenu.tscn"));
+        }
+
+        private void UpdateLevelNamePos()
+        {
+            var levelNameLabel = GetNode<Label>("UILayer/LabelNameParent/LevelName");
+            levelNameLabel.RectPosition = -levelNameLabel.RectSize / 2f;
         }
     }
 }

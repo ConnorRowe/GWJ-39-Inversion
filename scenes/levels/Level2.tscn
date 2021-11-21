@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/levels/Level3.tscn" type="PackedScene" id=5]
 
 [node name="Level2" instance=ExtResource( 4 )]
-LevelName = "Squirter Tutorial"
+LevelName = "Inversion Tutorial pt.2"
 nextLevel = ExtResource( 5 )
 
 [node name="PlayerStartPos" parent="." index="1"]
