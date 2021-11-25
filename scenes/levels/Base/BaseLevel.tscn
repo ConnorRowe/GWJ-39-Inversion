@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/levels/Base/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
@@ -8,6 +8,38 @@
 [ext_resource path="res://scenes/RotationLerper.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Settings.tscn" type="PackedScene" id=7]
 [ext_resource path="res://font/retganon.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://scenes/VirtualJoystick.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/PlatformSpecific.tscn" type="PackedScene" id=10]
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.388235, 0.670588, 0.247059, 1 )
+border_width_bottom = 6
+border_color = Color( 0.231373, 0.490196, 0.309804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.811765, 0.458824, 0.168627, 1 )
+border_width_top = 6
+border_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.25098, 0.286275, 0.45098, 1 )
+border_width_bottom = 6
+border_color = Color( 0.172549, 0.207843, 0.301961, 1 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.231373, 0.490196, 0.309804, 1 )
+border_width_bottom = 6
+border_color = Color( 0.184314, 0.341176, 0.32549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.411765, 0.141176, 0.392157, 1 )
+border_width_top = 6
+border_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.901961, 0.270588, 0.223529, 1 )
+border_width_bottom = 6
+border_color = Color( 0.678431, 0.184314, 0.270588, 1 )
 
 [sub_resource type="DynamicFont" id=12]
 size = 32
@@ -23,20 +55,10 @@ bg_color = Color( 0.784314, 0.831373, 0.364706, 1 )
 border_width_bottom = 6
 border_color = Color( 0.388235, 0.670588, 0.247059, 1 )
 
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.411765, 0.141176, 0.392157, 1 )
-border_width_top = 6
-border_color = Color( 0, 0, 0, 0 )
-
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.25098, 0.286275, 0.45098, 1 )
 border_width_bottom = 6
 border_color = Color( 0.172549, 0.207843, 0.301961, 1 )
-
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0.901961, 0.270588, 0.223529, 1 )
-border_width_bottom = 6
-border_color = Color( 0.678431, 0.184314, 0.270588, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.388235, 0.670588, 0.247059, 1 )
@@ -97,6 +119,50 @@ text = "debug"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PauseButton" type="Button" parent="UILayer"]
+pause_mode = 2
+margin_left = 607.0
+margin_right = 640.0
+margin_bottom = 34.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 14 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "P "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="PlatformSpecific" parent="UILayer/PauseButton" instance=ExtResource( 10 )]
+IsMobileOnly = true
+
+[node name="ResetButton" type="Button" parent="UILayer"]
+pause_mode = 2
+margin_right = 33.0
+margin_bottom = 34.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 9 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "R"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="PlatformSpecific" parent="UILayer/ResetButton" instance=ExtResource( 10 )]
+IsMobileOnly = true
 
 [node name="DeadColorRect" type="ColorRect" parent="UILayer"]
 visible = false
@@ -264,6 +330,20 @@ __meta__ = {
 [node name="RotationLerper" parent="UILayer/PausePopup/Control/TitleHolder" instance=ExtResource( 6 )]
 Speed = 0.2
 AngleSpread = 10.0
+
+[node name="MoveJoystick" parent="UILayer" instance=ExtResource( 9 )]
+position = Vector2( 78, 256 )
+XRange = Vector2( 0, 320 )
+
+[node name="PlatformSpecific" parent="UILayer/MoveJoystick" instance=ExtResource( 10 )]
+IsMobileOnly = true
+
+[node name="OrbJoystick" parent="UILayer" instance=ExtResource( 9 )]
+position = Vector2( 540, 257 )
+XRange = Vector2( 320, 640 )
+
+[node name="PlatformSpecific" parent="UILayer/OrbJoystick" instance=ExtResource( 10 )]
+IsMobileOnly = true
 
 [node name="InversionOrb" parent="." instance=ExtResource( 2 )]
 visible = false

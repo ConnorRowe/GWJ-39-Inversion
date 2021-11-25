@@ -14,6 +14,10 @@ namespace Inversion
             GetNode("Play").Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
             GetNode("Controls").Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
             GetNode("Settings").Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
+
+            Globals.HasTouchscreen = OS.HasTouchscreenUiHint();
+
+            Globals.UpdateDiscordActivityMenu();
         }
     }
 }

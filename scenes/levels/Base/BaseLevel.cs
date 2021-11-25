@@ -14,6 +14,8 @@ namespace Inversion
         private PackedScene nextLevel;
 
         public Player Player { get; set; }
+        public VirtualJoystick MoveStick { get; set; }
+        public VirtualJoystick OrbStick { get; set; }
         private bool playerDead = false;
         private bool canRespawn = false;
         private bool paused = false;
@@ -22,20 +24,6 @@ namespace Inversion
         public override void _Ready()
         {
             tween = GetNode<Tween>("Tween");
-
-            // Spawn player
-            var startPos = GetNode<Node2D>(playerStartPosition);
-            Player = GD.Load<PackedScene>("res://scenes/Player.tscn").Instance<Player>();
-            AddChild(Player);
-            Player.Position = startPos.Position;
-            Player.InversionOrb = GetNode<InversionOrb>("InversionOrb");
-
-            Player.Connect(nameof(Player.PlayerDied), this, nameof(PlayerDied));
-            var camera = Player.GetNode<Camera2D>("Camera2D");
-            camera.LimitLeft = (int)levelBounds.Position.x;
-            camera.LimitRight = (int)levelBounds.Position.y;
-            camera.LimitTop = (int)levelBounds.Size.x;
-            camera.LimitBottom = (int)levelBounds.Size.y;
 
             var unpauseBtn = GetNode<Button>("UILayer/PausePopup/Control/Unpause");
             var exit = GetNode<Button>("UILayer/PausePopup/Control/Exit");
@@ -57,11 +45,40 @@ namespace Inversion
             tween.Start();
 
             GetTree().CreateTimer(6.6f).Connect("timeout", levelNameParent, "set", new Godot.Collections.Array("visible", false));
+
+            MoveStick = GetNode<VirtualJoystick>("UILayer/MoveJoystick");
+            OrbStick = GetNode<VirtualJoystick>("UILayer/OrbJoystick");
+            var pauseBtn = GetNode<Button>("UILayer/PauseButton");
+            var resetBtn = GetNode<Button>("UILayer/ResetButton");
+
+            // Spawn player
+            var startPos = GetNode<Node2D>(playerStartPosition);
+            Player = GD.Load<PackedScene>("res://scenes/Player.tscn").Instance<Player>();
+            AddChild(Player);
+            Player.Position = startPos.Position;
+            Player.InversionOrb = GetNode<InversionOrb>("InversionOrb");
+
+            Player.Connect(nameof(Player.PlayerDied), this, nameof(PlayerDied));
+            var camera = Player.GetNode<Camera2D>("Camera2D");
+            camera.LimitLeft = (int)levelBounds.Position.x;
+            camera.LimitRight = (int)levelBounds.Position.y;
+            camera.LimitTop = (int)levelBounds.Size.x;
+            camera.LimitBottom = (int)levelBounds.Size.y;
+
+            if (Globals.HasTouchscreen)
+            {
+                pauseBtn.Connect("pressed", this, nameof(Pause));
+                resetBtn.Connect("pressed", Player, "KillPlayer");
+
+                GetNode<Label>("UILayer/YouDied/Label").Text = "You Died.\n\nTap the screen to respawn.";
+            }
+
+            Globals.UpdateDiscordActivityLevel(LevelName);
         }
 
         public override void _Input(InputEvent evt)
         {
-            if (canRespawn && playerDead && evt.IsActionReleased("g_respawn"))
+            if (canRespawn && playerDead && (evt.IsActionReleased("g_respawn") || evt is InputEventScreenTouch est && !est.Pressed))
             {
                 RestartLevel();
             }

@@ -16,6 +16,18 @@ namespace Inversion
             uiClickPlayer = GetNode<AudioStreamPlayer>("UIClickPlayer");
 
             singleton = this;
+
+            Globals.CanRunDiscord = OS.GetName() == "Windows";
+
+            Globals.InitDiscord();
+        }
+
+        public override void _Process(float delta)
+        {
+            base._Process(delta);
+
+            if (Globals.CanRunDiscord)
+                Globals.discord.RunCallbacks();
         }
 
         public override void _Input(InputEvent evt)

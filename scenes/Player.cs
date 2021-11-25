@@ -51,6 +51,7 @@ namespace Inversion
         private bool inAirLastFrame = false;
         private bool dead = false;
         private float maxY = 999999;
+        private BaseLevel currentLevel;
 
         public override void _Ready()
         {
@@ -67,6 +68,7 @@ namespace Inversion
             slidePlayer = GetNode<AudioStreamPlayer>("SlidePlayer");
             jumpPlayer = GetNode<AudioStreamPlayer>("JumpPlayer");
             jumpEffect = GetNode<AnimatedSprite>("JumpEffect");
+            currentLevel = ((BaseLevel)GetTree().CurrentScene);
 
             charSprite.Connect("frame_changed", this, nameof(FrameChanged));
 
@@ -75,7 +77,10 @@ namespace Inversion
             var playerMat = (ShaderMaterial)charSprite.Material;
             playerMat.SetShaderParam("override_percent", 0f);
 
-            maxY = ((BaseLevel)GetTree().CurrentScene).levelBounds.Position.y;
+            maxY = currentLevel.levelBounds.Position.y;
+
+            currentLevel.OrbStick.Connect(nameof(VirtualJoystick.Pressed), this, nameof(SpawnOrbPressed));
+            currentLevel.OrbStick.Connect(nameof(VirtualJoystick.Released), this, nameof(SpawnOrbReleased));
         }
 
         public override void _Input(InputEvent evt)
@@ -205,13 +210,7 @@ namespace Inversion
 
             if (IsOnFloor())
             {
-                inputDir = 0;
-
-                if (Input.IsActionPressed("g_move_left"))
-                    inputDir--;
-
-                if (Input.IsActionPressed("g_move_right"))
-                    inputDir++;
+                inputDir = GetMoveInput();
 
                 // Sprite rotation stuff
                 var floorNormal = GetFloorNormal();
@@ -219,21 +218,14 @@ namespace Inversion
             }
             else if (Input.IsActionPressed("g_move_left") || Input.IsActionPressed("g_move_right"))
             {
-                float newDir = 0;
-
-                if (Input.IsActionPressed("g_move_left"))
-                    newDir--;
-
-                if (Input.IsActionPressed("g_move_right"))
-                    newDir++;
-
+                float newDir = GetMoveInput();
 
                 inputDir = Mathf.Lerp(inputDir, newDir, delta * 4f);
 
                 charSprite.Rotation = 0f;
             }
 
-            if (Input.IsActionJustPressed("g_jump") && canJump)
+            if (((Globals.HasTouchscreen && currentLevel.MoveStick.GetAxis().y < -.65f) || Input.IsActionJustPressed("g_jump")) && canJump)
             {
                 // Jump
                 gravity = -JumpForce;
@@ -437,6 +429,33 @@ namespace Inversion
             newJumpEffect.Play("default");
 
             GetTree().CreateTimer(0.83334f).Connect("timeout", newJumpEffect, "queue_free");
+        }
+
+        private float GetMoveInput()
+        {
+            float input = 0f;
+
+            if (Globals.HasTouchscreen)
+            {
+                if (currentLevel.MoveStick.GetAxis().x > 0f)
+                {
+                    input = 1f;
+                }
+                else if (currentLevel.MoveStick.GetAxis().x < 0f)
+                {
+                    input = -1f;
+                }
+            }
+            else
+            {
+                if (Input.IsActionPressed("g_move_left"))
+                    input--;
+
+                if (Input.IsActionPressed("g_move_right"))
+                    input++;
+            }
+
+            return input;
         }
     }
 }

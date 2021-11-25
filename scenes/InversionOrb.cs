@@ -24,6 +24,7 @@ namespace Inversion
         private AudioStreamPlayer tonePlayer;
         private AudioStreamPlayer overlapPlayer;
         private AudioStreamPlayer endPlayer;
+        private VirtualJoystick joystick;
 
         public override void _Ready()
         {
@@ -36,6 +37,8 @@ namespace Inversion
             overlapPlayer = GetNode<AudioStreamPlayer>("OverlapPlayer");
             endPlayer = GetNode<AudioStreamPlayer>("EndPlayer");
             KinematicCollisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+            if (Globals.HasTouchscreen)
+                joystick = ((BaseLevel)GetTree().CurrentScene).GetNode<VirtualJoystick>("UILayer/OrbJoystick");
         }
 
         public override void _Process(float delta)
@@ -67,20 +70,23 @@ namespace Inversion
             float moveDelta = 0f;
             Vector2 lastPos = Position;
 
-            if (Mathf.Abs(mousePos.x) > 1f || Mathf.Abs(mousePos.y) > 1f)
+            if (Globals.HasTouchscreen || Mathf.Abs(mousePos.x) > 1f || Mathf.Abs(mousePos.y) > 1f)
             {
                 if (speed < MaxSpeed)
                     speed += Acceleration * delta;
                 else if (speed > MaxSpeed)
                     speed = MaxSpeed;
 
-                float mouseDist = mousePos.Length();
-                if (mouseDist < 24f)
+                if (!Globals.HasTouchscreen)
                 {
-                    speed *= .85f;
+                    float mouseDist = mousePos.Length();
+                    if (mouseDist < 24f)
+                    {
+                        speed *= .85f;
+                    }
                 }
 
-                var collision = MoveAndCollide((mousePos.Normalized()) * speed * delta, infiniteInertia: false);
+                var collision = MoveAndCollide((Globals.HasTouchscreen ? (joystick.GetAxis() * .6f) : (mousePos.Normalized())) * speed * delta, infiniteInertia: false);
                 moveDelta = (lastPos - Position).Length();
             }
             else

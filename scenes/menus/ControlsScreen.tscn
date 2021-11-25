@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://font/title_dynamicfont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://font/large_dynamicfont.tres" type="DynamicFont" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/menus/ControlsScreen.cs" type="Script" id=4]
 [ext_resource path="res://font/small_dynamicfont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/PositionLerper.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/PlatformSpecific.tscn" type="PackedScene" id=7]
+[ext_resource path="res://textures/joystick_icon.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 16.0
@@ -48,7 +50,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="MouseKBControlsPanel" type="PanelContainer" parent="."]
 margin_left = 38.0
 margin_top = 90.0
 margin_right = 609.0
@@ -59,14 +61,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="MouseKBControlsPanel"]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 555.0
 margin_bottom = 184.0
 dragger_visibility = 2
 
-[node name="Label" type="Label" parent="PanelContainer/HSplitContainer"]
+[node name="Label" type="Label" parent="MouseKBControlsPanel/HSplitContainer"]
 margin_right = 269.0
 margin_bottom = 168.0
 size_flags_horizontal = 3
@@ -79,7 +81,7 @@ Space or W - Jump
 Left Mouse - Spawn Orb
 "
 
-[node name="Label2" type="Label" parent="PanelContainer/HSplitContainer"]
+[node name="Label2" type="Label" parent="MouseKBControlsPanel/HSplitContainer"]
 margin_left = 269.0
 margin_right = 539.0
 margin_bottom = 168.0
@@ -90,6 +92,61 @@ custom_fonts/font = ExtResource( 2 )
 text = "R - Reset level
 Escape or P - Pause
 F11 - Toggle fullscreen"
+
+[node name="PlatformSpecific" parent="MouseKBControlsPanel" instance=ExtResource( 7 )]
+
+[node name="TouchControlsPanel" type="PanelContainer" parent="."]
+margin_left = 38.0
+margin_top = 90.0
+margin_right = 609.0
+margin_bottom = 264.0
+rect_min_size = Vector2( 571, 174 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TouchControlsPanel"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 555.0
+margin_bottom = 158.0
+dragger_visibility = 2
+
+[node name="Label" type="Label" parent="TouchControlsPanel/HSplitContainer"]
+margin_right = 272.0
+margin_bottom = 142.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_constants/line_spacing = 7
+custom_fonts/font = ExtResource( 2 )
+text = "Left    - move and jump.
+Right    - spawn and move
+             inversion orb."
+
+[node name="joystick" type="Sprite" parent="TouchControlsPanel/HSplitContainer/Label"]
+position = Vector2( 61, 15 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 8 )
+
+[node name="joystick2" type="Sprite" parent="TouchControlsPanel/HSplitContainer/Label"]
+position = Vector2( 68, 48 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 8 )
+
+[node name="Label2" type="Label" parent="TouchControlsPanel/HSplitContainer"]
+margin_left = 272.0
+margin_right = 539.0
+margin_bottom = 142.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_constants/line_spacing = 7
+custom_fonts/font = ExtResource( 2 )
+text = "  R button - reset level.
+  P button - pause."
+
+[node name="PlatformSpecific" parent="TouchControlsPanel" instance=ExtResource( 7 )]
+IsMobileOnly = true
 
 [node name="TitleHolder" type="Node2D" parent="."]
 position = Vector2( 326, 40 )
