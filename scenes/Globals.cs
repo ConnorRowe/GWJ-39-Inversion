@@ -104,6 +104,7 @@ namespace Inversion
 
             timestamps.Start = (long)OS.GetUnixTime();
             baseActivity.State = state;
+            baseActivity.Timestamps = timestamps;
 
             discord.GetActivityManager().UpdateActivity(baseActivity, DiscordActivityUpdateCallback);
         }

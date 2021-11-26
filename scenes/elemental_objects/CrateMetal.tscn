@@ -30,7 +30,6 @@ angle_random = 1.0
 anim_speed = 1.0
 
 [node name="CrateMetal" type="RigidBody2D"]
-collision_layer = 9
 mass = 2.2
 physics_material_override = SubResource( 12 )
 can_sleep = false
