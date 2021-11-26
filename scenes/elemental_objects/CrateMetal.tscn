@@ -34,6 +34,7 @@ collision_layer = 9
 mass = 2.2
 physics_material_override = SubResource( 12 )
 can_sleep = false
+angular_damp = 2.0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

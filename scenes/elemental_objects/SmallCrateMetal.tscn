@@ -25,6 +25,7 @@ angle_random = 1.0
 anim_speed = 1.0
 
 [node name="SmallCrateMetal" instance=ExtResource( 1 )]
+angular_damp = 1.5
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
