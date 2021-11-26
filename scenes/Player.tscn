@@ -95,7 +95,7 @@ anim_speed = 1.0
 
 [sub_resource type="AudioStreamRandomPitch" id=16]
 audio_stream = ExtResource( 9 )
-random_pitch = 1.5
+random_pitch = 1.6
 
 [sub_resource type="AudioStreamRandomPitch" id=17]
 audio_stream = ExtResource( 11 )
@@ -207,7 +207,7 @@ texture = ExtResource( 8 )
 
 [node name="FootstepPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 16 )
-volume_db = 3.0
+volume_db = -3.5
 bus = "SFX"
 
 [node name="JumpPlayer" type="AudioStreamPlayer" parent="."]

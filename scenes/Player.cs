@@ -404,7 +404,7 @@ namespace Inversion
 
         private void FrameChanged()
         {
-            if ((charSprite.Frame == 1 || charSprite.Frame == 4) && IsOnFloor())
+            if ((charSprite.Frame == 1 || charSprite.Frame == 5) && IsOnFloor())
             {
                 footstepPlayer.Play();
             }
