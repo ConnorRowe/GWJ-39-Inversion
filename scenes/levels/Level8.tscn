@@ -23,7 +23,7 @@ position = Vector2( 153, 97 )
 rotation = 0.20143
 
 [node name="CrateMetal3" parent="." index="8" instance=ExtResource( 2 )]
-position = Vector2( 358, 102 )
+position = Vector2( 290, 99 )
 
 [node name="CrateMetal2" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 74, 100 )

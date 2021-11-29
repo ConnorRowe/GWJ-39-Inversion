@@ -47,14 +47,10 @@ namespace Inversion
             PowerChanged();
         }
 
-        private void ElementStarted(Element element, Node source)
+        private void ElementStarted(Element element)
         {
-            if (element == Element.Lightning && source != null)
+            if (element == Element.Lightning)
             {
-                GD.Print($"{source.Name}");
-
-                reactionHandler.LightningSource = (IHasElementalArea)source;
-
                 hasElementalPower = true;
 
                 PowerChanged();
@@ -107,16 +103,6 @@ namespace Inversion
         public bool IsDisabled()
         {
             return !(hasWirePower || hasElementalPower);
-        }
-
-        public bool IsSource()
-        {
-            return false;
-        }
-        
-        public IHasElementalArea GetSource()
-        {
-            return reactionHandler.LightningSource;
         }
     }
 }

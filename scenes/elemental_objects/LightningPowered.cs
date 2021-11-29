@@ -49,12 +49,10 @@ namespace Inversion
             isLightningPowered = false;
         }
 
-        private void ElementStarted(Element element, Node source)
+        private void ElementStarted(Element element)
         {
             if (element == Element.Lightning)
             {
-                reactionHandler.LightningSource = (IHasElementalArea)source;
-
                 LightningPower();
             }
         }

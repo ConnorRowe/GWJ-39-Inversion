@@ -44,7 +44,7 @@ texture = ExtResource( 1 )
 
 [node name="ReactionHandler" parent="." instance=ExtResource( 3 )]
 collisionShapePath = NodePath("../LightningArea/CollisionShape2D")
-NeedsSource = true
+trackMetallics = true
 
 [node name="LightningArea" type="Area2D" parent="."]
 collision_layer = 4

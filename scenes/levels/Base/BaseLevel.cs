@@ -21,9 +21,13 @@ namespace Inversion
         private bool paused = false;
         private Tween tween;
 
+        public Label Debug { get; set; }
+
         public override void _Ready()
         {
             tween = GetNode<Tween>("Tween");
+
+            Debug = GetNode<Label>("UILayer/debug");
 
             var unpauseBtn = GetNode<Button>("UILayer/PausePopup/Control/Unpause");
             var exit = GetNode<Button>("UILayer/PausePopup/Control/Exit");

@@ -3,7 +3,7 @@ using Godot;
 namespace Inversion
 {
     // [Tool]
-    public class MetalBar : Node2D, IHasElementalArea
+    public class MetalBar : Node2D, IHasElementalArea, IMetallic
     {
         private CollisionShape2D staticCollisionRect;
         private CollisionShape2D elemCollisionRect;
@@ -21,19 +21,11 @@ namespace Inversion
             sparks = GetNode<Particles2D>("Sparks");
             sprite = GetNode<Sprite>("Sprite");
             reactionHandler = GetNode<ReactionHandler>("ReactionHandler");
-            reactionHandler.Connect(nameof(ReactionHandler.ElementStarted), this, nameof(ElementStarted));
-            reactionHandler.Connect(nameof(ReactionHandler.ElementEnded), this, nameof(ElementEnded));
         }
 
         public override void _Process(float delta)
         {
             base._Process(delta);
-
-            if (reactionHandler.LightningSource == null || (reactionHandler.LightningSource != null && reactionHandler.LightningSource.IsDisabled()))
-            {
-                isCharged = false;
-                sparks.Emitting = false;
-            }
         }
 
         public override void _Draw()
@@ -42,7 +34,7 @@ namespace Inversion
             sprite.RegionRect = new Rect2(Vector2.Zero, extents * 2);
             var sparksMat = (ParticlesMaterial)sparks.ProcessMaterial;
             sparksMat.EmissionShape = ParticlesMaterial.EmissionShapeEnum.Box;
-            sparksMat.EmissionBoxExtents = new Vector3(extents.x*1.5f, extents.y*1.5f, 0);
+            sparksMat.EmissionBoxExtents = new Vector3(extents.x + 4, extents.y + 4, 0);
             sparks.Amount = Mathf.FloorToInt((extents.x * extents.y) / 30f);
         }
 
@@ -56,36 +48,26 @@ namespace Inversion
             return !isCharged;
         }
 
-        private void ElementStarted(Element element, Node source)
+        public void Power()
         {
-            if (element == Element.Lightning && source != null)
-            {
-                reactionHandler.LightningSource = (IHasElementalArea)source;
+            if (isCharged)
+                return;
 
-                isCharged = true;
-                sparks.Emitting = true;
+            isCharged = true;
+            sparks.Emitting = true;
 
-                GlobalNodes.Singleton.MakeBzztSound();
-            }
+            GlobalNodes.Singleton.MakeBzztSound();
         }
 
-        private void ElementEnded(Element element)
+        public void UnPower()
         {
-            if (element == Element.Lightning)
-            {
-                isCharged = false;
-                sparks.Emitting = false;
-            }
+            isCharged = false;
+            sparks.Emitting = false;
         }
 
-        public bool IsSource()
+        public System.Collections.Generic.HashSet<IMetallic> GetNearbyMetallics()
         {
-            return false;
-        }
-
-        public IHasElementalArea GetSource()
-        {
-            return reactionHandler.LightningSource;
+            return reactionHandler.NearbyMetallics;
         }
     }
 }

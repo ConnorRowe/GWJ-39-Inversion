@@ -65,7 +65,7 @@ process_material = SubResource( 2 )
 
 [node name="ReactionHandler" parent="." instance=ExtResource( 4 )]
 collisionShapePath = NodePath("../LightningArea/CollisionRect")
-NeedsSource = true
+trackMetallics = true
 
 [node name="VisibilityEnabler2D" parent="ReactionHandler" index="0"]
 scale = Vector2( 1, 11.8 )

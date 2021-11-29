@@ -2,22 +2,22 @@ using Godot;
 
 namespace Inversion
 {
-    public class CrateMetal : RigidBody2D, IHasElementalArea
+    public class CrateMetal : RigidBody2D, IHasElementalArea, IMetallic
     {
         private bool isCharged = false;
         private Particles2D sparks;
         private Vector2 startPosition;
         private float maxY = 999999;
         private ReactionHandler reactionHandler;
+        private BaseLevel level;
 
         public override void _Ready()
         {
             sparks = GetNode<Particles2D>("Sparks");
             reactionHandler = GetNode<ReactionHandler>("ReactionHandler");
-            reactionHandler.Connect(nameof(ReactionHandler.ElementStarted), this, nameof(ElementStarted));
-            reactionHandler.Connect(nameof(ReactionHandler.ElementEnded), this, nameof(ElementEnded));
             startPosition = GlobalPosition;
             maxY = ((BaseLevel)GetTree().CurrentScene).levelBounds.Position.y;
+            level = (BaseLevel)GetTree().CurrentScene;
         }
 
         public override void _Process(float delta)
@@ -30,34 +30,28 @@ namespace Inversion
                 AngularVelocity = 0f;
                 GlobalPosition = startPosition;
             }
-
-            if (reactionHandler.LightningSource == null || (reactionHandler.LightningSource != null && reactionHandler.LightningSource.IsDisabled()))
-            {
-                isCharged = false;
-                sparks.Emitting = false;
-            }
         }
 
-        private void ElementStarted(Element element, Node source)
+        public void Power()
         {
-            if (element == Element.Lightning && source != null)
-            {
-                reactionHandler.LightningSource = (IHasElementalArea)source;
+            if (isCharged)
+                return;
 
-                isCharged = true;
-                sparks.Emitting = true;
+            isCharged = true;
+            sparks.Emitting = true;
 
-                GlobalNodes.Singleton.MakeBzztSound();
-            }
+            GlobalNodes.Singleton.MakeBzztSound();
         }
 
-        private void ElementEnded(Element element)
+        public void UnPower()
         {
-            if (element == Element.Lightning)
-            {
-                isCharged = false;
-                sparks.Emitting = false;
-            }
+            isCharged = false;
+            sparks.Emitting = false;
+        }
+
+        public System.Collections.Generic.HashSet<IMetallic> GetNearbyMetallics()
+        {
+            return reactionHandler.NearbyMetallics;
         }
 
         public Element GetAreaElement()
@@ -68,16 +62,6 @@ namespace Inversion
         public bool IsDisabled()
         {
             return !isCharged;
-        }
-
-        public bool IsSource()
-        {
-            return false;
-        }
-
-        public IHasElementalArea GetSource()
-        {
-            return reactionHandler.LightningSource;
         }
     }
 }

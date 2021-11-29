@@ -9,11 +9,14 @@ namespace Inversion
 
         private Sprite sprite;
         private Particles2D sparks;
+        private PowerSourceHandler powerSourceHandler;
 
         public override void _Ready()
         {
             sprite = GetNode<Sprite>("Sprite");
             sparks = GetNode<Particles2D>("Sparks");
+            powerSourceHandler = GetNode<PowerSourceHandler>("PowerSourceHandler");
+            powerSourceHandler.IsPowered = currentElement == Element.Lightning;
 
             base._Ready();
         }
@@ -23,11 +26,14 @@ namespace Inversion
             base.Invert();
 
             sparks.Emitting = currentElement == Element.Lightning;
+            powerSourceHandler.IsPowered = currentElement == Element.Lightning;
 
             if (currentElement == Element.Lightning)
                 sprite.Texture = batteryTex;
             else
                 sprite.Texture = groundTex;
+
+
         }
 
         public override bool IsDisabled()
