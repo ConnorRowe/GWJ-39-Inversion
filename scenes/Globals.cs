@@ -13,7 +13,7 @@ namespace Inversion
         public static int CurrentLevel { get; set; } = 0;
         public static bool HasTouchscreen { get; set; } = false;
         public static Discord.Discord discord { get; set; }
-        public static bool CanRunDiscord { get; set; } = false;
+        public static bool CanRunDiscord { get; set; } = true;
 
         //Discord stuff
         private static Discord.ActivityAssets activityAssets;
@@ -48,10 +48,19 @@ namespace Inversion
 
         public static void InitDiscord()
         {
-            if (!CanRunDiscord)
-                return;
+            try
+            {
+                discord = new Discord.Discord(CLIENT_ID, (ulong)Discord.CreateFlags.NoRequireDiscord);
+            }
+            catch(System.DllNotFoundException)
+            {
+                GD.PrintErr("Discord Game SDK dll not found.");
 
-            discord = new Discord.Discord(CLIENT_ID, (ulong)Discord.CreateFlags.NoRequireDiscord);
+                CanRunDiscord = false;
+            }
+
+            if(!CanRunDiscord)
+                return;
 
             activityAssets = new Discord.ActivityAssets()
             {

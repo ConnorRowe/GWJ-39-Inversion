@@ -17,8 +17,6 @@ namespace Inversion
 
             singleton = this;
 
-            Globals.CanRunDiscord = OS.GetName() == "Windows";
-
             Globals.InitDiscord();
         }
 
