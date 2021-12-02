@@ -48,8 +48,6 @@ namespace Inversion
             if (body is PhysicsBody2D physicsBody)
             {
                 overlappedBodies.Add(physicsBody);
-
-                GD.Print($"Added {body} to fan.");
             }
         }
 
@@ -58,10 +56,6 @@ namespace Inversion
             if (body is PhysicsBody2D physicsBody)
             {
                 var b = overlappedBodies.Remove(physicsBody);
-                if (!b)
-                    GD.PrintErr("Tried to remove non-cached body from fan!");
-                else
-                    GD.Print($"Removed {body} from fan.");
             }
         }
 

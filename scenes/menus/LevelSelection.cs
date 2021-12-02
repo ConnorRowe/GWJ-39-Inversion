@@ -2,14 +2,13 @@ using Godot;
 
 namespace Inversion
 {
-    public class LevelSelection : Node2D
+    public class LevelSelection : BaseMenu
     {
         public override void _Ready()
         {
-            int cnt = Globals.AllLevels.Count;
+            base._Ready();
 
-            GD.Print($"Level count: {cnt}");
-            GD.Print($"MaxLevel: {SaveData.MaxLevel}");
+            int lvlCount = Globals.AllLevels.Count;
 
             Button buttonToCopy = GetNode<Button>("ScrollContainer/GridContainer/Button");
             buttonToCopy.GetParent().RemoveChild(buttonToCopy);
@@ -30,14 +29,15 @@ namespace Inversion
                 i++;
             }
 
-            GetNode("Return").Connect("pressed", GetTree(), "change_scene_to", new Godot.Collections.Array(GD.Load<PackedScene>("res://scenes/menus/MainMenu.tscn")));
+            GetNode("Return").Connect("pressed", this, nameof(TransitionToScene), new Godot.Collections.Array(GD.Load<PackedScene>("res://scenes/menus/MainMenu.tscn")));
             GetNode("Return").Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
         }
 
         private void StartLevel(int level)
         {
-            GetTree().ChangeSceneTo(Globals.AllLevels[level]);
             Globals.CurrentLevel = level;
+
+            TransitionToScene(Globals.AllLevels[level]);
         }
     }
 }

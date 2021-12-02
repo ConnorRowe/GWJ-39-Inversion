@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/levels/Base/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/elemental_objects/Lava.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/elemental_objects/MetalBar.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/PositionLerper.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/elemental_objects/WireBranch.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/levels/Level12.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.0355556, 0.0733333, 0.502222, 0.842222, 0.882222, 1 )
@@ -26,11 +27,11 @@ _data = [ Vector2( 0, 0.823864 ), 0.0, 0.0, 0, 0, Vector2( 0.0486258, 1.1 ), 0.0
 [sub_resource type="CurveTexture" id=8]
 curve = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=15]
 resource_local_to_scene = true
 lifetime_randomness = 0.3
 emission_shape = 2
-emission_box_extents = Vector3( 60, 1, 0 )
+emission_box_extents = Vector3( 120, 1, 0 )
 flag_align_y = true
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
@@ -51,9 +52,30 @@ color_ramp = SubResource( 3 )
 resource_local_to_scene = true
 extents = Vector2( 120, 15 )
 
+[sub_resource type="ParticlesMaterial" id=16]
+resource_local_to_scene = true
+lifetime_randomness = 0.3
+emission_shape = 2
+emission_box_extents = Vector3( 40, 1, 0 )
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 31.1
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.64
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.28
+damping = 2.44
+scale_random = 0.71
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 3 )
+
 [sub_resource type="RectangleShape2D" id=11]
 resource_local_to_scene = true
-extents = Vector2( 60, 15 )
+extents = Vector2( 40, 15 )
 
 [sub_resource type="RectangleShape2D" id=12]
 resource_local_to_scene = true
@@ -79,13 +101,15 @@ angle_random = 1.0
 anim_speed = 1.0
 
 [node name="Level11" instance=ExtResource( 1 )]
+LevelName = "Imperative Timing"
 levelBounds = Rect2( 0, 800, 0, 360 )
+nextLevel = ExtResource( 11 )
 
 [node name="PlayerStartPos" parent="." index="1"]
 position = Vector2( 79, 298 )
 
 [node name="TileMap" parent="." index="4"]
-tile_data = PoolIntArray( -1, 2, 4, -65536, 2, 196609, -65535, 2, 196609, -65534, 2, 196609, -65533, 2, 196609, -65532, 2, 196609, -65531, 2, 196609, -65530, 2, 196609, -65529, 2, 196609, -65528, 2, 196609, -65527, 2, 196609, -65526, 2, 196609, -65525, 2, 196609, -65524, 2, 196609, -65523, 2, 196609, -65522, 2, 196609, -65521, 2, 196609, -65520, 2, 196609, -65519, 2, 196609, -65518, 2, 196609, -65517, 2, 196609, -65516, 2, 7, 65535, 2, 65539, 20, 2, 65539, 131071, 2, 65539, 65556, 2, 65539, 196607, 2, 65539, 131077, 536870916, 0, 131080, 536870916, 0, 131081, 2, 196611, 131082, 4, 0, 131084, 536870916, 0, 131085, 2, 196611, 131092, 2, 65539, 262143, 2, 65539, 196612, 2, 196611, 196628, 2, 65539, 327679, 2, 65539, 262150, 2, 196611, 262151, 4, 0, 262154, 536870916, 0, 262155, 2, 196608, 262156, 2, 196610, 262161, 2, 4, 262162, 2, 196609, 262163, 2, 196609, 262164, 2, 262151, 393215, 2, 65539, 327697, 2, 131075, 327700, 2, 65539, 458751, 2, 65539, 393222, 4, 0, 393224, 2, 196608, 393225, 2, 196610, 393236, 2, 65539, 524287, 2, 65539, 458755, 2, 0, 458756, 2, 2, 458763, 2, 3, 458767, 2, 3, 458772, 2, 65539, 589823, 2, 196612, 524288, 2, 196609, 524289, 2, 196609, 524290, 2, 196609, 524291, 2, 196614, 524292, 2, 196613, 524293, 2, 196609, 524294, 2, 196609, 524295, 2, 196609, 524296, 2, 196609, 524297, 2, 196609, 524298, 2, 196609, 524299, 2, 196616, 524300, 2, 196609, 524301, 2, 196609, 524302, 2, 196609, 524303, 2, 196616, 524304, 2, 196609, 524305, 2, 196609, 524306, 2, 196609, 524307, 2, 196609, 524308, 2, 196615 )
+tile_data = PoolIntArray( -1, 2, 4, -65536, 2, 196609, -65535, 2, 196609, -65534, 2, 196609, -65533, 2, 196609, -65532, 2, 196609, -65531, 2, 196609, -65530, 2, 196609, -65529, 2, 196609, -65528, 2, 196609, -65527, 2, 196609, -65526, 2, 196609, -65525, 2, 196609, -65524, 2, 196609, -65523, 2, 196609, -65522, 2, 196609, -65521, 2, 196609, -65520, 2, 196609, -65519, 2, 196609, -65518, 2, 196609, -65517, 2, 196609, -65516, 2, 7, 65535, 2, 65539, 20, 2, 65539, 131071, 2, 65539, 65556, 2, 65539, 196607, 2, 65539, 131077, 536870916, 0, 131080, 536870916, 0, 131081, 2, 196611, 131082, 4, 0, 131084, 536870916, 0, 131092, 2, 65539, 262143, 2, 65539, 196612, 2, 196611, 196628, 2, 65539, 327679, 2, 65539, 262150, 2, 196611, 262151, 4, 0, 262154, 536870916, 0, 262155, 2, 196608, 262156, 2, 196610, 262161, 2, 4, 262162, 2, 196609, 262163, 2, 196609, 262164, 2, 262151, 393215, 2, 65539, 327697, 2, 131075, 327700, 2, 65539, 458751, 2, 65539, 393222, 4, 0, 393224, 2, 196608, 393225, 2, 196610, 393236, 2, 65539, 524287, 2, 65539, 458755, 2, 0, 458756, 2, 2, 458763, 2, 3, 458766, 2, 0, 458767, 2, 2, 458772, 2, 65539, 589823, 2, 196612, 524288, 2, 196609, 524289, 2, 196609, 524290, 2, 196609, 524291, 2, 196614, 524292, 2, 196613, 524293, 2, 196609, 524294, 2, 196609, 524295, 2, 196609, 524296, 2, 196609, 524297, 2, 196609, 524298, 2, 196609, 524299, 2, 196616, 524300, 2, 196609, 524301, 2, 196609, 524302, 2, 196614, 524303, 2, 196613, 524304, 2, 196609, 524305, 2, 196609, 524306, 2, 196609, 524307, 2, 196609, 524308, 2, 196615 )
 
 [node name="GoalPlatform1" parent="." index="5"]
 position = Vector2( 778, 321 )
@@ -96,22 +120,20 @@ position = Vector2( 240, 280 )
 [node name="Flames" parent="Lava" index="0"]
 position = Vector2( 80, 10 )
 amount = 120
-process_material = SubResource( 9 )
+process_material = SubResource( 15 )
 
 [node name="CollisionRect" parent="Lava/Area2D" index="0"]
 position = Vector2( 80, 25 )
 shape = SubResource( 10 )
 
 [node name="Lava2" parent="." index="8" instance=ExtResource( 2 )]
-position = Vector2( 520, 280 )
+position = Vector2( 520, 305 )
 
 [node name="Flames" parent="Lava2" index="0"]
-position = Vector2( 20, 10 )
-amount = 60
-process_material = SubResource( 9 )
+position = Vector2( 0, -15 )
+process_material = SubResource( 16 )
 
 [node name="CollisionRect" parent="Lava2/Area2D" index="0"]
-position = Vector2( 20, 25 )
 shape = SubResource( 11 )
 
 [node name="PoweredDoor" parent="." index="9" instance=ExtResource( 3 )]
@@ -162,7 +184,7 @@ position = Vector2( 658, 13 )
 rotation = 3.14159
 
 [node name="PositionLerper" parent="Laser" index="4" instance=ExtResource( 9 )]
-Speed = 0.15
+Speed = 0.075
 
 [node name="GlobalPointA" parent="Laser/PositionLerper" index="0"]
 position = Vector2( 658, 13 )
@@ -170,18 +192,18 @@ position = Vector2( 658, 13 )
 [node name="GlobalPointB" parent="Laser/PositionLerper" index="1"]
 position = Vector2( 658, 257 )
 
-[node name="Laser4" parent="." index="17" instance=ExtResource( 7 )]
+[node name="Laser1" parent="." index="17" instance=ExtResource( 7 )]
 position = Vector2( 658, 13 )
 rotation = 3.14159
 
-[node name="PositionLerper" parent="Laser4" index="4" instance=ExtResource( 9 )]
-Speed = 0.15
+[node name="PositionLerper" parent="Laser1" index="4" instance=ExtResource( 9 )]
+Speed = 0.075
 PercentOffset = 0.75
 
-[node name="GlobalPointA" parent="Laser4/PositionLerper" index="0"]
+[node name="GlobalPointA" parent="Laser1/PositionLerper" index="0"]
 position = Vector2( 658, 13 )
 
-[node name="GlobalPointB" parent="Laser4/PositionLerper" index="1"]
+[node name="GlobalPointB" parent="Laser1/PositionLerper" index="1"]
 position = Vector2( 658, 257 )
 
 [node name="WireBranch" parent="." index="18" instance=ExtResource( 10 )]
@@ -199,4 +221,4 @@ position = Vector2( 685, 224 )
 [editable path="MetalBar"]
 [editable path="MetalBar/ReactionHandler"]
 [editable path="Laser/PositionLerper"]
-[editable path="Laser4/PositionLerper"]
+[editable path="Laser1/PositionLerper"]

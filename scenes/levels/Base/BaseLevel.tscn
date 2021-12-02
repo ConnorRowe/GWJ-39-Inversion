@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/levels/Base/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://font/retganon.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scenes/VirtualJoystick.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/PlatformSpecific.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Transition.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.388235, 0.670588, 0.247059, 1 )
@@ -217,12 +218,14 @@ __meta__ = {
 Speed = 0.5
 AngleSpread = 10.0
 
-[node name="DeathCount" type="Label" parent="UILayer"]
+[node name="DeathCountParent" type="Node2D" parent="UILayer"]
+
+[node name="DeathCount" type="Label" parent="UILayer/DeathCountParent"]
 visible = false
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 84.0
 margin_top = 227.0
-margin_right = 375.0
+margin_right = 388.0
 margin_bottom = 311.0
 rect_pivot_offset = Vector2( 118, 42 )
 custom_fonts/font = ExtResource( 5 )
@@ -361,3 +364,5 @@ tile_data = PoolIntArray( -1, 2, 4, -65536, 2, 196609, -65535, 2, 196609, -65534
 position = Vector2( 570, 321 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Transition" parent="." instance=ExtResource( 11 )]

@@ -51,12 +51,15 @@ namespace Inversion
             isPowered = true;
             Update();
 
-            GD.Print($"{Name} powered");
+            var str = $"{Name} powered";
 
             if (connectedPoweredNode != null)
             {
                 connectedPoweredNode.WirePower();
+                str += $" -> {((Node)connectedPoweredNode).Name}";
             }
+
+            GD.Print(str);
         }
 
         public void WireUnPower()

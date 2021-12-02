@@ -37,6 +37,8 @@ namespace Inversion
 
             hasWirePower = true;
 
+            GD.Print($"{Name} hasWirePower");
+
             PowerChanged();
         }
 

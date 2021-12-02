@@ -10,7 +10,7 @@ namespace Inversion
         public delegate void Released();
 
         private static readonly Color opaque = new Color(1f, 1f, 1f, .75f);
-        private static readonly Color transparent = new Color(1f, 1f, 1f, .15f);
+        private static readonly Color transparent = new Color(1f, 1f, 1f, .27f);
 
         private const float maxDist = 30f;
 

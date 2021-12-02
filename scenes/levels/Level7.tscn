@@ -63,14 +63,18 @@ position = Vector2( 340, 312 )
 invertOnStart = true
 
 [node name="PowerTerminal" parent="." index="14" instance=ExtResource( 4 )]
-position = Vector2( 325, 312 )
+position = Vector2( 324, 312 )
 connectedPoweredNodePath = NodePath("../WireBranch")
 
-[node name="PowerTerminal2" parent="." index="15" instance=ExtResource( 4 )]
-position = Vector2( 355, 312 )
+[node name="WireBranch" parent="." index="15" instance=ExtResource( 7 )]
+position = Vector2( 325, 320 )
+connectedPoweredNodePaths = [ NodePath("../WireL1"), NodePath("../LaserWire") ]
+
+[node name="PowerTerminal2" parent="." index="16" instance=ExtResource( 4 )]
+position = Vector2( 356, 312 )
 connectedPoweredNodePath = NodePath("../WireR1")
 
-[node name="WireL1" parent="." index="16" instance=ExtResource( 5 )]
+[node name="WireL1" parent="." index="17" instance=ExtResource( 5 )]
 connectedPoweredNodePath = NodePath("../WireL2")
 
 [node name="StartPos" parent="WireL1" index="0"]
@@ -79,7 +83,7 @@ position = Vector2( 325, 320 )
 [node name="EndPos" parent="WireL1" index="1"]
 position = Vector2( 325, 460 )
 
-[node name="WireL2" parent="." index="17" instance=ExtResource( 5 )]
+[node name="WireL2" parent="." index="18" instance=ExtResource( 5 )]
 connectedPoweredNodePath = NodePath("../WireL3")
 
 [node name="StartPos" parent="WireL2" index="0"]
@@ -88,7 +92,7 @@ position = Vector2( 327, 458 )
 [node name="EndPos" parent="WireL2" index="1"]
 position = Vector2( 280, 458 )
 
-[node name="WireL3" parent="." index="18" instance=ExtResource( 5 )]
+[node name="WireL3" parent="." index="19" instance=ExtResource( 5 )]
 connectedPoweredNodePath = NodePath("../PowerTerminalL")
 
 [node name="StartPos" parent="WireL3" index="0"]
@@ -97,7 +101,7 @@ position = Vector2( 280, 460 )
 [node name="EndPos" parent="WireL3" index="1"]
 position = Vector2( 280, 440 )
 
-[node name="WireR1" parent="." index="19" instance=ExtResource( 5 )]
+[node name="WireR1" parent="." index="20" instance=ExtResource( 5 )]
 connectedPoweredNodePath = NodePath("../WireR2")
 
 [node name="StartPos" parent="WireR1" index="0"]
@@ -106,7 +110,7 @@ position = Vector2( 355, 320 )
 [node name="EndPos" parent="WireR1" index="1"]
 position = Vector2( 355, 460 )
 
-[node name="WireR2" parent="." index="20" instance=ExtResource( 5 )]
+[node name="WireR2" parent="." index="21" instance=ExtResource( 5 )]
 connectedPoweredNodePath = NodePath("../WireR3")
 
 [node name="StartPos" parent="WireR2" index="0"]
@@ -115,7 +119,7 @@ position = Vector2( 353, 458 )
 [node name="EndPos" parent="WireR2" index="1"]
 position = Vector2( 399, 458 )
 
-[node name="WireR3" parent="." index="21" instance=ExtResource( 5 )]
+[node name="WireR3" parent="." index="22" instance=ExtResource( 5 )]
 connectedPoweredNodePath = NodePath("../PowerTerminalR")
 
 [node name="StartPos" parent="WireR3" index="0"]
@@ -124,7 +128,7 @@ position = Vector2( 399, 460 )
 [node name="EndPos" parent="WireR3" index="1"]
 position = Vector2( 399, 440 )
 
-[node name="LaserWire" parent="." index="22" instance=ExtResource( 5 )]
+[node name="LaserWire" parent="." index="23" instance=ExtResource( 5 )]
 connectedPoweredNodePath = NodePath("../LaserTerminal")
 
 [node name="StartPos" parent="LaserWire" index="0"]
@@ -133,31 +137,27 @@ position = Vector2( 340, 320 )
 [node name="EndPos" parent="LaserWire" index="1"]
 position = Vector2( 340, 120 )
 
-[node name="PowerTerminalL" parent="." index="23" instance=ExtResource( 4 )]
+[node name="PowerTerminalL" parent="." index="24" instance=ExtResource( 4 )]
 position = Vector2( 280, 432 )
 
-[node name="PowerTerminalR" parent="." index="24" instance=ExtResource( 4 )]
+[node name="PowerTerminalR" parent="." index="25" instance=ExtResource( 4 )]
 position = Vector2( 399, 432 )
 
-[node name="CrateMetal" parent="." index="25" instance=ExtResource( 6 )]
+[node name="CrateMetal" parent="." index="26" instance=ExtResource( 6 )]
 position = Vector2( 260, 392 )
 physics_material_override = null
 
-[node name="CrateMetal2" parent="." index="26" instance=ExtResource( 6 )]
+[node name="CrateMetal2" parent="." index="27" instance=ExtResource( 6 )]
 position = Vector2( 299, 392 )
 physics_material_override = null
 
-[node name="CrateMetal3" parent="." index="27" instance=ExtResource( 6 )]
+[node name="CrateMetal3" parent="." index="28" instance=ExtResource( 6 )]
 position = Vector2( 380, 392 )
 physics_material_override = null
 
-[node name="CrateMetal4" parent="." index="28" instance=ExtResource( 6 )]
+[node name="CrateMetal4" parent="." index="29" instance=ExtResource( 6 )]
 position = Vector2( 419, 392 )
 physics_material_override = null
-
-[node name="WireBranch" parent="." index="29" instance=ExtResource( 7 )]
-position = Vector2( 325, 320 )
-connectedPoweredNodePaths = [ NodePath("../WireL1"), NodePath("../LaserWire") ]
 
 [node name="LaserTerminal" parent="." index="30" instance=ExtResource( 4 )]
 position = Vector2( 340, 128 )

@@ -36,6 +36,8 @@ namespace Inversion
                 LoadLevel("Level8"),
                 LoadLevel("Level9"),
                 LoadLevel("Level10"),
+                LoadLevel("Level11"),
+                LoadLevel("Level12"),
             };
         }
 
@@ -48,16 +50,6 @@ namespace Inversion
         {
             if (!CanRunDiscord)
                 return;
-            /*
-               Grab that Client ID from earlier
-               Discord.CreateFlags.Default will require Discord to be running for the game to work
-               If Discord is not running, it will:
-               1. Close your game
-               2. Open Discord
-               3. Attempt to re-open your game
-               Step 3 may fail when running directly from your editor
-               Therefore, always keep Discord running during tests, or use Discord.CreateFlags.NoRequireDiscord
-           */
 
             discord = new Discord.Discord(CLIENT_ID, (ulong)Discord.CreateFlags.NoRequireDiscord);
 

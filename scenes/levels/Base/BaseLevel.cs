@@ -20,6 +20,7 @@ namespace Inversion
         private bool canRespawn = false;
         private bool paused = false;
         private Tween tween;
+        private Transition transition;
 
         public Label Debug { get; set; }
 
@@ -78,6 +79,8 @@ namespace Inversion
             }
 
             Globals.UpdateDiscordActivityLevel(LevelName);
+
+            transition = GetNode<Transition>("Transition");
         }
 
         public override void _Input(InputEvent evt)
@@ -102,7 +105,7 @@ namespace Inversion
             // Show dead UI
             var bg = GetNode<ColorRect>("UILayer/DeadColorRect");
             var youDied = GetNode<Node2D>("UILayer/YouDied");
-            var deathCount = GetNode<Label>("UILayer/DeathCount");
+            var deathCount = GetNode<Label>("UILayer/DeathCountParent/DeathCount");
 
             deathCount.Text = $"You've died {Globals.LevelDeathCount} time{(Globals.LevelDeathCount == 1 ? "" : "s")} on this level so far...";
             bg.Visible = youDied.Visible = deathCount.Visible = true;
@@ -116,16 +119,25 @@ namespace Inversion
             GetTree().CreateTimer(.75f).Connect("timeout", this, nameof(EnableRespawn));
         }
 
-        private void RestartLevel()
+        private async void RestartLevel()
         {
-            // Player.Position = GetNode<Node2D>(playerStartPosition).Position;
+            if (transition.Active)
+                return;
+
+            var timer = GetTree().CreateTimer(1.25f);
+            transition.StartTransition();
+            await ToSignal(timer, "timeout");
 
             GetTree().ReloadCurrentScene();
             QueueFree();
         }
 
-        public void GotoNextLevel()
+        public async void GotoNextLevel()
         {
+            var timer = GetTree().CreateTimer(1.25f);
+            transition.StartTransition();
+            await ToSignal(timer, "timeout");
+
             GetTree().ChangeSceneTo(nextLevel);
             QueueFree();
             Globals.LevelDeathCount = 0;
@@ -154,10 +166,15 @@ namespace Inversion
             paused = GetTree().Paused = false;
         }
 
-        private void Exit()
+        private async void Exit()
         {
             paused = GetTree().Paused = false;
             GetNode<Settings>("UILayer/PausePopup/Control/PanelContainer/Settings").SaveSettings();
+            GetNode<PopupPanel>("UILayer/PausePopup").Hide();
+
+            var timer = GetTree().CreateTimer(1.25f);
+            transition.StartTransition();
+            await ToSignal(timer, "timeout");
 
             GetTree().ChangeSceneTo(GD.Load<PackedScene>("res://scenes/menus/MainMenu.tscn"));
         }

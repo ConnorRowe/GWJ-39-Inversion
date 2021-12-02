@@ -28,6 +28,7 @@ anim_speed = 1.0
 
 [node name="PowerTerminal" type="Node2D"]
 script = ExtResource( 2 )
+connectedPoweredNodePath = NodePath("PowerArea")
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -42,7 +43,6 @@ shape = SubResource( 1 )
 
 [node name="ReactionHandler" parent="." instance=ExtResource( 3 )]
 collisionShapePath = NodePath("../PowerArea/CollisionShape2D")
-NeedsSource = true
 
 [node name="PowerArea" type="Area2D" parent="."]
 collision_layer = 4

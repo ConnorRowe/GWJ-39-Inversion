@@ -22,6 +22,8 @@ namespace Inversion
         protected NodePath collisionShapePath;
         [Export]
         protected bool trackMetallics = false;
+        [Export]
+        protected Godot.Collections.Array<NodePath> exludedNodes;
 
         public bool IsActive { get; set; } = true;
         public bool FlipH { get; set; } = false;
@@ -56,6 +58,20 @@ namespace Inversion
             xform.Scale = new Vector2(FlipH ? -1f : -1f, 1f);
             shapeQueryParams.CollideWithAreas = true;
             shapeQueryParams.CollisionLayer = 4;
+
+            if (exludedNodes != null)
+            {
+                var exclude = new Godot.Collections.Array();
+                foreach (var path in exludedNodes)
+                {
+                    if (Owner.GetNode(path) is Node node)
+                    {
+                        exclude.Add(node);
+                    }
+                }
+
+                shapeQueryParams.Exclude = exclude;
+            }
         }
 
         public override void _PhysicsProcess(float delta)
