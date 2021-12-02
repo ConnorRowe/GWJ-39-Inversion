@@ -32,7 +32,6 @@ anim_speed = 1.0
 [node name="CrateMetal" type="RigidBody2D"]
 mass = 2.2
 physics_material_override = SubResource( 12 )
-can_sleep = false
 angular_damp = 2.0
 script = ExtResource( 2 )
 

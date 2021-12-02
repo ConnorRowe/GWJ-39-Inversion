@@ -24,7 +24,7 @@ namespace Inversion
             lightingHandler.RegisterLight(GetNode<Particles2D>("PoweredDoor/PowerTerminal/Sparks"), Vector2.Zero, Lighting.LightType.Small);
             lightingHandler.RegisterLight(GetNode<Particles2D>("PowerTerminal/Sparks"), Vector2.Zero, Lighting.LightType.Small);
 
-            GetNode<Node2D>("UILayer/LightingTexture").Visible = true;
+            GetNode<Node2D>("LightingLayer/LightingTexture").Visible = true;
 
             GetNode<Transition>("Transition").BGColour = Colors.Black;
         }

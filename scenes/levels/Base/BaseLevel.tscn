@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/levels/Base/BaseLevel.cs" type="Script" id=1]
 [ext_resource path="res://scenes/InversionOrb.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/VirtualJoystick.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/PlatformSpecific.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/Transition.tscn" type="PackedScene" id=11]
+[ext_resource path="res://textures/joystick_fg_alt.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.388235, 0.670588, 0.247059, 1 )
@@ -109,12 +110,13 @@ __meta__ = {
 position = Vector2( 44, 292 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="debug" type="Label" parent="UILayer"]
 visible = false
-margin_left = 13.0
+margin_left = 42.0
 margin_top = 13.0
-margin_right = 53.0
+margin_right = 82.0
 margin_bottom = 27.0
 text = "debug"
 __meta__ = {
@@ -345,6 +347,9 @@ IsMobileOnly = true
 position = Vector2( 540, 257 )
 XRange = Vector2( 320, 640 )
 
+[node name="FG" parent="UILayer/OrbJoystick/BG" index="0"]
+texture = ExtResource( 12 )
+
 [node name="PlatformSpecific" parent="UILayer/OrbJoystick" instance=ExtResource( 10 )]
 IsMobileOnly = true
 
@@ -366,3 +371,5 @@ position = Vector2( 570, 321 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Transition" parent="." instance=ExtResource( 11 )]
+
+[editable path="UILayer/OrbJoystick"]

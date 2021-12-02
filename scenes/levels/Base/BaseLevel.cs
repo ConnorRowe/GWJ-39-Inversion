@@ -83,6 +83,13 @@ namespace Inversion
             transition = GetNode<Transition>("Transition");
         }
 
+        // public override void _Process(float delta)
+        // {
+        //     base._Process(delta);
+
+        //     Debug.Text = $"{Engine.GetFramesPerSecond()} fps";
+        // }
+
         public override void _Input(InputEvent evt)
         {
             if (canRespawn && playerDead && (evt.IsActionReleased("g_respawn") || evt is InputEventScreenTouch est && !est.Pressed))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/menus/BaseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://textures/joystick_icon.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/PositionLerper.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/PlatformSpecific.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/menus/ControlsScreen.cs" type="Script" id=9]
+[ext_resource path="res://textures/joystick_icon_alt.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 16.0
@@ -123,7 +124,7 @@ texture = ExtResource( 2 )
 [node name="joystick2" type="Sprite" parent="TouchControlsPanel/HSplitContainer/Label" index="1"]
 position = Vector2( 68, 48 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 10 )
 
 [node name="Label2" type="Label" parent="TouchControlsPanel/HSplitContainer" index="1"]
 margin_left = 272.0
