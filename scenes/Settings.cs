@@ -8,6 +8,7 @@ namespace Inversion
         private HSlider musicSlider;
         private HSlider sfxSlider;
         private CheckButton fullscreenToggle;
+        private CheckButton vsyncToggle;
 
         private int masterBusId;
         private int musicBusId;
@@ -21,6 +22,7 @@ namespace Inversion
             musicSlider = GetNode<HSlider>("MusicSlider");
             sfxSlider = GetNode<HSlider>("SFXSlider");
             fullscreenToggle = GetNode<CheckButton>("FullscreenToggle");
+            vsyncToggle = GetNode<CheckButton>("VSyncToggle");
 
             masterBusId = AudioServer.GetBusIndex("Master");
             musicBusId = AudioServer.GetBusIndex("Music");
@@ -30,16 +32,19 @@ namespace Inversion
             musicSlider.Value = GetBusVol(musicBusId);
             sfxSlider.Value = GetBusVol(sfxBusId);
             fullscreenToggle.Pressed = OS.WindowFullscreen;
+            vsyncToggle.Pressed = OS.VsyncEnabled;
 
             masterSlider.Connect("value_changed", this, nameof(MasterChanged));
             musicSlider.Connect("value_changed", this, nameof(MusicChanged));
             sfxSlider.Connect("value_changed", this, nameof(SFXChanged));
             fullscreenToggle.Connect("toggled", this, nameof(FullscreenToggled));
+            vsyncToggle.Connect("toggled", this, nameof(vsyncToggle));
 
             masterSlider.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
             musicSlider.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
             sfxSlider.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
             fullscreenToggle.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
+            vsyncToggle.Connect("mouse_entered", GlobalNodes.Singleton, nameof(GlobalNodes.UIClick));
         }
 
         private float GetBusVol(int busId)
@@ -70,6 +75,11 @@ namespace Inversion
         private void FullscreenToggled(bool toggle)
         {
             OS.WindowFullscreen = toggle;
+        }
+
+        private void VSyncToggled(bool toggle)
+        {
+            OS.VsyncEnabled = toggle;
         }
 
         public void SaveSettings()

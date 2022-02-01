@@ -52,14 +52,16 @@ namespace Inversion
             {
                 discord = new Discord.Discord(CLIENT_ID, (ulong)Discord.CreateFlags.NoRequireDiscord);
             }
-            catch(System.DllNotFoundException)
+            catch (System.Exception e)
             {
-                GD.PrintErr("Discord Game SDK dll not found.");
-
+                if (e is System.DllNotFoundException)
+                    GD.PrintErr("Discord Game SDK dll not found.");
+                else if (e is Discord.ResultException dre)
+                    GD.PrintErr($"Discord error: {dre.Message} // Is discord open?");
                 CanRunDiscord = false;
             }
 
-            if(!CanRunDiscord)
+            if (!CanRunDiscord)
                 return;
 
             activityAssets = new Discord.ActivityAssets()
@@ -107,7 +109,16 @@ namespace Inversion
             baseActivity.State = state;
             baseActivity.Timestamps = timestamps;
 
-            discord.GetActivityManager().UpdateActivity(baseActivity, DiscordActivityUpdateCallback);
+            try
+            {
+                discord.GetActivityManager().UpdateActivity(baseActivity, DiscordActivityUpdateCallback);
+            }
+            catch (Discord.ResultException e)
+            {
+                GD.PrintErr($"Discord error: {e.Message} // Has discord been closed?");
+
+                CanRunDiscord = false;
+            }
         }
 
         private static void DiscordActivityUpdateCallback(Discord.Result result)

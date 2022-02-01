@@ -25,7 +25,18 @@ namespace Inversion
             base._Process(delta);
 
             if (Globals.CanRunDiscord)
-                Globals.discord.RunCallbacks();
+            {
+                try
+                {
+                    Globals.discord.RunCallbacks();
+                }
+                catch (Discord.ResultException e)
+                {
+                    GD.PrintErr($"Discord error: {e.Message} // Has discord been closed?");
+
+                    Globals.CanRunDiscord = false;
+                }
+            }
         }
 
         public override void _Input(InputEvent evt)

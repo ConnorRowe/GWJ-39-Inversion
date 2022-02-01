@@ -41,9 +41,9 @@ script = ExtResource( 7 )
 
 [node name="PanelContainer" type="PanelContainer" parent="." index="1"]
 margin_left = 38.0
-margin_top = 90.0
+margin_top = 76.0
 margin_right = 609.0
-margin_bottom = 264.0
+margin_bottom = 294.0
 rect_min_size = Vector2( 571, 174 )
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
@@ -56,7 +56,7 @@ anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 555.0
-margin_bottom = 158.0
+margin_bottom = 202.0
 
 [node name="TitleHolder" type="Node2D" parent="." index="2"]
 position = Vector2( 326, 40 )
@@ -78,7 +78,7 @@ Speed = 0.2
 AngleSpread = 10.0
 
 [node name="SubtitleHolder" type="Node2D" parent="." index="3"]
-position = Vector2( 580, 80 )
+position = Vector2( 580, 66 )
 
 [node name="Subtitle" type="Label" parent="SubtitleHolder" index="0"]
 margin_left = -72.0
@@ -107,9 +107,9 @@ position = Vector2( 580, 80 )
 
 [node name="Return" type="Button" parent="." index="4"]
 margin_left = 205.0
-margin_top = 286.0
+margin_top = 308.0
 margin_right = 435.0
-margin_bottom = 320.0
+margin_bottom = 342.0
 rect_min_size = Vector2( 64, 32 )
 focus_mode = 0
 custom_fonts/font = ExtResource( 2 )
