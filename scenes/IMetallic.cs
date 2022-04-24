@@ -4,6 +4,6 @@ namespace Inversion
     {
         void Power();
         void UnPower();
-        System.Collections.Generic.HashSet<IMetallic> GetNearbyMetallics();
+        System.Collections.Generic.List<IMetallic> GetNearbyMetallics();
     }
 }

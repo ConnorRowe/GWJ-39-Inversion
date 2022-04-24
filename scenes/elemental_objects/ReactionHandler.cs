@@ -32,7 +32,7 @@ namespace Inversion
         private Shape2D shape;
         private Physics2DShapeQueryParameters shapeQueryParams;
         private Dictionary<Element, bool> elementOverlaps = new Dictionary<Element, bool>(emptyElementOverlaps);
-        public HashSet<IMetallic> NearbyMetallics = new HashSet<IMetallic>();
+        public List<IMetallic> NearbyMetallics = new List<IMetallic>();
 
 
         public override void _Ready()
@@ -83,7 +83,7 @@ namespace Inversion
             var results = spaceState.IntersectShape(shapeQueryParams);
 
             var newElemOverlaps = new Dictionary<Element, bool>(emptyElementOverlaps);
-            NearbyMetallics = new HashSet<IMetallic>();
+            NearbyMetallics = new List<IMetallic>();
 
             foreach (Godot.Collections.Dictionary hit in results)
             {

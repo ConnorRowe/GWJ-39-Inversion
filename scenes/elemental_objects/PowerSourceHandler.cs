@@ -8,8 +8,8 @@ namespace Inversion
 
         public bool IsPowered { get; set; } = false;
 
-        private HashSet<IMetallic> lastNetwork = new HashSet<IMetallic>();
-        private HashSet<IMetallic> newNetwork = new HashSet<IMetallic>();
+        private List<IMetallic> lastNetwork = new List<IMetallic>();
+        private List<IMetallic> newNetwork = new List<IMetallic>();
 
         private BaseLevel level;
 
@@ -26,7 +26,7 @@ namespace Inversion
 
             if (IsPowered)
             {
-                newNetwork = new HashSet<IMetallic>();
+                newNetwork = new List<IMetallic>();
 
                 GetConnectionsRecursive(NearbyMetallics, 0);
 
@@ -54,16 +54,19 @@ namespace Inversion
             }
         }
 
-        private void GetConnectionsRecursive(HashSet<IMetallic> set, int currentDepth)
+        private void GetConnectionsRecursive(List<IMetallic> list, int currentDepth)
         {
             if (currentDepth >= MaxRecursionDepth)
                 return;
 
             currentDepth++;
-            foreach (var connection in set)
+            foreach (var connection in list)
             {
-                if (newNetwork.Add(connection))
+                if (!newNetwork.Contains(connection))
+                {
+                    newNetwork.Add(connection);
                     GetConnectionsRecursive(connection.GetNearbyMetallics(), currentDepth);
+                }
             }
         }
     }

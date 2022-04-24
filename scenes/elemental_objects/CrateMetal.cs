@@ -49,7 +49,7 @@ namespace Inversion
             sparks.Emitting = false;
         }
 
-        public System.Collections.Generic.HashSet<IMetallic> GetNearbyMetallics()
+        public System.Collections.Generic.List<IMetallic> GetNearbyMetallics()
         {
             return reactionHandler.NearbyMetallics;
         }
